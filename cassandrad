@@ -1,0 +1,89 @@
+#!/bin/bash
+# chkconfig: 2345 99 01
+# description: Cassandra
+
+. /etc/rc.d/init.d/functions
+
+CASSANDRA_HOME=/apps/cassandra
+CASSANDRA_BIN=$CASSANDRA_HOME/bin/cassandra
+CASSANDRA_NODETOOL=$CASSANDRA_HOME/bin/nodetool
+CASSANDRA_LOG=$CASSANDRA_HOME/log/cassandra.log
+CASSANDRA_PID=/var/run/cassandra.pid
+CASSANDRA_LOCK=/var/lock/subsys/cassandra
+PROGRAM="cassandra"
+
+if [ ! -f $CASSANDRA_BIN ]; then
+  echo "File not found: $CASSANDRA_BIN"
+  exit 1
+fi
+
+RETVAL=0
+
+start() {
+  if [ -f $CASSANDRA_PID ] && checkpid `cat $CASSANDRA_PID`; then
+    echo "Cassandra is already running."
+    exit 0
+  fi
+  echo -n $"Starting $PROGRAM: "
+  daemon $CASSANDRA_BIN -p $CASSANDRA_PID >> $CASSANDRA_LOG 2>&1
+  usleep 500000
+  RETVAL=$?
+  if [ $RETVAL -eq 0 ]; then
+    touch $CASSANDRA_LOCK
+    echo_success
+  else
+    echo_failure
+  fi
+  echo
+  return $RETVAL
+}
+
+stop() {
+  if [ ! -f $CASSANDRA_PID ]; then
+    echo "Cassandra is already stopped."
+    exit 0
+  fi
+  echo -n $"Stopping $PROGRAM: "
+  $CASSANDRA_NODETOOL -h 127.0.0.1 decommission
+  if kill `cat $CASSANDRA_PID`; then
+    RETVAL=0
+    rm -f $CASSANDRA_LOCK
+    echo_success
+  else
+    RETVAL=1
+    echo_failure
+  fi
+  echo
+  [ $RETVAL = 0 ]
+}
+
+status_fn() {
+  if [ -f $CASSANDRA_PID ] && checkpid `cat $CASSANDRA_PID`; then
+    echo "Cassandra is running."
+    exit 0
+  else
+    echo "Cassandra is stopped."
+    exit 1
+  fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status_fn
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo $"Usage: $PROGRAM {start|stop|restart|status}"
+    RETVAL=3
+esac
+
+exit $RETVAL
