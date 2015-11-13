@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Terminal=true
+Name=Idea
+Icon=/apps/idea/bin/idea.png
+Exec=/apps/idea/bin/idea.sh
