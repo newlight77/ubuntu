@@ -11,6 +11,8 @@ add-apt-repository restricted
 
 apt-get update
 
+dpkg-reconfigure tzdata
+apt-get install ntp ntpdate -y
 apt-get install git -y
 apt-get install nodejs -y
 apt-get install curl -y
@@ -90,10 +92,15 @@ rm spring-tool-suite-3.7.1.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
 ln -s /apps/sts-bundle/sts-3.7.1.RELEASE /apps/sts
 
 # Cassandra  
-curl -O http://www.us.apache.org/dist/cassandra/2.2.3/apache-cassandra-2.2.3-bin.tar.gz
-tar -xvzf apache-cassandra-2.2.3-bin.tar.gz
-rm apache-cassandra-2.2.3-bin.tar.gz
-ln -s /apps/apache-cassandra-2.2.3 /apps/cassandra
+#curl -O http://www.us.apache.org/dist/cassandra/2.2.3/apache-cassandra-2.2.3-bin.tar.gz
+#tar -xvzf apache-cassandra-2.2.3-bin.tar.gz
+#rm apache-cassandra-2.2.3-bin.tar.gz
+#ln -s /apps/apache-cassandra-2.2.3 /apps/cassandra
+echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list 
+curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add - 
+apt-get update
+apt-get install cassandra -y
+
 
 # DevCenter
 curl -O http://downloads.datastax.com/devcenter/DevCenter-1.4.1-linux-gtk-x86_64.tar.gz
