@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo su -  
+sudo su -
 
 add-apt-repository main
 add-apt-repository universe
@@ -17,11 +17,11 @@ apt-get install git -y
 apt-get install nodejs -y
 apt-get install curl -y
 apt-get install terminator -y
-apt-get install libgconf2-4 libnss3-1d libxss1  
+apt-get install libgconf2-4 libnss3-1d libxss1
 apt-get install mongodb-client -y
 apt-get install eclipse -y
-apt-get install openjdk-8-jdk  
-  #alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin  
+apt-get install openjdk-8-jdk
+  #alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin
 
 #NodeJs
 curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
@@ -44,33 +44,42 @@ apt-get install docker-engine -y
 usermod -aG docker asaid
 systemctl enable docker
 
-# Docker-compose  
+# Docker-compose
 curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose  
+chmod +x /usr/local/bin/docker-compose
 
 #Evernote
-add-apt-repository ppa:nvbn-rm/ppa  
+add-apt-repository ppa:nvbn-rm/ppa
 apt-get update
 apt-get install everpad
 
-#Slack  
+#Slack
 wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.5-amd64.deb
 dpkg -i slack-desktop-1.2.5-amd64.deb
 rm dpkg -i slack-desktop-1.2.5-amd64.deb
 
 #Chrome
 #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#dpkg -i google-chrome-stable_current_amd64.deb  
+#dpkg -i google-chrome-stable_current_amd64.deb
 apt-get install chromium-browser
 
-# Sublime  
-add-apt-repository ppa:webupd8team/sublime-text-3  
+# Sublime
+add-apt-repository ppa:webupd8team/sublime-text-3
 apt-get update
 apt-get install sublime-text-installer
+
+# Cassandra
+echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+apt-get update
+apt-get install cassandra=2.2.3 -y
 
 
 mkdir /apps
 chmod -R 777 /apps
+
+exit
+
 cd /apps
 
 #VSCode
@@ -79,7 +88,7 @@ unzip VSCode-linux64.zip
 rm VSCode-linux64.zip
 ln -s /apps/VSCode-linux-x64 /apps/VSCode
 
-# Idea  
+# Idea
 curl -O https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.5.tar.gz
 tar zxvf ideaIC-14.1.5.tar.gz
 rm ideaIC-14.1.5.tar.gz
@@ -91,16 +100,11 @@ tar zxvf spring-tool-suite-3.7.1.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
 rm spring-tool-suite-3.7.1.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
 ln -s /apps/sts-bundle/sts-3.7.1.RELEASE /apps/sts
 
-# Cassandra  
+# Cassandra
 #curl -O http://www.us.apache.org/dist/cassandra/2.2.3/apache-cassandra-2.2.3-bin.tar.gz
 #tar -xvzf apache-cassandra-2.2.3-bin.tar.gz
 #rm apache-cassandra-2.2.3-bin.tar.gz
 #ln -s /apps/apache-cassandra-2.2.3 /apps/cassandra
-echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list 
-curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add - 
-apt-get update
-apt-get install cassandra -y
-
 
 # DevCenter
 curl -O http://downloads.datastax.com/devcenter/DevCenter-1.4.1-linux-gtk-x86_64.tar.gz
@@ -121,9 +125,6 @@ rm apache-maven-3.3.3-bin.tar.gz
 ln -s /apps/apache-maven-3.3.3 /apps/maven
 
 
-exit
-
-
 #IntelliJ shortcut
 echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
 echo "Type=Application" >> /usr/share/applications/idea.desktop
@@ -141,5 +142,3 @@ echo "export PATH=/apps/cassandra/bin:\$PATH" >> ~/.bashrc
 echo "export PATH=/apps/devcenter/bin:\$PATH" >> ~/.bashrc
 echo "export PATH=/apps/tomcat/bin:\$PATH" >> ~/.bashrc
 echo "export PATH=/apps/maven/bin:\$PATH" >> ~/.bashrc
-
-
