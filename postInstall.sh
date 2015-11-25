@@ -14,7 +14,6 @@ apt-get update
 dpkg-reconfigure tzdata
 apt-get install ntp ntpdate -y
 apt-get install git -y
-apt-get install nodejs -y
 apt-get install curl -y
 apt-get install terminator -y
 apt-get install libgconf2-4 libnss3-1d libxss1
@@ -24,10 +23,8 @@ apt-get install openjdk-8-jdk
   #alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin
 
 #NodeJs
-curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
+curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
 apt-get install nodejs -y
-apt-get install npm -y
-ln -s /usr/bin/nodejs /usr/bin/node
 npm install -g nodemon gulp bower grunt yo
 
 
