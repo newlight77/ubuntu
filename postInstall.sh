@@ -25,7 +25,7 @@ apt-get install openjdk-8-jdk
 #NodeJs
 curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
 apt-get install nodejs -y
-npm install -g nodemon gulp bower grunt yo
+npm install -g nodemon gulp yo
 
 
 #Docker
