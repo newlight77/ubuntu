@@ -38,7 +38,7 @@ apt-get update
 apt-get purge lxc-docker*
 apt-cache policy docker-engine
 apt-get install docker-engine -y
-usermod -aG docker asaid
+usermod -aG docker $LOGNAME
 systemctl enable docker
 
 # Docker-compose
@@ -53,7 +53,7 @@ apt-get install everpad
 #Slack
 wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.5-amd64.deb
 dpkg -i slack-desktop-1.2.5-amd64.deb
-rm dpkg -i slack-desktop-1.2.5-amd64.deb
+rm slack-desktop-1.2.5-amd64.deb
 
 #Chrome
 #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -121,7 +121,7 @@ tar zxvf apache-maven-3.3.3-bin.tar.gz
 rm apache-maven-3.3.3-bin.tar.gz
 ln -s /apps/apache-maven-3.3.3 /apps/maven
 
-
+sudo su -
 #IntelliJ shortcut
 echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
 echo "Type=Application" >> /usr/share/applications/idea.desktop
@@ -129,7 +129,7 @@ echo "Terminal=true" >> /usr/share/applications/idea.desktop
 echo "Name=Idea" >> /usr/share/applications/idea.desktop
 echo "Icon=/apps/idea/bin/idea.png" >> /usr/share/applications/idea.desktop
 echo "Exec=/apps/idea/bin/idea.sh" >> /usr/share/applications/idea.desktop
-
+exit
 
 echo "Hello $LOGNAME"
 echo "export PATH=/apps/VSCode:\$PATH" >> ~/.bashrc
