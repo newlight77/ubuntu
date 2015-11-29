@@ -22,13 +22,15 @@ Vagrant.configure("2") do |config|
 
     # forwarded ports
     #config.vm.network :forwarded_port, guest: 80, host: 80, auto_correct: true
-    [2999, 3000, 8081, 8082, 8083, 8084, 8089, 8001, 8080, 8443, 9042, 19042].each do |p|
+    [2999, 3000, 8081, 8082, 8083, 8084, 8089, 8001, 8080, 8443].each do |p|
         config.vm.network :forwarded_port, guest: p, host: p
     end
 
-    #config.vm.network :private_network, ip: "192.168.56.22"
+    config.vm.network :private_network, ip: "192.168.56.22"
+    #config.vm.network :private_network, type: "dhcp"
 
-    config.vm.synced_folder ".", "/vagrant", :type => "nfs"
+    #config.vm.synced_folder ".", "/vagrant", :type => "nfs"
+    config.vm.synced_folder ".", "/vagrant"
 
     config.vm.provision :shell, path: "postInstall.sh", :privileged => true
 
