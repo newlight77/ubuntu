@@ -16,10 +16,13 @@ apt-get install ntp ntpdate -y
 apt-get install git -y
 apt-get install curl -y
 apt-get install terminator -y
-apt-get install libgconf2-4 libnss3-1d libxss1
+apt-get install libgconf2-4 libnss3-1d libxss1 -y
+apt-get install nfs-kernel-server -y
+apt-get install python-support -y
+apt-get install gvfs-bin -y
 apt-get install mongodb-client -y
 apt-get install eclipse -y
-apt-get install openjdk-8-jdk
+apt-get install openjdk-8-jdk -y
   #alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin
 
 #NodeJs
@@ -46,9 +49,9 @@ curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 #Evernote
-add-apt-repository ppa:nvbn-rm/ppa
+add-apt-repository ppa:nvbn-rm/ppa -y
 apt-get update
-apt-get install everpad
+apt-get install everpad -y
 
 #Slack
 wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.5-amd64.deb
@@ -58,12 +61,12 @@ rm slack-desktop-1.2.5-amd64.deb
 #Chrome
 #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #dpkg -i google-chrome-stable_current_amd64.deb
-apt-get install chromium-browser
+apt-get install chromium-browser -y
 
 # Sublime
-add-apt-repository ppa:webupd8team/sublime-text-3
+add-apt-repository ppa:webupd8team/sublime-text-3 -y
 apt-get update
-apt-get install sublime-text-installer
+apt-get install sublime-text-installer -y
 
 # Cassandra
 echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
