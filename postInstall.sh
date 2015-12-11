@@ -24,6 +24,9 @@ apt-get install mongodb-client -y
 apt-get install eclipse -y
 apt-get install openjdk-8-jdk -y
   #alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin
+apt-get install build-essential g++ flex bison gperf ruby perl \
+  libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
+  libpng-dev libjpeg-dev python libx11-dev libxext-dev
 
 #NodeJs
 curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
@@ -47,6 +50,9 @@ systemctl enable docker
 # Docker-compose
 curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+
+# Phantomjs
+
 
 #Evernote
 add-apt-repository ppa:nvbn-rm/ppa -y
@@ -74,6 +80,12 @@ curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 apt-get update
 apt-get install cassandra=2.2.3 -y
 
+
+#unity-tweak-tool
+apt-get install unity-tweak-tool -y
+apt-get install compiz -y
+apt-get install clipit -y
+apt-get install gpick -y
 
 mkdir /apps
 chmod -R 777 /apps
@@ -132,13 +144,10 @@ echo "Terminal=true" >> /usr/share/applications/idea.desktop
 echo "Name=Idea" >> /usr/share/applications/idea.desktop
 echo "Icon=/apps/idea/bin/idea.png" >> /usr/share/applications/idea.desktop
 echo "Exec=/apps/idea/bin/idea.sh" >> /usr/share/applications/idea.desktop
+
+cat .bashrc-root >> ~/.bashrc
+
 exit
 
-echo "Hello $LOGNAME"
-echo "export PATH=/apps/VSCode:\$PATH" >> ~/.bashrc
-echo "export PATH=/apps/idea:\$PATH" >> ~/.bashrc
-echo "export PATH=/apps/sts:\$PATH" >> ~/.bashrc
-echo "export PATH=/apps/cassandra/bin:\$PATH" >> ~/.bashrc
-echo "export PATH=/apps/devcenter/bin:\$PATH" >> ~/.bashrc
-echo "export PATH=/apps/tomcat/bin:\$PATH" >> ~/.bashrc
-echo "export PATH=/apps/maven/bin:\$PATH" >> ~/.bashrc
+cat .bashrc >> ~/.bashrc
+cat .gitconfig >> ~/.gitconfig

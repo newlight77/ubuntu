@@ -1,0 +1,5 @@
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+WHITE="\033[1;37m"
+RESET="\033[0;37m"
+PS1="\[$WHITE\]\t \[${RED}\]\u@\h \[$WHITE\]in \[$GREEN\]\w\[$RED\]\n\## "
