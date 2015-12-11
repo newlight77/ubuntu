@@ -32,6 +32,7 @@ Vagrant.configure("2") do |config|
     #config.vm.synced_folder ".", "/vagrant", :type => "nfs"
     config.vm.synced_folder ".", "/vagrant"
 
+    config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install ubuntu-desktop -y"
     config.vm.provision :shell, path: "postInstall.sh", :privileged => true
 
     #config.vm.provision "shell", inline: <<-SHELL
