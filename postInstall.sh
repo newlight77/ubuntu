@@ -22,6 +22,7 @@ apt-get install python-support -y
 apt-get install gvfs-bin -y
 apt-get install mongodb-client -y
 apt-get install eclipse -y
+apt-get install nginx -y
 apt-get install openjdk-8-jdk -y
   #alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin
 apt-get install build-essential g++ flex bison gperf ruby perl \
@@ -52,7 +53,6 @@ curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 # Phantomjs
-
 
 #Evernote
 add-apt-repository ppa:nvbn-rm/ppa -y
@@ -100,6 +100,11 @@ unzip VSCode-linux64.zip
 rm VSCode-linux64.zip
 ln -s /apps/VSCode-linux-x64 /apps/VSCode
 
+#NetBeans
+cur -O http://download.netbeans.org/netbeans/8.1/final/bundles/netbeans-8.1-linux.sh
+chmod +x netbeans-8.1-linux.sh
+./netbeans-8.1-linux.sh
+
 # Idea
 curl -O https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.5.tar.gz
 tar zxvf ideaIC-14.1.5.tar.gz
@@ -117,6 +122,10 @@ ln -s /apps/sts-bundle/sts-3.7.2.RELEASE /apps/sts
 #tar -xvzf apache-cassandra-2.2.3-bin.tar.gz
 #rm apache-cassandra-2.2.3-bin.tar.gz
 #ln -s /apps/apache-cassandra-2.2.3 /apps/cassandra
+
+#Cassandra-Cluster-Admin
+git clone https://github.com/sebgiroux/Cassandra-Cluster-Admin.git
+
 
 # DevCenter
 curl -O http://downloads.datastax.com/devcenter/DevCenter-1.4.1-linux-gtk-x86_64.tar.gz
