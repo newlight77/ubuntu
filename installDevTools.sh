@@ -15,16 +15,16 @@ createAppsDir () {
   echo "***createAppsDir*** done" 1>&2
 }
 
-installCassandra () {
-  echo "***installCassandra*** Installing Cassandra" 1>&2
-  cd /apps
-  # Cassandra
+#installCassandra () {
+  #echo "***installCassandra*** Installing Cassandra" 1>&2
+  #cd /apps
+  ## Cassandra
   #curl -O http://www.us.apache.org/dist/cassandra/2.2.3/apache-cassandra-2.2.3-bin.tar.gz
   #tar -xvzf apache-cassandra-2.2.3-bin.tar.gz
   #rm apache-cassandra-2.2.3-bin.tar.gz
   #ln -s /apps/apache-cassandra-2.2.3 /apps/cassandra
-  echo "***installCassandra*** done" 1>&2
-}
+  #echo "***installCassandra*** done" 1>&2
+#}
 
 installCassandraAdmin () {
   echo "***installCassandraAdmin*** Installing Cassandra Admin Tool" 1>&2
@@ -49,10 +49,10 @@ installTomcat () {
   echo "***installTomcat*** Installing Tomcat" 1>&2
   cd /apps
   #Tomcat
-  curl -O http://mirrors.ircam.fr/pub/apache/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz
-  tar zxvf apache-tomcat-8.0.28.tar.gz
-  rm apache-tomcat-8.0.28.tar.gz
-  ln -s /apps/apache-tomcat-8.0.28 /apps/tomcat
+  curl -O http://mirrors.ircam.fr/pub/apache/tomcat/tomcat-8/v8.0.30/bin/apache-tomcat-8.0.30.tar.gz
+  tar zxvf apache-tomcat-8.0.30.tar.gz
+  rm apache-tomcat-8.0.30.tar.gz
+  ln -s /apps/apache-tomcat-8.0.30 /apps/tomcat
   echo "***installTomcat*** done" 1>&2
 }
 
@@ -82,7 +82,7 @@ installNetbeans () {
   echo "***installNetbeans*** Installing Unity tweak tools" 1>&2
   cd /apps
   #NetBeans
-  cur -O http://download.netbeans.org/netbeans/8.1/final/bundles/netbeans-8.1-linux.sh
+  curl -O http://download.netbeans.org/netbeans/8.1/final/bundles/netbeans-8.1-linux.sh
   chmod +x netbeans-8.1-linux.sh
   ./netbeans-8.1-linux.sh
   echo "***installNetbeans*** done" 1>&2

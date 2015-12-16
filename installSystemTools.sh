@@ -49,9 +49,6 @@ installCommonPackages () {
   apt-get install openjdk-8-jdk -y
   apt-get install nginx -y
 
-  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-  apt-get install mongodb-client -y
-
   echo "***installCommonPackages*** done" 1>&2
 }
 
@@ -104,7 +101,8 @@ installMongoDb () {
   $(isRoot)
   #mongodb-client
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-  apt-get install mongodb-client -y
+  echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+  apt-get install mongodb-org -y
   echo "***installMongoDb*** done" 1>&2
 }
 
@@ -116,6 +114,16 @@ installChrome () {
   #dpkg -i google-chrome-stable_current_amd64.deb
   apt-get install chromium-browser -y
   echo "***installChrome*** done" 1>&2
+}
+
+installAtom () {
+  echo "***installAtom*** Installing Atom" 1>&2
+  cd /apps
+  #VSCode
+  curl -O https://github.com/atom/atom/releases/download/v1.3.1/atom-amd64.deb
+  dpkg -i atom-amd64.deb
+  rm atom-amd64.deb
+  echo "***installAtom*** done" 1>&2
 }
 
 installSublime () {
