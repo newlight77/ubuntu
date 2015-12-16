@@ -1,32 +1,36 @@
-
-
 ## Install Ubuntu
 -Install ubuntu : http://www.ubuntu.com/download/desktop/install-ubuntu-desktop
-
 -Ensure to choose "encrypt user home" during the installation
 
-### SSH
--*ssh-keygen -t rsa*
+## Install tools
 
-### Environment
--*echo "Hello $LOGNAME"
--*echo "export PATH=/apps/VSCode:\$PATH" >> ~/.bashrc*
--*echo "export PATH=/apps/idea:\$PATH" >> ~/.bashrc*
--*echo "export PATH=/apps/sts:\$PATH" >> ~/.bashrc*
--*echo "export PATH=/apps/cassandra/bin:\$PATH" >> ~/.bashrc*
--*echo "export PATH=/apps/devcenter/bin:\$PATH" >> ~/.bashrc*
--*echo "export PATH=/apps/tomcat/bin:\$PATH" >> ~/.bashrc*
--*echo "export PATH=/apps/maven/bin:\$PATH" >> ~/.bashrc*
+### install git
+Install git as it is required at first to retrieve the ubuntu toolboxs scripts from github.com
 
-### Google Java Style
-*git clone https://github.com/google/styleguide.git*
+```sh
+sudo apt-get install git
+```
 
-### GIT
-*git config --global user.name "newlight77"*
-*git config --global user.email "newlight77@gmail.com"*
+### clone Ubuntu install scripts
+```sh
+cd ~
+git clone https://github.com/newlight77/ubuntu.git
+```
 
-### Next
--Import projects into pivotal
--Import Google Java code formatter
--Ensure using UTF-8 for XML/HTML/Java/Properties files in eclipse
+### Install Tools
+```sh
+sudo installTools.sh
+```
 
+### Customize
+Modify the customize script
+```sh
+customizeRoot.sh
+customize.sh
+```
+
+## Uninstall
+### Uninstall NodeJs
+```sh
+removeNodeJs.sh
+```

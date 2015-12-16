@@ -2,13 +2,13 @@
 
 isRoot() {
   if [ "$(id -u)" != "0" ]; then
-   echo "This script must be run as root" 1>&2
+   echo "***isRoot*** This script must be run as root" 1>&2
    exit 1
  fi
 }
 
 addRepository () {
-  echo "Adding repositories to system in /etc/apt/sources.list.d" 1>&2
+  echo "***addRepository*** Adding repositories to system in /etc/apt/sources.list.d" 1>&2
   $(isRoot)
 
   add-apt-repository main
@@ -19,17 +19,19 @@ addRepository () {
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
 
   apt-get update
+  echo "***addRepository*** done" 1>&2
 }
 
 configureTime () {
-  echo "Configuring system time and timezone" 1>&2
+  echo "***configureTime*** Configuring system time and timezone" 1>&2
   $(isRoot)
   dpkg-reconfigure tzdata
   apt-get install ntp ntpdate -y
+  echo "***configureTime*** done" 1>&2
 }
 
 installCommonPackages () {
-  echo "Installing common packages" 1>&2
+  echo "***installCommonPackages*** Installing common packages" 1>&2
   $(isRoot)
   apt-get install curl -y
   apt-get install terminator -y
@@ -46,20 +48,25 @@ installCommonPackages () {
   apt-get install git -y
   apt-get install openjdk-8-jdk -y
   apt-get install nginx -y
+
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
   apt-get install mongodb-client -y
+
+  echo "***installCommonPackages*** done" 1>&2
 }
 
 installNodejs () {
-  echo "Installing NodeJs, NPM, gulp, nodemon, yeoman" 1>&2
+  echo "***installNodejs*** Installing NodeJs, NPM, gulp, nodemon, yeoman" 1>&2
   $(isRoot)
   #NodeJs
   curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
   apt-get install nodejs -y
   npm install -g nodemon gulp yo
+  echo "***installNodejs*** done" 1>&2
 }
 
 installDocker () {
-  echo "Installing Docker and compose" 1>&2
+  echo "***installDocker*** Installing Docker and compose" 1>&2
   $(isRoot)
   #Docker
   apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -75,63 +82,79 @@ installDocker () {
   usermod -aG docker $LOGNAME
   systemctl enable docker
 
- Docker-compose
+  #Docker-compose
   curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
-}
-
-installEvernote () {
-  echo "Installing Evernote" 1>&2
-  $(isRoot)
-  #Evernote
-  add-apt-repository ppa:nvbn-rm/ppa -y
-  apt-get update
-  apt-get install everpad -y
-}
-
-installSlack () {
-  echo "Installing Slack" 1>&2
-  $(isRoot)
-  #Slack
-  wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.5-amd64.deb
-  dpkg -i slack-desktop-1.2.5-amd64.deb
-  rm slack-desktop-1.2.5-amd64.deb
-}
-
-installChrome () {
-  echo "Installing Chrome" 1>&2
-  $(isRoot)
-  #Chrome
-  #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #dpkg -i google-chrome-stable_current_amd64.deb
-  apt-get install chromium-browser -y
-}
-
-installSublime () {
-  echo "Installing Sublime" 1>&2
-  $(isRoot)
-  # Sublime
-  add-apt-repository ppa:webupd8team/sublime-text-3 -y
-  apt-get update
-  apt-get install sublime-text-installer -y
+  echo "***installDocker*** done" 1>&2
 }
 
 installCassandra () {
-  echo "Installing Cassandra" 1>&2
+  echo "***installCassandra*** Installing Cassandra" 1>&2
   $(isRoot)
   # Cassandra
   echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
   curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
   apt-get update
   apt-get install cassandra=2.2.3 -y
+  echo "***installCassandra*** done" 1>&2
+}
+
+installMongoDb () {
+  echo "***installMongoDb*** Installing mongodb-client" 1>&2
+  $(isRoot)
+  #mongodb-client
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  apt-get install mongodb-client -y
+  echo "***installMongoDb*** done" 1>&2
+}
+
+installChrome () {
+  echo "***installChrome*** Installing Chrome" 1>&2
+  $(isRoot)
+  #Chrome
+  #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  #dpkg -i google-chrome-stable_current_amd64.deb
+  apt-get install chromium-browser -y
+  echo "***installChrome*** done" 1>&2
+}
+
+installSublime () {
+  echo "***installSublime*** Installing Sublime" 1>&2
+  $(isRoot)
+  # Sublime
+  add-apt-repository ppa:webupd8team/sublime-text-3 -y
+  apt-get update
+  apt-get install sublime-text-installer -y
+  echo "***installSublime*** done" 1>&2
+}
+
+installSlack () {
+  echo "***installSlack*** Installing Slack" 1>&2
+  $(isRoot)
+  #Slack
+  wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.5-amd64.deb
+  dpkg -i slack-desktop-1.2.5-amd64.deb
+  rm slack-desktop-1.2.5-amd64.deb
+  echo "***installSlack*** done" 1>&2
+}
+
+installEvernote () {
+  echo "***installEvernote*** Installing Evernote" 1>&2
+  $(isRoot)
+  #Evernote
+  add-apt-repository ppa:nvbn-rm/ppa -y
+  apt-get update
+  apt-get install everpad -y
+  echo "***installEvernote*** done" 1>&2
 }
 
 installUnitTweak () {
-  echo "Installing Unity tweak tools" 1>&2
+  echo "***installUnitTweak*** Installing Unity tweak tools" 1>&2
   $(isRoot)
   #unity-tweak-tool
   apt-get install unity-tweak-tool -y
   apt-get install compiz -y
   apt-get install clipit -y
   apt-get install gpick -y
+  echo "***installUnitTweak*** done" 1>&2
 }
