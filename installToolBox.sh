@@ -9,21 +9,22 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 . "$DIR/installDevTools.sh"
 
 # Installing System Tools
-sudo addRepository
-sudo configureTime
-sudo installCommonPackages
-sudo installNodejs
-sudo installDocker
-sudo installCassandra
-sudo installMongoDb
-sudo installChrome
-sudo installSublime
-sudo installSlack
-#sudo installEvernote
-sudo installUnitTweak
+addRepository
+configureTime
+installCommonPackages
+installNodejs
+installDocker
+installCassandra
+installMongoDb
+installChrome
+installAtom
+installSublime
+installSlack
+installEvernote
+installUnitTweak
 
 # Installing Dev Tools
-sudo createAppsDir
+createAppsDir
 installCassandra
 installCassandraAdmin
 installMaven
@@ -34,5 +35,3 @@ installDevCenter
 installIdea
 installSts
 addToPath
-
-exit
