@@ -46,8 +46,12 @@ installCommonPackages () {
     libpng-dev libjpeg-dev python libx11-dev libxext-dev
 
   apt-get install git -y
-  apt-get install openjdk-8-jdk -y
   apt-get install nginx -y
+
+  #apt-get install openjdk-8-jdk -y
+  add-apt-repository ppa:webupd8team/java
+  apt-get update
+  apt-get install oracle-java8-installer -y
 
   echo "***installCommonPackages*** done" 1>&2
 }

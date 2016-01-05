@@ -7,7 +7,6 @@ export PATH=/apps/devcenter/bin:$PATH
 export PATH=/apps/tomcat/bin:$PATH
 export PATH=/apps/maven/bin:$PATH
 
-
 YELLOW="\033[1;33m"
 GREEN="\033[1;32m"
 PURPLE="\033[1;35m"
