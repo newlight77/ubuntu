@@ -26,6 +26,15 @@ createAppsDir () {
   #echo "***installCassandra*** done" 1>&2
 #}
 
+installJdk8 () {
+  curl -O http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
+  tar zxvf jdk-8u65-linux-x64.tar.gz
+  rm jdk-8u65-linux-x64.tar.gz
+  ln -s /apps/jdk1.8.0_65 /apps/jdk8
+  alternatives --set java /apps/jdk8/bin
+  echo "***installJdk*** done" 1>&2
+}
+
 installCassandraAdmin () {
   echo "***installCassandraAdmin*** Installing Cassandra Admin Tool" 1>&2
   cd /apps
@@ -60,9 +69,9 @@ installDevCenter () {
   echo "***installDevCenter*** Installing Dev Center" 1>&2
   cd /apps
   # DevCenter
-  curl -O http://downloads.datastax.com/devcenter/DevCenter-1.4.1-linux-gtk-x86_64.tar.gz
-  tar -xvzf  DevCenter-1.4.1-linux-gtk-x86_64.tar.gz
-  rm DevCenter-1.4.1-linux-gtk-x86_64.tar.gz
+  curl -O http://downloads.datastax.com/devcenter/DevCenter-1.5.0-linux-gtk-x86_64.tar.gz
+  tar -xvzf  DevCenter-1.5.0-linux-gtk-x86_64.tar.gz
+  rm DevCenter-1.5.0-linux-gtk-x86_64.tar.gz
   ln -s /apps/DevCenter /apps/devcenter
   echo "***installDevCenter*** done" 1>&2
 }
@@ -107,6 +116,17 @@ installIdea () {
   cat .bashrc-root >> ~/.bashrc
 
   echo "***installIdea*** done" 1>&2
+}
+
+installEclipse () {
+  echo "***installEclipse*** Installing Eclipse" 1>&2
+
+  curl -O http://download.springsource.com/release/ECLIPSE/mars/1/eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+  tar zxvf eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+  rm eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+  mv /apps/eclipse /apps/eclipse-mars
+  ln -s /apps/eclipse-mars /apps/eclipse
+  echo "***installEclipse*** done" 1>&2
 }
 
 installSts () {

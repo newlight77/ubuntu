@@ -33,5 +33,5 @@ installVSCode
 installDevCenter
 #installNetbeans
 installIdea
-installSts
+installEclipse
 addToPath
