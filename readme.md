@@ -5,7 +5,7 @@
 ## Install tools
 
 ### install git
-Install git as it is required at first to retrieve the ubuntu toolboxs scripts from github.com
+Install git as it is required at first to retrieve the ubuntu toolbox scripts from github.com
 
 ```sh
 sudo apt-get install git
@@ -23,9 +23,12 @@ sudo installTools.sh
 ```
 
 ### Customize
-Modify the customize script
 ```sh
 customizeRoot.sh
+```
+
+Edit the customize.sh script and input your own git user config in
+```sh
 customize.sh
 ```
 
