@@ -27,6 +27,7 @@ createAppsDir () {
 #}
 
 installJdk8 () {
+  echo "***installJdk*** Installing Oracle Jdk8" 1>&2
   curl -O http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
   tar zxvf jdk-8u65-linux-x64.tar.gz
   rm jdk-8u65-linux-x64.tar.gz
