@@ -19,7 +19,7 @@ git clone https://github.com/newlight77/ubuntu.git
 
 ### Install Tools
 ```sh
-sudo installTools.sh
+sudo installToolBox.sh
 ```
 
 ### Customize
