@@ -34,6 +34,7 @@ installCommonPackages () {
   echo "***installCommonPackages*** Installing common packages" 1>&2
   $(isRoot)
   apt-get install curl -y
+  apt-get install mailutils -y
   apt-get install terminator -y
   apt-get install libgconf2-4 libnss3-1d libxss1 -y
   apt-get install nfs-kernel-server -y
@@ -158,6 +159,15 @@ installEvernote () {
   apt-get update
   apt-get install everpad -y
   echo "***installEvernote*** done" 1>&2
+}
+
+installMkUsb() {
+  echo "***installMkUsb*** Installing mkusb allowing to create bootable usb" 1>&2
+  $(isRoot)
+  sudo add-apt-repository ppa:mkusb/ppa
+  sudo apt-get update
+  sudo apt-get install mkusb -y
+  echo "***installMkUsb*** done" 1>&2
 }
 
 installUnitTweak () {

@@ -21,6 +21,7 @@ installAtom
 installSublime
 installSlack
 installEvernote
+installMkUsb
 installUnitTweak
 
 # Installing Dev Tools
