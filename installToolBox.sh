@@ -36,3 +36,4 @@ installDevCenter
 installIdea
 installEclipse
 addToPath
+changeAppsRights

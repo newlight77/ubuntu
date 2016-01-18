@@ -125,7 +125,7 @@ installAtom () {
   echo "***installAtom*** Installing Atom" 1>&2
   cd /apps
   #VSCode
-  curl -O https://github.com/atom/atom/releases/download/v1.3.1/atom-amd64.deb
+  wget https://github.com/atom/atom/releases/download/v1.4.0/atom-amd64.deb
   dpkg -i atom-amd64.deb
   rm atom-amd64.deb
   echo "***installAtom*** done" 1>&2
