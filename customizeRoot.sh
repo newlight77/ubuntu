@@ -10,5 +10,5 @@ isRoot() {
 echo "*** Customize *** Customizing User env" 1>&2
 $(isRoot)
 
-cat .bashrc-root >> ~/.bashrc
+cat .bashrc >> ~/.bashrc
 ssh-keygen -t rsa

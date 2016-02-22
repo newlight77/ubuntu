@@ -160,5 +160,9 @@ addToPath () {
   echo "export PATH=/apps/maven/bin:$PATH" >> ~/.bashrc
   echo "export PATH=/apps/activator:$PATH" >> ~/.bashrc
 
+  echo "export NPM_PACKAGES=${HOME}/.npm-global-pkg" >> ~/.bashrc
+  echo "export NODE_PATH=$NPM_PACKAGES/lib/node_modules:$NODE_PATH" >> ~/.bashrc
+  echo "export PATH=$NPM_PACKAGES/bin:$PATH" >> ~/.bashrc
+
   echo "***addToPath*** done" 1>&2
 }
