@@ -27,10 +27,10 @@ installUnitTweak
 # Installing Dev Tools
 createAppsDir
 installCassandra
-installCassandraAdmin
+#installCassandraAdmin
 installMaven
 installTomcat
-installVSCode
+#installVSCode
 installDevCenter
 #installNetbeans
 installIdea

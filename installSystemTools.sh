@@ -85,7 +85,7 @@ installDocker () {
   systemctl enable docker
 
   #Docker-compose
-  curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
   echo "***installDocker*** done" 1>&2
 }
@@ -125,9 +125,11 @@ installAtom () {
   echo "***installAtom*** Installing Atom" 1>&2
   cd /apps
   #VSCode
-  wget https://github.com/atom/atom/releases/download/v1.4.0/atom-amd64.deb
+  wget https://github.com/atom/atom/releases/download/v1.5.3/atom-amd64.deb
   dpkg -i atom-amd64.deb
   rm atom-amd64.deb
+  gem install scss_lint
+  apm install linter-scss-lint
   echo "***installAtom*** done" 1>&2
 }
 
