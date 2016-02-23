@@ -29,11 +29,15 @@ export LESS="--RAW-CONTROL-CHARS"
 USER_COLOR=$COLOR_YELLOW                     # user's color
 [ $UID -eq "0" ] && USER_COLOR=$COLOR_LIGHT_RED   # root's color
 
-git_branch () { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'; }
+git_branch () {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'; 
+}
 
-TIME=${COLOR_LIGHT_GRAY}'\]\t '
-HOST=${USER_COLOR}'\]\u'${COLOR_LIGHT_BLUE}'\]@'${COLOR_CYAN}'\]\h '
-LOCATION=${USER_COLOR}'\]`pwd | sed "s#\(/[^/]\{1,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"` '
-BRANCH=${COLOR_BROWN}' \]$(git_branch)\['${COLOR_NC}'\] \n\['${COLOR_LIGHT_GREEN}'\]→\['${COLOR_NC}'\]'
-PS1=$TIME$HOST$LOCATION$BRANCH
+TIME=${COLOR_LIGHT_GRAY}'\t '
+HOST=${USER_COLOR}'\u'${COLOR_NC}'@'${COLOR_CYAN}'\h '
+LOCATION=${USER_COLOR}'`pwd | sed "s#\(/[^/]\{1,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"` '
+LOCATION=${USER_COLOR}'`pwd` '
+BRANCH=${COLOR_BROWN}$(git_branch)${COLOR_NC}
+CMD_LINE=${COLOR_LIGHT_GREEN}' → '${COLOR_NC}
+PS1=$TIME$HOST$LOCATION$BRANCH'\n'$CMD_LINE
 PS2='\['${COLOR_LIGHT_CYAN}'\]>'
