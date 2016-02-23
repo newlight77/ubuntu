@@ -1,0 +1,8 @@
+
+alias pull=’git pull’
+alias push=’git push’
+alias commit=’git commit -a’
+alias add=’git add’
+#git aliased to git-publish -> push current branch` to origin and then track
+alias publish=’git publish’
+alias status=’git status’
