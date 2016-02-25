@@ -2,6 +2,9 @@
 
 echo "*** Customize *** Customizing User env" 1>&2
 
+cd ~
+git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt
+
 cd ~/ubuntu
 cp  .bashrc_profile >> ~/.bashrc_profile
 cp  .bashrc_alias >> ~/.bashrc_alias
