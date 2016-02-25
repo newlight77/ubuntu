@@ -41,11 +41,11 @@ git_branch () {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
 }
 
-TIME=${COLOR_LIGHT_GRAY}'\t '
-HOST=${USER_COLOR}'\u'${COLOR_NC}'@'${COLOR_CYAN}'\h '
-LOCATION=${USER_COLOR}'`pwd | sed "s#\(/[^/]\{1,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"` '
-LOCATION=${USER_COLOR}'`pwd` '
-BRANCH=${COLOR_BROWN}'$(git_branch)'${COLOR_NC}
-CMD_LINE=${COLOR_LIGHT_GREEN}' → '${COLOR_LIGHT_GRAY}
-PS1=$TIME$HOST$LOCATION$BRANCH'\n'$CMD_LINE
+TIME='\['${COLOR_LIGHT_GRAY}'\]\t '
+HOST='\['${USER_COLOR}'\]\u\['${COLOR_NC}'\]@\['${COLOR_CYAN}'\]\h '
+LOCATION='\['${USER_COLOR}'\]`pwd | sed "s#\(/[^/]\{1,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"` '
+LOCATION='\['${USER_COLOR}'\]`pwd` '
+BRANCH='\['${COLOR_BROWN}'\]$(git_branch)'
+CMD_LINE=' \['${COLOR_LIGHT_RED}'\]→ \['${USER_COLOR}'\]'
+PS1=$TIME$HOST$LOCATION$BRANCH'\n '$CMD_LINE
 PS2='\['${COLOR_LIGHT_CYAN}'\]>'
