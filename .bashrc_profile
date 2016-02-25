@@ -7,6 +7,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 export COLOR_NC='\e[0m' # No Color
 export COLOR_WHITE='\e[1;37m'
 export COLOR_BLACK='\e[0;30m'
@@ -37,15 +49,10 @@ export LESS="--RAW-CONTROL-CHARS"
 USER_COLOR=$COLOR_YELLOW                     # user's color
 [ $UID -eq "0" ] && USER_COLOR=$COLOR_LIGHT_RED   # root's color
 
-git_branch () {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
-}
-
 TIME='\['${COLOR_LIGHT_GRAY}'\]\t '
 HOST='\['${USER_COLOR}'\]\u\['${COLOR_NC}'\]@\['${COLOR_CYAN}'\]\h '
 LOCATION='\['${USER_COLOR}'\]`pwd | sed "s#\(/[^/]\{1,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"` '
 LOCATION='\['${USER_COLOR}'\]`pwd` '
-BRANCH='\['${COLOR_BROWN}'\]$(git_branch)'
 CMD_LINE=' \['${COLOR_LIGHT_RED}'\]→ \['${USER_COLOR}'\]'
-PS1=$TIME$HOST$LOCATION$BRANCH'\n '$CMD_LINE
+PS1=$TIME$HOST$LOCATION'\n '$CMD_LINE
 PS2='\['${COLOR_LIGHT_CYAN}'\]>'

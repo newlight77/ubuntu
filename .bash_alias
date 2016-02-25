@@ -2,6 +2,7 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias cd..='cd ..'
 
 alias pull=’git pull’
 alias push=’git push’
