@@ -54,6 +54,8 @@ installCommonPackages () {
   apt-get update
   apt-get install oracle-java8-installer -y
 
+  apt-get install gksu
+
   echo "***installCommonPackages*** done" 1>&2
 }
 
@@ -123,7 +125,6 @@ installChrome () {
 
 installAtom () {
   echo "***installAtom*** Installing Atom" 1>&2
-  cd /apps
   #VSCode
   wget https://github.com/atom/atom/releases/download/v1.5.3/atom-amd64.deb
   dpkg -i atom-amd64.deb

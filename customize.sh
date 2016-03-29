@@ -2,17 +2,25 @@
 
 echo "*** Customize *** Customizing User env" 1>&2
 
-cd ~
-
-git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt
 git clone https://github.com/google/styleguide.git
-git clone https://github.com/newlight77/ubuntu.git .ubuntu
+#git clone https://github.com/newlight77/ubuntu.git .ubuntu
 
-cat .ubuntu/.bashrc_profile >> ~/.bashrc_profile
-cat .ubuntu/.gitconfig >> ~/.gitconfig
+cp  .bashrc_natenadau  ~/.ubuntu/.bashrc_natenadau
+cp  .bashrc_profile    ~/.ubuntu/.bashrc_profile
+cp  .bashrc_alias      ~/.ubuntu/.bashrc_alias
 
+cp  .gitconfig_alias      ~/.ubuntu/.gitconfig_alias
+
+cat .bashrc       >> ~/.bashrc
+
+cat .gitconfig    >> ~/.gitconfig
 
 git config --global user.name "newlight77"
 git config --global user.email "newlight77@gmail.com"
+
+git clone https://github.com/google/styleguide.git
+
+cd ~
+git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt
 
 ssh-keygen -t rsa
