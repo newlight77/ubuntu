@@ -1,6 +1,6 @@
 
-if [ -f ~/.ubuntu/.bashrc_natenadau ]; then
-    source ~/.ubuntu/.bashrc_natenadau
+if [ -f ~/.ubuntu/.bashrc_natelandau ]; then
+    source ~/.ubuntu/.bashrc_natelandau
 fi
 
 if [ -f ~/.ubuntu/.bashrc_aliases ]; then
