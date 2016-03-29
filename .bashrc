@@ -3,11 +3,11 @@ if [ -f ~/.ubuntu/.bashrc_natenadau ]; then
     source ~/.ubuntu/.bashrc_natenadau
 fi
 
-if [ -f ~/.ubuntu/.bash_aliases ]; then
+if [ -f ~/.ubuntu/.bashrc_aliases ]; then
     source ~/.ubuntu/.bashrc_aliases
 fi
 
-if [ -f ~/.ubuntu/.bash_pS12 ]; then
+if [ -f ~/.ubuntu/.bashrc_ps12 ]; then
     source ~/.ubuntu/.bashrc_ps12
 fi
 

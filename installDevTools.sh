@@ -112,7 +112,6 @@ installIdea () {
   echo "Name=Idea" >> /usr/share/applications/idea.desktop
   echo "Icon=/apps/idea/bin/idea.png" >> /usr/share/applications/idea.desktop
   echo "Exec=/apps/idea/bin/idea.sh" >> /usr/share/applications/idea.desktop
-  cat .bashrc-root >> ~/.bashrc
 
   echo "***installIdea*** done" 1>&2
 }
@@ -125,6 +124,14 @@ installEclipse () {
   rm eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
   mv /apps/eclipse /apps/eclipse-mars
   ln -s /apps/eclipse-mars /apps/eclipse
+
+  echo "[Desktop Entry]" >> /usr/share/applications/eclipse.desktop
+  echo "Type=Application" >> /usr/share/applications/eclipse.desktop
+  echo "Terminal=true" >> /usr/share/applications/eclipse.desktop
+  echo "Name=Eclipse" >> /usr/share/applications/eclipse.desktop
+  echo "Icon=/apps/eclipse/eclipse.png" >> /usr/share/applications/eclipse.desktop
+  echo "Exec=/apps/eclipse/eclipse" >> /usr/share/applications/eclipse.desktop
+
   echo "***installEclipse*** done" 1>&2
 }
 
@@ -151,14 +158,14 @@ installPlay2 () {
 addToPath () {
   echo "***addToPath*** Adding apps to PATH" 1>&2
 
-  echo "export PATH=/apps/VSCode:$PATH" >> ~/.bashrc
-  echo "export PATH=/apps/idea:$PATH" >> ~/.bashrc
-  echo "export PATH=/apps/sts:$PATH" >> ~/.bashrc
-  echo "export PATH=/apps/cassandra/bin:$PATH" >> ~/.bashrc
-  echo "export PATH=/apps/devcenter/bin:$PATH" >> ~/.bashrc
-  echo "export PATH=/apps/tomcat/bin:$PATH" >> ~/.bashrc
-  echo "export PATH=/apps/maven/bin:$PATH" >> ~/.bashrc
-  echo "export PATH=/apps/activator:$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/VSCode:\$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/idea:\$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/sts:\$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/cassandra/bin:\$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/devcenter/bin:\$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/tomcat/bin:\$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/maven/bin:\$PATH" >> ~/.bashrc
+  echo "export PATH=/apps/activator:\$PATH" >> ~/.bashrc
 
   echo "export NPM_PACKAGES=${HOME}/.npm-global-pkg" >> ~/.bashrc
   echo "export NODE_PATH=$NPM_PACKAGES/lib/node_modules:$NODE_PATH" >> ~/.bashrc

@@ -1,4 +1,4 @@
 
-if [ -f ~/.macosx/.bashrc ]; then
-    source ~/.macosx/.bashrc
+if [ -f ~/.ubuntu/.bashrc ]; then
+    source ~/.ubuntu/.bashrc
 fi
