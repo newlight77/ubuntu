@@ -10,6 +10,7 @@ isRoot() {
 echo "*** Customize *** Customizing User env" 1>&2
 $(isRoot)
 
+git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
 #git clone https://github.com/newlight77/ubuntu.git .ubuntu
 
 mkdir /root/.ubuntu
@@ -19,6 +20,7 @@ cp  .bashrc_alias      /root/.ubuntu/.bashrc_alias
 cp  .bashrc_ps12       /root/.ubuntu/.bashrc_ps12
 cp  .gitconfig_alias   /root/.ubuntu/.gitconfig_alias
 
-cat .bashrc_profile >> ~/.bashrc_profile
-cat .bashrc_alias >> ~/.bashrc_alias
-cat .bashrc >> ~/.bashrc
+cat .bashrc >> /root/.bashrc
+cat .bashrc_profile >> /root/.bashrc_profile
+cat .bashrc_alias >> /root/.bashrc_alias
+cat .gitconfig         >> ~/.gitconfig
