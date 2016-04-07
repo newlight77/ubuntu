@@ -1,3 +1,4 @@
+#############################################
 # github.com/newlight77/ubuntu [customization
 
 if [ -f ~/.ubuntu/.bashrc ]; then
@@ -5,3 +6,4 @@ if [ -f ~/.ubuntu/.bashrc ]; then
 fi
 
 # github.com/newlight77/ubuntu customization]
+#############################################

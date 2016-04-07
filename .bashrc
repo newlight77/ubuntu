@@ -1,3 +1,4 @@
+#############################################
 # github.com/newlight77/ubuntu [customization
 
 if [ -f ~/.ubuntu/.bashrc_natelandau ]; then
@@ -38,3 +39,4 @@ GIT_PROMPT_ONLY_IN_REPO=1
 # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
 
 # github.com/newlight77/ubuntu customization]
+#############################################

@@ -15,20 +15,26 @@ sudo apt-get install git
 ```sh
 cd ~
 git clone https://github.com/newlight77/ubuntu.git
+cd ubuntu
 ```
 
 ### Install Tools
 ```sh
-sudo installToolBox.sh
+sudo ./installToolBox.sh
 ```
 
 ### Customize
 ```sh
-customizeRoot.sh
+sudo ./customizeRoot.sh
 ```
 
 ```sh
-customize.sh
+./customize.sh
+```
+
+### SSH
+```sh
+ssh-keygen -t rsa
 ```
 
 ### Git config
