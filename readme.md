@@ -27,9 +27,14 @@ sudo installToolBox.sh
 customizeRoot.sh
 ```
 
-Edit the customize.sh script and input your own git user config in
 ```sh
 customize.sh
+```
+
+### Git config
+```sh
+git config --global user.name "Kong TO"
+git config --global user.email "newlight77@gmail.com"
 ```
 
 ## Uninstall
