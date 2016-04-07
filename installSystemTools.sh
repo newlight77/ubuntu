@@ -83,7 +83,8 @@ installDocker () {
   apt-get purge lxc-docker*
   apt-cache policy docker-engine
   apt-get install docker-engine -y
-  usermod -aG docker $LOGNAME
+  usermod -aG docker $USER
+  newgrp docker
   systemctl enable docker
 
   #Docker-compose
