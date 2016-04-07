@@ -1,4 +1,7 @@
+# github.com/newlight77/ubuntu [customization
 
 if [ -f ~/.ubuntu/.bashrc ]; then
     source ~/.ubuntu/.bashrc
 fi
+
+# github.com/newlight77/ubuntu customization]
