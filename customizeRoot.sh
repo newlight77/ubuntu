@@ -22,5 +22,3 @@ cp  .gitconfig_alias   /root/.ubuntu/.gitconfig_alias
 cat .bashrc_profile >> ~/.bashrc_profile
 cat .bashrc_alias >> ~/.bashrc_alias
 cat .bashrc >> ~/.bashrc
-
-#ssh-keygen -t rsa

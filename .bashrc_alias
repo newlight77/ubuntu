@@ -1,3 +1,4 @@
+#############################################
 # github.com/newlight77/ubuntu [customization
 
 # some more ls aliases
@@ -26,3 +27,4 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # github.com/newlight77/ubuntu customization]
+#############################################
