@@ -52,29 +52,32 @@ installCassandraAdmin () {
 installMaven () {
   echo "***installMaven*** Installing Maven" 1>&2
   cd /apps
-  curl -O http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
-  tar zxvf apache-maven-3.3.3-bin.tar.gz
-  rm apache-maven-3.3.3-bin.tar.gz
-  ln -s /apps/apache-maven-3.3.3 /apps/maven
+  version=3.3.3
+  curl -O http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/$version/binaries/apache-maven-$version-bin.tar.gz
+  tar zxvf apache-maven-$version-bin.tar.gz
+  rm apache-maven-$version-bin.tar.gz
+  ln -s /apps/apache-maven-$version /apps/maven
   echo "***installMaven*** done" 1>&2
 }
 
 installTomcat () {
   echo "***installTomcat*** Installing Tomcat" 1>&2
   cd /apps
-  curl -O http://mirrors.ircam.fr/pub/apache/tomcat/tomcat-8/v8.0.30/bin/apache-tomcat-8.0.30.tar.gz
-  tar zxvf apache-tomcat-8.0.30.tar.gz
-  rm apache-tomcat-8.0.30.tar.gz
-  ln -s /apps/apache-tomcat-8.0.30 /apps/tomcat
+  version=8.0.33
+  curl -O http://mirrors.ircam.fr/pub/apache/tomcat/tomcat-8/v$version/bin/apache-tomcat-$version.tar.gz
+  tar zxvf apache-tomcat-$version.tar.gz
+  rm apache-tomcat-$version.tar.gz
+  ln -s /apps/apache-tomcat-$version /apps/tomcat
   echo "***installTomcat*** done" 1>&2
 }
 
 installDevCenter () {
   echo "***installDevCenter*** Installing Dev Center" 1>&2
   cd /apps
-  curl -O http://downloads.datastax.com/devcenter/DevCenter-1.5.0-linux-gtk-x86_64.tar.gz
-  tar -xvzf  DevCenter-1.5.0-linux-gtk-x86_64.tar.gz
-  rm DevCenter-1.5.0-linux-gtk-x86_64.tar.gz
+  version=1.5.0
+  curl -O http://downloads.datastax.com/devcenter/DevCenter-$version-linux-gtk-x86_64.tar.gz
+  tar -xvzf  DevCenter-$version-linux-gtk-x86_64.tar.gz
+  rm DevCenter-$version-linux-gtk-x86_64.tar.gz
   ln -s /apps/DevCenter /apps/devcenter
   echo "***installDevCenter*** done" 1>&2
 }
@@ -82,7 +85,8 @@ installDevCenter () {
 installVSCode () {
   echo "***installVSCode*** Installing VS Code" 1>&2
   cd /apps
-  curl -O https://az764295.vo.msecnd.net/public/0.9.1/VSCode-linux64.zip
+  version=0.9.1
+  curl -O https://az764295.vo.msecnd.net/public/$version/VSCode-linux64.zip
   unzip VSCode-linux64.zip
   rm VSCode-linux64.zip
   ln -s /apps/VSCode-linux-x64 /apps/VSCode
@@ -92,18 +96,20 @@ installVSCode () {
 installNetbeans () {
   echo "***installNetbeans*** Installing Unity tweak tools" 1>&2
   cd /apps
-  curl -O http://download.netbeans.org/netbeans/8.1/final/bundles/netbeans-8.1-linux.sh
-  chmod +x netbeans-8.1-linux.sh
-  ./netbeans-8.1-linux.sh
+  version=8.1
+  curl -O http://download.netbeans.org/netbeans/$version/final/bundles/netbeans-$version-linux.sh
+  chmod +x netbeans-$version-linux.sh
+  ./netbeans-$version-linux.sh
   echo "***installNetbeans*** done" 1>&2
 }
 
 installIdea () {
   echo "***installIdea*** Installing Idea" 1>&2
   cd /apps
-  curl -O https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.5.tar.gz
-  tar zxvf ideaIC-14.1.5.tar.gz
-  rm ideaIC-14.1.5.tar.gz
+  version=14.1.5
+  curl -O https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-$version.tar.gz
+  tar zxvf ideaIC-$version.tar.gz
+  rm ideaIC-$version.tar.gz
   ln -s /apps/idea-IC-141.2735.5 /apps/idea
 
   echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
@@ -119,9 +125,10 @@ installIdea () {
 installEclipse () {
   echo "***installEclipse*** Installing Eclipse" 1>&2
   cd /apps
-  curl -O http://download.springsource.com/release/ECLIPSE/mars/1/eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
-  tar zxvf eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
-  rm eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+  version=mars-1
+  curl -O http://download.springsource.com/release/ECLIPSE/mars/1/eclipse-jee-$version-linux-gtk-x86_64.tar.gz
+  tar zxvf eclipse-jee-$version-linux-gtk-x86_64.tar.gz
+  rm eclipse-jee-$version-linux-gtk-x86_64.tar.gz
   mv /apps/eclipse /apps/eclipse-mars
   ln -s /apps/eclipse-mars /apps/eclipse
 
@@ -138,20 +145,22 @@ installEclipse () {
 installSts () {
   echo "***installSts*** Installing STS" 1>&2
   cd /apps
-  curl -O http://dist.springsource.com/release/STS/3.7.2.RELEASE/dist/e4.5/spring-tool-suite-3.7.2.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
-  tar zxvf spring-tool-suite-3.7.2.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
-  rm spring-tool-suite-3.7.2.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
-  ln -s /apps/sts-bundle/sts-3.7.2.RELEASE /apps/sts
+  version=3.7.2
+  curl -O http://dist.springsource.com/release/STS/$version.RELEASE/dist/e4.5/spring-tool-suite-$version.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
+  tar zxvf spring-tool-suite-$version.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
+  rm spring-tool-suite-$version.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
+  ln -s /apps/sts-bundle/sts-$version.RELEASE /apps/sts
   echo "***installSts*** done" 1>&2
 }
 
 installPlay2 () {
   echo "***installPlay2*** Installing Play2" 1>&2
   cd /apps
-  wget https://downloads.typesafe.com/typesafe-activator/1.3.7/typesafe-activator-1.3.7-minimal.zip
-  unzip typesafe-activator-1.3.7-minimal.zip
-  rm typesafe-activator-1.3.7-minimal.zip
-  ln -s /apps/activator-1.3.7-minimal /apps/activator
+  version=1.3.7
+  wget https://downloads.typesafe.com/typesafe-activator/$version/typesafe-activator-$version-minimal.zip
+  unzip typesafe-activator-$version-minimal.zip
+  rm typesafe-activator-$version-minimal.zip
+  ln -s /apps/activator-$version-minimal /apps/activator
   echo "***installPlay2*** done" 1>&2
 }
 

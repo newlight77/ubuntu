@@ -128,7 +128,8 @@ installChrome () {
 installAtom () {
   echo "***installAtom*** Installing Atom" 1>&2
   #VSCode
-  wget https://github.com/atom/atom/releases/download/v1.5.3/atom-amd64.deb
+  version=1.7.2
+  wget https://github.com/atom/atom/releases/download/v$version/atom-amd64.deb
   dpkg -i atom-amd64.deb
   rm atom-amd64.deb
   gem install scss_lint
@@ -150,9 +151,10 @@ installSlack () {
   echo "***installSlack*** Installing Slack" 1>&2
   $(isRoot)
   #Slack
-  wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.5-amd64.deb
-  dpkg -i slack-desktop-1.2.5-amd64.deb
-  rm slack-desktop-1.2.5-amd64.deb
+  version=1.2.5
+  wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-$version-amd64.deb
+  dpkg -i slack-desktop-$version-amd64.deb
+  rm slack-desktop-$version-amd64.deb
   echo "***installSlack*** done" 1>&2
 }
 
