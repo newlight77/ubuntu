@@ -10,7 +10,10 @@ isRoot() {
 echo "*** Customize *** Customizing User env" 1>&2
 $(isRoot)
 
-git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
+if [ ! -d ~/.bash-git-prompt ]; then
+  git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
+fi
+
 #git clone https://github.com/newlight77/ubuntu.git .ubuntu
 
 mkdir /root/.ubuntu
