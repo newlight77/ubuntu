@@ -16,7 +16,7 @@ fi
 
 #git clone https://github.com/newlight77/ubuntu.git .ubuntu
 
-mkdir /root/.ubuntu
+mkdir -p /root/.ubuntu
 cp  .bashrc_natelandau /root/.ubuntu/.bashrc_natelandau
 cp  .bashrc_profile    /root/.ubuntu/.bashrc_profile
 cp  .bashrc_alias      /root/.ubuntu/.bashrc_alias
