@@ -2,8 +2,12 @@
 
 echo "*** Customize *** Customizing User env" 1>&2
 
-git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
-git clone https://github.com/google/styleguide.git           ~/styleguide
+if [ ! -d ~/.bash-git-prompt ]; then
+  git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
+fi
+if [ ! -d ~/styleguide ]; then
+  git clone https://github.com/google/styleguide.git           ~/styleguide
+fi
 #git clone https://github.com/newlight77/ubuntu.git           ~/.ubuntu
 
 mkdir ~/.ubuntu
