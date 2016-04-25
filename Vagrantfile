@@ -33,9 +33,9 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder ".", "/vagrant"
 
     config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install ubuntu-desktop -y"
-    config.vm.provision :shell, path: "./installToolBox.sh", :privileged => true
-    config.vm.provision :shell, path: "./customizeRoot.sh", :privileged => true
-    config.vm.provision :shell, path: "./customize.sh", :privileged => true
+    config.vm.provision :shell, path: "/vagrant/installToolBox.sh", :privileged => true
+    config.vm.provision :shell, path: "/vagrant/customizeRoot.sh", :privileged => true
+    config.vm.provision :shell, path: "/vagrant/customize.sh", :privileged => true
 
     #config.vm.provision "shell", inline: <<-SHELL
 

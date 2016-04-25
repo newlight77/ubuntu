@@ -15,7 +15,7 @@ installCommonPackages
 installNodejs
 installDocker
 installCassandra
-installMongoDb
+#installMongoDb
 installChrome
 installAtom
 installSublime
