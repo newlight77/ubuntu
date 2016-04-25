@@ -10,7 +10,7 @@ if [ ! -d ~/styleguide ]; then
 fi
 #git clone https://github.com/newlight77/ubuntu.git           ~/.ubuntu
 
-mkdir ~/.ubuntu
+mkdir -p ~/.ubuntu
 cp  .bashrc_natelandau ~/.ubuntu/.bashrc_natelandau
 cp  .bashrc_profile    ~/.ubuntu/.bashrc_profile
 cp  .bashrc_alias      ~/.ubuntu/.bashrc_alias
