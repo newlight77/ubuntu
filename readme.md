@@ -25,14 +25,14 @@ sudo ./installToolBox.sh
 
 ### Customize
 ```sh
-sudo ./customizeRoot.sh
+sudo su -
+./customizeRoot.sh
 ```
 
 ```sh
 ./customize.sh
 ```
 
-### SSH
 ```sh
 ssh-keygen -t rsa
 ```
