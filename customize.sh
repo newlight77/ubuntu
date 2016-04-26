@@ -16,6 +16,7 @@ cp  .bashrc_profile    ~/.ubuntu/.bashrc_profile
 cp  .bashrc_alias      ~/.ubuntu/.bashrc_alias
 cp  .bashrc_ps12       ~/.ubuntu/.bashrc_ps12
 cp  .gitconfig_alias   ~/.ubuntu/.gitconfig_alias
+cp  .bashrc            ~/.ubuntu/.basrch
 
 cat .bashrc_profile    >> ~/.bashrc
 cat .gitconfig         >> ~/.gitconfig
