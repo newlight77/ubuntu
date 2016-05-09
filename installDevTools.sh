@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LOGFILE=`basename $0`.log
+
 isRoot() {
   if [ "$(id -u)" != "0" ]; then
    echo "***isRoot*** This script must be run as root" 1>&2
@@ -34,7 +36,7 @@ changeAppsRights () {
 installJdk8 () {
   echo "***installJdk*** Installing Oracle Jdk8" 1>&2
   cd /apps
-  curl -O http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
+  wget http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
   tar zxvf jdk-8u65-linux-x64.tar.gz
   rm jdk-8u65-linux-x64.tar.gz
   ln -s /apps/jdk1.8.0_65 /apps/jdk8
@@ -53,7 +55,7 @@ installMaven () {
   echo "***installMaven*** Installing Maven" 1>&2
   cd /apps
   version=3.3.3
-  curl -O http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/$version/binaries/apache-maven-$version-bin.tar.gz
+  wget http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/$version/binaries/apache-maven-$version-bin.tar.gz
   tar zxvf apache-maven-$version-bin.tar.gz
   rm apache-maven-$version-bin.tar.gz
   ln -s /apps/apache-maven-$version /apps/maven
@@ -64,7 +66,7 @@ installTomcat () {
   echo "***installTomcat*** Installing Tomcat" 1>&2
   cd /apps
   version=8.0.33
-  curl -O http://mirrors.ircam.fr/pub/apache/tomcat/tomcat-8/v$version/bin/apache-tomcat-$version.tar.gz
+  wget http://mirrors.ircam.fr/pub/apache/tomcat/tomcat-8/v$version/bin/apache-tomcat-$version.tar.gz
   tar zxvf apache-tomcat-$version.tar.gz
   rm apache-tomcat-$version.tar.gz
   ln -s /apps/apache-tomcat-$version /apps/tomcat
@@ -75,7 +77,7 @@ installDevCenter () {
   echo "***installDevCenter*** Installing Dev Center" 1>&2
   cd /apps
   version=1.5.0
-  curl -O http://downloads.datastax.com/devcenter/DevCenter-$version-linux-gtk-x86_64.tar.gz
+  wget http://downloads.datastax.com/devcenter/DevCenter-$version-linux-gtk-x86_64.tar.gz
   tar -xvzf  DevCenter-$version-linux-gtk-x86_64.tar.gz
   rm DevCenter-$version-linux-gtk-x86_64.tar.gz
   ln -s /apps/DevCenter /apps/devcenter
@@ -86,7 +88,7 @@ installVSCode () {
   echo "***installVSCode*** Installing VS Code" 1>&2
   cd /apps
   version=0.9.1
-  curl -O https://az764295.vo.msecnd.net/public/$version/VSCode-linux64.zip
+  wget https://az764295.vo.msecnd.net/public/$version/VSCode-linux64.zip
   unzip VSCode-linux64.zip
   rm VSCode-linux64.zip
   ln -s /apps/VSCode-linux-x64 /apps/VSCode
@@ -97,7 +99,7 @@ installNetbeans () {
   echo "***installNetbeans*** Installing Unity tweak tools" 1>&2
   cd /apps
   version=8.1
-  curl -O http://download.netbeans.org/netbeans/$version/final/bundles/netbeans-$version-linux.sh
+  wget http://download.netbeans.org/netbeans/$version/final/bundles/netbeans-$version-linux.sh
   chmod +x netbeans-$version-linux.sh
   ./netbeans-$version-linux.sh
   echo "***installNetbeans*** done" 1>&2
@@ -106,8 +108,8 @@ installNetbeans () {
 installIdea () {
   echo "***installIdea*** Installing Idea" 1>&2
   cd /apps
-  version=14.1.5
-  curl -O https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-$version.tar.gz
+  version=2016.1.1
+  wget https://download.jetbrains.com/idea/ideaIC-$version.tar.gz
   tar zxvf ideaIC-$version.tar.gz
   rm ideaIC-$version.tar.gz
   ln -s /apps/idea-IC-141.2735.5 /apps/idea
@@ -126,7 +128,7 @@ installEclipse () {
   echo "***installEclipse*** Installing Eclipse" 1>&2
   cd /apps
   version=mars-1
-  curl -O http://download.springsource.com/release/ECLIPSE/mars/1/eclipse-jee-$version-linux-gtk-x86_64.tar.gz
+  wget http://download.springsource.com/release/ECLIPSE/mars/1/eclipse-jee-$version-linux-gtk-x86_64.tar.gz
   tar zxvf eclipse-jee-$version-linux-gtk-x86_64.tar.gz
   rm eclipse-jee-$version-linux-gtk-x86_64.tar.gz
   mv /apps/eclipse /apps/eclipse-mars
@@ -146,7 +148,7 @@ installSts () {
   echo "***installSts*** Installing STS" 1>&2
   cd /apps
   version=3.7.2
-  curl -O http://dist.springsource.com/release/STS/$version.RELEASE/dist/e4.5/spring-tool-suite-$version.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
+  wget http://dist.springsource.com/release/STS/$version.RELEASE/dist/e4.5/spring-tool-suite-$version.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
   tar zxvf spring-tool-suite-$version.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
   rm spring-tool-suite-$version.RELEASE-e4.5.1-linux-gtk-x86_64.tar.gz
   ln -s /apps/sts-bundle/sts-$version.RELEASE /apps/sts
