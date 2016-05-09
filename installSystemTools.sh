@@ -65,8 +65,8 @@ installNodejs () {
   #NodeJs
   curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
   apt-get install nodejs -y
-  npm install -g nodemon gulp yo
-  npm install -g aglio drakov hercule dredd
+  #npm install -g nodemon gulp yo
+  #npm install -g aglio drakov hercule dredd
   echo "***installNodejs*** done" 1>&2
 }
 
