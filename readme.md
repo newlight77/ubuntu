@@ -37,6 +37,12 @@ sudo su -
 ssh-keygen -t rsa
 ```
 
+### NPM
+```sh
+sudo npm install -g nodemon gulp yo
+sudo npm install -g aglio drakov hercule dredd
+```
+
 ### Git config
 ```sh
 git config --global user.name "Kong TO"
