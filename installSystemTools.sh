@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LOGFILE=`basename $0`.log
+
 isRoot() {
   if [ "$(id -u)" != "0" ]; then
    echo "***isRoot*** This script must be run as root" 1>&2
@@ -18,7 +20,7 @@ addRepository () {
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
 
-  apt-get update
+  apt-get update >> $LOGFILE
   echo "***addRepository*** done" 1>&2
 }
 
@@ -26,47 +28,45 @@ configureTime () {
   echo "***configureTime*** Configuring system time and timezone" 1>&2
   $(isRoot)
   dpkg-reconfigure tzdata
-  apt-get install ntp ntpdate -y
+  apt-get install ntp ntpdate -y >> $LOGFILE
   echo "***configureTime*** done" 1>&2
 }
 
 installCommonPackages () {
   echo "***installCommonPackages*** Installing common packages" 1>&2
   $(isRoot)
-  apt-get install curl -y
+  apt-get install curl -y >> $LOGFILE
   apt-get install mailutils -y
-  apt-get install terminator -y
-  apt-get install libgconf2-4 libnss3-1d libxss1 -y
-  apt-get install nfs-kernel-server -y
-  apt-get install python-support -y
-  apt-get install gvfs-bin -y
+  apt-get install terminator -y >> $LOGFILE
+  apt-get install libgconf2-4 libnss3-1d libxss1 -y >> $LOGFILE
+  apt-get install nfs-kernel-server -y >> $LOGFILE
+  apt-get install python-support -y >> $LOGFILE
+  apt-get install gvfs-bin -y >> $LOGFILE
 
   #required for phantomjs compile
   apt-get install build-essential g++ flex bison gperf ruby perl \
     libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
-    libpng-dev libjpeg-dev python libx11-dev libxext-dev
+    libpng-dev libjpeg-dev python libx11-dev libxext-dev >> $LOGFILE
 
-  apt-get install git -y
-  apt-get install nginx -y
+  apt-get install git -y >> $LOGFILE
+  apt-get install nginx -y >> $LOGFILE
 
   #apt-get install openjdk-8-jdk -y
   add-apt-repository ppa:webupd8team/java
-  apt-get update
-  apt-get install oracle-java8-installer -y
+  apt-get update >> $LOGFILE
+  apt-get install oracle-java8-installer -y >> $LOGFILE
 
-  apt-get install gksu
+  apt-get install gksu >> $LOGFILE
 
   echo "***installCommonPackages*** done" 1>&2
 }
 
 installNodejs () {
-  echo "***installNodejs*** Installing NodeJs, NPM, gulp, nodemon, yeoman" 1>&2
+  echo "***installNodejs*** Installing NodeJs and NPM" 1>&2
   $(isRoot)
   #NodeJs
   curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
-  apt-get install nodejs -y
-  #npm install -g nodemon gulp yo
-  #npm install -g aglio drakov hercule dredd
+  apt-get install nodejs -y >> $LOGFILE
   echo "***installNodejs*** done" 1>&2
 }
 
@@ -80,12 +80,13 @@ installDocker () {
     #apt-key add  ~/.pgp/c52609d
   echo "deb https://apt.dockerproject.org/repo ubuntu-vivid main" >> /etc/apt/sources.list.d/docker.list
   #sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
-  apt-get update
-  apt-get purge lxc-docker*
-  apt-cache policy docker-engine
-  apt-get install docker-engine -y
+  apt-get update >> $LOGFILE
+  apt-get purge lxc-docker* >> $LOGFILE
+  apt-cache policy docker-engine >> $LOGFILE
+  apt-get install docker-engine -y >> $LOGFILE
   usermod -aG docker $USER
-  newgrp docker
+  #newgrp docker
+  groupadd docker
   systemctl enable docker
 
   #Docker-compose
@@ -100,8 +101,8 @@ installCassandra () {
   # Cassandra
   echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
   curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
-  apt-get update
-  apt-get install cassandra=2.2.3 -y
+  apt-get update >> $LOGFILE
+  apt-get install cassandra=2.2.3 -y >> $LOGFILE
   echo "***installCassandra*** done" 1>&2
 }
 
@@ -111,7 +112,7 @@ installMongoDb () {
   #mongodb-client
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
   echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-  apt-get install mongodb-org -y
+  apt-get install mongodb-org -y >> $LOGFILE
   echo "***installMongoDb*** done" 1>&2
 }
 
@@ -121,7 +122,7 @@ installChrome () {
   #Chrome
   #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   #dpkg -i google-chrome-stable_current_amd64.deb
-  apt-get install chromium-browser -y
+  apt-get install chromium-browser -y >> $LOGFILE
   echo "***installChrome*** done" 1>&2
 }
 
@@ -130,10 +131,10 @@ installAtom () {
   #VSCode
   version=1.7.2
   wget https://github.com/atom/atom/releases/download/v$version/atom-amd64.deb
-  dpkg -i atom-amd64.deb
+  dpkg -i atom-amd64.deb >> $LOGFILE
   rm atom-amd64.deb
-  gem install scss_lint
-  apm install linter-scss-lint
+  gem install scss_lint >> $LOGFILE
+  apm install linter-scss-lint >> $LOGFILE
   echo "***installAtom*** done" 1>&2
 }
 
@@ -142,8 +143,8 @@ installSublime () {
   $(isRoot)
   # Sublime
   add-apt-repository ppa:webupd8team/sublime-text-3 -y
-  apt-get update
-  apt-get install sublime-text-installer -y
+  apt-get update >> $LOGFILE
+  apt-get install sublime-text-installer -y >> $LOGFILE
   echo "***installSublime*** done" 1>&2
 }
 
@@ -153,7 +154,7 @@ installSlack () {
   #Slack
   version=1.2.5
   wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-$version-amd64.deb
-  dpkg -i slack-desktop-$version-amd64.deb
+  dpkg -i slack-desktop-$version-amd64.deb >> $LOGFILE
   rm slack-desktop-$version-amd64.deb
   echo "***installSlack*** done" 1>&2
 }
@@ -163,8 +164,8 @@ installEvernote () {
   $(isRoot)
   #Evernote
   add-apt-repository ppa:nvbn-rm/ppa -y
-  apt-get update
-  apt-get install everpad -y
+  apt-get update >> $LOGFILE
+  apt-get install everpad -y >> $LOGFILE
   echo "***installEvernote*** done" 1>&2
 }
 
@@ -172,8 +173,8 @@ installMkUsb() {
   echo "***installMkUsb*** Installing mkusb allowing to create bootable usb" 1>&2
   $(isRoot)
   sudo add-apt-repository ppa:mkusb/ppa
-  sudo apt-get update
-  sudo apt-get install mkusb -y
+  sudo apt-get update >> $LOGFILE
+  sudo apt-get install mkusb -y >> $LOGFILE
   echo "***installMkUsb*** done" 1>&2
 }
 
@@ -181,9 +182,9 @@ installUnitTweak () {
   echo "***installUnitTweak*** Installing Unity tweak tools" 1>&2
   $(isRoot)
   #unity-tweak-tool
-  apt-get install unity-tweak-tool -y
-  apt-get install compiz -y
-  apt-get install clipit -y
-  apt-get install gpick -y
+  apt-get install unity-tweak-tool -y >> $LOGFILE
+  apt-get install compiz -y >> $LOGFILE
+  apt-get install clipit -y >> $LOGFILE
+  apt-get install gpick -y >> $LOGFILE
   echo "***installUnitTweak*** done" 1>&2
 }
