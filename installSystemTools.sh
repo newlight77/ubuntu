@@ -103,6 +103,7 @@ installCassandra () {
   curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
   apt-get update >> $LOGFILE
   apt-get install cassandra=2.2.3 -y >> $LOGFILE
+  systemctl disable cassandra
   echo "***installCassandra*** done" 1>&2
 }
 
@@ -133,8 +134,8 @@ installAtom () {
   wget https://github.com/atom/atom/releases/download/v$version/atom-amd64.deb
   dpkg -i atom-amd64.deb >> $LOGFILE
   rm atom-amd64.deb
-  gem install scss_lint >> $LOGFILE
-  apm install linter-scss-lint >> $LOGFILE
+  #gem install scss_lint >> $LOGFILE
+  #apm install linter-scss-lint >> $LOGFILE
   echo "***installAtom*** done" 1>&2
 }
 
@@ -148,12 +149,22 @@ installSublime () {
   echo "***installSublime*** done" 1>&2
 }
 
+installVSCode () {
+  echo "***installVSCode*** Installing VS Code" 1>&2
+  cd /apps
+  version=1.1.0
+  wget https://az764295.vo.msecnd.net/stable/c212f0908f3d29933317bbc3233568fbca7944b1/vscode-amd64.deb
+  dpkg -i vscode-amd64.deb >> $LOGFILE
+  rm vscode-amd64.deb
+  echo "***installVSCode*** done" 1>&2
+}
+
 installSlack () {
   echo "***installSlack*** Installing Slack" 1>&2
   $(isRoot)
   #Slack
-  version=1.2.5
-  wget https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-$version-amd64.deb
+  version=2.0.4
+  wget https://downloads.slack-edge.com/linux_releases/slack-desktop-$version-amd64.deb
   dpkg -i slack-desktop-$version-amd64.deb >> $LOGFILE
   rm slack-desktop-$version-amd64.deb
   echo "***installSlack*** done" 1>&2

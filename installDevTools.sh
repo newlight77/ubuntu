@@ -19,7 +19,7 @@ createAppsDir () {
 changeAppsRights () {
   echo "***changeAppsRights*** Change access rights to /apps" 1>&2
   $(isRoot)
-  chmod -R 777 /apps
+  chmod -R 755 /apps
   echo "***changeAppsRights*** done" 1>&2
 }
 
@@ -112,7 +112,7 @@ installIdea () {
   wget https://download.jetbrains.com/idea/ideaIC-$version.tar.gz
   tar zxvf ideaIC-$version.tar.gz
   rm ideaIC-$version.tar.gz
-  ln -s /apps/idea-IC-141.2735.5 /apps/idea
+  ln -s /apps/idea-IC-145.597.3 /apps/idea
 
   echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
   echo "Type=Application" >> /usr/share/applications/idea.desktop
@@ -127,8 +127,8 @@ installIdea () {
 installEclipse () {
   echo "***installEclipse*** Installing Eclipse" 1>&2
   cd /apps
-  version=mars-1
-  wget http://download.springsource.com/release/ECLIPSE/mars/1/eclipse-jee-$version-linux-gtk-x86_64.tar.gz
+  version=mars-2
+  wget http://download.springsource.com/release/ECLIPSE/mars/2/eclipse-jee-$version-linux-gtk-x86_64.tar.gz
   tar zxvf eclipse-jee-$version-linux-gtk-x86_64.tar.gz
   rm eclipse-jee-$version-linux-gtk-x86_64.tar.gz
   mv /apps/eclipse /apps/eclipse-mars
@@ -158,7 +158,7 @@ installSts () {
 installPlay2 () {
   echo "***installPlay2*** Installing Play2" 1>&2
   cd /apps
-  version=1.3.7
+  version=1.3.10
   wget https://downloads.typesafe.com/typesafe-activator/$version/typesafe-activator-$version-minimal.zip
   unzip typesafe-activator-$version-minimal.zip
   rm typesafe-activator-$version-minimal.zip
