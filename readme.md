@@ -43,6 +43,12 @@ sudo npm install -g nodemon gulp yo
 sudo npm install -g aglio drakov hercule dredd
 ```
 
+### Atom
+```sh
+sudo gem install scss_lint >> $LOGFILE
+sudo apm install linter-scss-lint >> $LOGFILE
+```
+
 ### Git config
 ```sh
 git config --global user.name "Kong TO"

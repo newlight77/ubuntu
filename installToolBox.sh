@@ -19,6 +19,7 @@ installCassandra
 installChrome
 installAtom
 installSublime
+installVSCode
 installSlack
 installEvernote
 installMkUsb
@@ -26,7 +27,8 @@ installUnitTweak
 
 # Installing Dev Tools
 createAppsDir
-installCassandra
+#installJdk8
+#installCassandra
 #installCassandraAdmin
 installMaven
 installTomcat
