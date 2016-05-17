@@ -13,6 +13,7 @@ addRepository
 configureTime
 installJdk
 installMailUtil
+installMkUsb
 installSystemLibraries
 installCommonTools
 installNodejs
@@ -23,11 +24,10 @@ installChrome
 installAtom
 installSublime
 installVSCode
+installStarUml
 installSlack
 installEvernote
-installMkUsb
 installUnitTweak
-
 # Installing Dev Tools
 createAppsDir
 #installJdk8
