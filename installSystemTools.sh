@@ -28,37 +28,56 @@ configureTime () {
   echo "***configureTime*** Configuring system time and timezone" 1>&2
   $(isRoot)
   dpkg-reconfigure tzdata
-  apt-get install ntp ntpdate -y >> $LOGFILE
+  apt-get install -y ntp ntpdate
   echo "***configureTime*** done" 1>&2
 }
 
-installCommonPackages () {
-  echo "***installCommonPackages*** Installing common packages" 1>&2
+installJdk () {
+  echo "***installJdk*** Installing Oracle Jdk8" 1>&2
   $(isRoot)
-  apt-get install curl -y >> $LOGFILE
-  apt-get install mailutils -y
-  apt-get install terminator -y >> $LOGFILE
-  apt-get install libgconf2-4 libnss3-1d libxss1 -y >> $LOGFILE
-  apt-get install nfs-kernel-server -y >> $LOGFILE
-  apt-get install python-support -y >> $LOGFILE
-  apt-get install gvfs-bin -y >> $LOGFILE
-
-  #required for phantomjs compile
-  apt-get install build-essential g++ flex bison gperf ruby perl \
-    libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
-    libpng-dev libjpeg-dev python libx11-dev libxext-dev >> $LOGFILE
-
-  apt-get install git -y >> $LOGFILE
-  apt-get install nginx -y >> $LOGFILE
-
   #apt-get install openjdk-8-jdk -y
   add-apt-repository ppa:webupd8team/java
   apt-get update >> $LOGFILE
-  apt-get install oracle-java8-installer -y >> $LOGFILE
+  apt-get install -y oracle-java8-installer
 
-  apt-get install gksu >> $LOGFILE
+  echo "***installJdk*** done" 1>&2
+}
 
-  echo "***installCommonPackages*** done" 1>&2
+installMailUtil () {
+  echo "***installMailUtil*** Installing mailutil" 1>&2
+  $(isRoot)
+  apt-get install -y mailutils
+  echo "***installMailUtil*** done" 1>&2
+}
+
+installSystemLibraries () {
+  echo "***installSystemLibraries*** Installing system libraries" 1>&2
+  $(isRoot)
+
+  apt-get install -y libgconf2-4 libnss3-1d libxss1
+  apt-get install -y nfs-kernel-server
+  apt-get install -y python-support
+  apt-get install -y gvfs-bin
+
+  #required for phantomjs compile
+  apt-get install -y build-essential g++ flex bison gperf ruby perl \
+    libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
+    libpng-dev libjpeg-dev python libx11-dev libxext-dev
+
+  echo "***installSystemLibraries*** done" 1>&2
+}
+
+installCommonTools () {
+  echo "***installCommonTools*** Installing common tools" 1>&2
+  $(isRoot)
+
+  apt-get install -y gksu
+  apt-get install -y curl
+  apt-get install -y terminator
+  apt-get install -y git
+  apt-get install -y nginx
+
+  echo "***installCommonTools*** done" 1>&2
 }
 
 installNodejs () {
@@ -66,7 +85,7 @@ installNodejs () {
   $(isRoot)
   #NodeJs
   curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
-  apt-get install nodejs -y >> $LOGFILE
+  apt-get install -y nodejs >> $LOGFILE
   echo "***installNodejs*** done" 1>&2
 }
 
@@ -83,10 +102,10 @@ installDocker () {
   apt-get update >> $LOGFILE
   apt-get purge lxc-docker* >> $LOGFILE
   apt-cache policy docker-engine >> $LOGFILE
-  apt-get install docker-engine -y >> $LOGFILE
+  apt-get install -y docker-engine >> $LOGFILE
+  groupadd docker
   usermod -aG docker $USER
   #newgrp docker
-  groupadd docker
   systemctl enable docker
 
   #Docker-compose
@@ -102,7 +121,7 @@ installCassandra () {
   echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
   curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
   apt-get update >> $LOGFILE
-  apt-get install cassandra=2.2.3 -y >> $LOGFILE
+  apt-get install -y cassandra=2.2.3 >> $LOGFILE
   systemctl disable cassandra
   echo "***installCassandra*** done" 1>&2
 }
@@ -113,7 +132,7 @@ installMongoDb () {
   #mongodb-client
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
   echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-  apt-get install mongodb-org -y >> $LOGFILE
+  apt-get install -y mongodb-org >> $LOGFILE
   echo "***installMongoDb*** done" 1>&2
 }
 
@@ -123,7 +142,7 @@ installChrome () {
   #Chrome
   #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   #dpkg -i google-chrome-stable_current_amd64.deb
-  apt-get install chromium-browser -y >> $LOGFILE
+  apt-get install -y chromium-browser >> $LOGFILE
   echo "***installChrome*** done" 1>&2
 }
 
@@ -145,7 +164,7 @@ installSublime () {
   # Sublime
   add-apt-repository ppa:webupd8team/sublime-text-3 -y
   apt-get update >> $LOGFILE
-  apt-get install sublime-text-installer -y >> $LOGFILE
+  apt-get install -y sublime-text-installer >> $LOGFILE
   echo "***installSublime*** done" 1>&2
 }
 
@@ -176,7 +195,7 @@ installEvernote () {
   #Evernote
   add-apt-repository ppa:nvbn-rm/ppa -y
   apt-get update >> $LOGFILE
-  apt-get install everpad -y >> $LOGFILE
+  apt-get install -y everpad >> $LOGFILE
   echo "***installEvernote*** done" 1>&2
 }
 
@@ -185,7 +204,7 @@ installMkUsb() {
   $(isRoot)
   sudo add-apt-repository ppa:mkusb/ppa
   sudo apt-get update >> $LOGFILE
-  sudo apt-get install mkusb -y >> $LOGFILE
+  sudo apt-get install -y mkusb >> $LOGFILE
   echo "***installMkUsb*** done" 1>&2
 }
 
@@ -193,10 +212,10 @@ installUnitTweak () {
   echo "***installUnitTweak*** Installing Unity tweak tools" 1>&2
   $(isRoot)
   #unity-tweak-tool
-  apt-get install unity-tweak-tool -y >> $LOGFILE
-  apt-get install compiz -y >> $LOGFILE
-  apt-get install clipit -y >> $LOGFILE
-  apt-get install gpick -y >> $LOGFILE
+  apt-get install -y unity-tweak-tool >> $LOGFILE
+  apt-get install -y compiz >> $LOGFILE
+  apt-get install -y clipit >> $LOGFILE
+  apt-get install -y gpick >> $LOGFILE
   echo "***installUnitTweak*** done" 1>&2
 }
 
