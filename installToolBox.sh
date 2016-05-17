@@ -11,7 +11,10 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 # Installing System Tools
 addRepository
 configureTime
-installCommonPackages
+installJdk
+installMailUtil
+installSystemLibraries
+installCommonTools
 installNodejs
 installDocker
 installCassandra
