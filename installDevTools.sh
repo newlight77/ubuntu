@@ -51,16 +51,16 @@ installCassandraAdmin () {
   echo "***installCassandraAdmin*** done" 1>&2
 }
 
-installMaven () {
-  echo "***installMaven*** Installing Maven" 1>&2
-  cd /apps
-  version=3.3.3
-  wget http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/$version/binaries/apache-maven-$version-bin.tar.gz
-  tar zxvf apache-maven-$version-bin.tar.gz
-  rm apache-maven-$version-bin.tar.gz
-  ln -s /apps/apache-maven-$version /apps/maven
-  echo "***installMaven*** done" 1>&2
-}
+# installMaven () {
+#   echo "***installMaven*** Installing Maven" 1>&2
+#   cd /apps
+#   version=3.3.3
+#   wget http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/$version/binaries/apache-maven-$version-bin.tar.gz
+#   tar zxvf apache-maven-$version-bin.tar.gz
+#   rm apache-maven-$version-bin.tar.gz
+#   ln -s /apps/apache-maven-$version /apps/maven
+#   echo "***installMaven*** done" 1>&2
+# }
 
 installTomcat () {
   echo "***installTomcat*** Installing Tomcat" 1>&2

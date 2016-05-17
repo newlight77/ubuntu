@@ -16,6 +16,7 @@ installMailUtil
 installMkUsb
 installSystemLibraries
 installCommonTools
+installMaven
 installNodejs
 installDocker
 installCassandra
@@ -33,7 +34,7 @@ createAppsDir
 #installJdk8
 #installCassandra
 #installCassandraAdmin
-installMaven
+#installMaven
 installTomcat
 #installVSCode
 installDevCenter

@@ -19,6 +19,12 @@ addRepository () {
   add-apt-repository restricted
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
+  add-apt-repository ppa:webupd8team/java
+  add-apt-repository ppa:mkusb/ppa
+  add-apt-repository ppa:webupd8team/sublime-text-3 -y
+  add-apt-repository ppa:nvbn-rm/ppa -y
+  add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+  add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
 
   apt-get update >> $LOGFILE
   echo "***addRepository*** done" 1>&2
@@ -36,8 +42,8 @@ installJdk () {
   echo "***installJdk*** Installing Oracle Jdk8" 1>&2
   $(isRoot)
   #apt-get install openjdk-8-jdk -y
-  add-apt-repository ppa:webupd8team/java
-  apt-get update >> $LOGFILE
+  #add-apt-repository ppa:webupd8team/java
+  #apt-get update >> $LOGFILE
   apt-get install -y oracle-java8-installer
 
   echo "***installJdk*** done" 1>&2
@@ -53,8 +59,8 @@ installMailUtil () {
 installMkUsb() {
   echo "***installMkUsb*** Installing mkusb allowing to create bootable usb" 1>&2
   $(isRoot)
-  add-apt-repository ppa:mkusb/ppa
-  apt-get update >> $LOGFILE
+  #add-apt-repository ppa:mkusb/ppa
+  #apt-get update >> $LOGFILE
   apt-get install -y mkusb
   echo "***installMkUsb*** done" 1>&2
 }
@@ -89,10 +95,19 @@ installCommonTools () {
   echo "***installCommonTools*** done" 1>&2
 }
 
+installMaven () {
+  echo "***installMaven*** Installing Maven" 1>&2
+  $(isRoot)
+  #sudo add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+  #sudo apt-get update
+  sudo apt-get install maven3 >> $LOGFILE
+  sudo ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
+  echo "***installMaven*** done" 1>&2
+}
+
 installNodejs () {
   echo "***installNodejs*** Installing NodeJs and NPM" 1>&2
   $(isRoot)
-  #NodeJs
   curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
   apt-get install -y nodejs >> $LOGFILE
   echo "***installNodejs*** done" 1>&2
@@ -106,9 +121,9 @@ installDocker () {
     #apt-get install docker.io -y
     #save   https://pgp.mit.edu/pks/lookup?op=get&search=0xF76221572C52609D in
     #apt-key add  ~/.pgp/c52609d
-  echo "deb https://apt.dockerproject.org/repo ubuntu-vivid main" >> /etc/apt/sources.list.d/docker.list
-  #sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
-  apt-get update >> $LOGFILE
+  #echo "deb https://apt.dockerproject.org/repo ubuntu-vivid main" >> /etc/apt/sources.list.d/docker.list
+  #add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
+  #apt-get update >> $LOGFILE
   apt-get purge lxc-docker* >> $LOGFILE
   apt-cache policy docker-engine >> $LOGFILE
   apt-get install -y docker-engine >> $LOGFILE
@@ -126,7 +141,6 @@ installDocker () {
 installCassandra () {
   echo "***installCassandra*** Installing Cassandra" 1>&2
   $(isRoot)
-  # Cassandra
   echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
   curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
   apt-get update >> $LOGFILE
@@ -138,7 +152,6 @@ installCassandra () {
 installMongoDb () {
   echo "***installMongoDb*** Installing mongodb-client" 1>&2
   $(isRoot)
-  #mongodb-client
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
   echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
   apt-get install -y mongodb-org >> $LOGFILE
@@ -148,7 +161,6 @@ installMongoDb () {
 installChrome () {
   echo "***installChrome*** Installing Chrome" 1>&2
   $(isRoot)
-  #Chrome
   #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   #dpkg -i google-chrome-stable_current_amd64.deb
   apt-get install -y chromium-browser >> $LOGFILE
@@ -157,7 +169,6 @@ installChrome () {
 
 installAtom () {
   echo "***installAtom*** Installing Atom" 1>&2
-  #VSCode
   version=1.7.2
   wget https://github.com/atom/atom/releases/download/v$version/atom-amd64.deb
   dpkg -i atom-amd64.deb >> $LOGFILE
@@ -170,9 +181,8 @@ installAtom () {
 installSublime () {
   echo "***installSublime*** Installing Sublime" 1>&2
   $(isRoot)
-  # Sublime
-  add-apt-repository ppa:webupd8team/sublime-text-3 -y
-  apt-get update >> $LOGFILE
+  #add-apt-repository ppa:webupd8team/sublime-text-3 -y
+  #apt-get update >> $LOGFILE
   apt-get install -y sublime-text-installer >> $LOGFILE
   echo "***installSublime*** done" 1>&2
 }
@@ -204,7 +214,6 @@ installStarUml() {
 installSlack () {
   echo "***installSlack*** Installing Slack" 1>&2
   $(isRoot)
-  #Slack
   version=2.0.4
   wget https://downloads.slack-edge.com/linux_releases/slack-desktop-$version-amd64.deb
   dpkg -i slack-desktop-$version-amd64.deb >> $LOGFILE
@@ -215,9 +224,8 @@ installSlack () {
 installEvernote () {
   echo "***installEvernote*** Installing Evernote" 1>&2
   $(isRoot)
-  #Evernote
-  add-apt-repository ppa:nvbn-rm/ppa -y
-  apt-get update >> $LOGFILE
+  #add-apt-repository ppa:nvbn-rm/ppa -y
+  #apt-get update >> $LOGFILE
   apt-get install -y everpad >> $LOGFILE
   echo "***installEvernote*** done" 1>&2
 }
@@ -225,7 +233,6 @@ installEvernote () {
 installUnitTweak () {
   echo "***installUnitTweak*** Installing Unity tweak tools" 1>&2
   $(isRoot)
-  #unity-tweak-tool
   apt-get install -y unity-tweak-tool >> $LOGFILE
   apt-get install -y compiz >> $LOGFILE
   apt-get install -y clipit >> $LOGFILE
