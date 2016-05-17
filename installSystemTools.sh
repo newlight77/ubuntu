@@ -50,6 +50,15 @@ installMailUtil () {
   echo "***installMailUtil*** done" 1>&2
 }
 
+installMkUsb() {
+  echo "***installMkUsb*** Installing mkusb allowing to create bootable usb" 1>&2
+  $(isRoot)
+  add-apt-repository ppa:mkusb/ppa
+  apt-get update >> $LOGFILE
+  apt-get install -y mkusb
+  echo "***installMkUsb*** done" 1>&2
+}
+
 installSystemLibraries () {
   echo "***installSystemLibraries*** Installing system libraries" 1>&2
   $(isRoot)
@@ -197,15 +206,6 @@ installEvernote () {
   apt-get update >> $LOGFILE
   apt-get install -y everpad >> $LOGFILE
   echo "***installEvernote*** done" 1>&2
-}
-
-installMkUsb() {
-  echo "***installMkUsb*** Installing mkusb allowing to create bootable usb" 1>&2
-  $(isRoot)
-  sudo add-apt-repository ppa:mkusb/ppa
-  sudo apt-get update >> $LOGFILE
-  sudo apt-get install -y mkusb >> $LOGFILE
-  echo "***installMkUsb*** done" 1>&2
 }
 
 installUnitTweak () {
