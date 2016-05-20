@@ -26,6 +26,11 @@ addRepository () {
   add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
   add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
 
+
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2EA8F35793D8809A
+  apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+
   apt-get update >> $LOGFILE
   echo "***addRepository*** done" 1>&2
 }
@@ -76,7 +81,7 @@ installSystemLibraries () {
 
   #required for phantomjs compile
   apt-get install -y build-essential g++ flex bison gperf ruby perl \
-    libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
+    libsqlite3-dev libfontconfig1-dev libicu52 libfreetype6 libssl-dev \
     libpng-dev libjpeg-dev python libx11-dev libxext-dev
 
   echo "***installSystemLibraries*** done" 1>&2
@@ -100,8 +105,8 @@ installMaven () {
   $(isRoot)
   #sudo add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
   #sudo apt-get update
-  sudo apt-get install maven3 >> $LOGFILE
-  sudo ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
+  apt-get install maven3 >> $LOGFILE
+  ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
   echo "***installMaven*** done" 1>&2
 }
 
@@ -117,7 +122,7 @@ installDocker () {
   echo "***installDocker*** Installing Docker and compose" 1>&2
   $(isRoot)
   #Docker
-  apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  #apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
     #apt-get install docker.io -y
     #save   https://pgp.mit.edu/pks/lookup?op=get&search=0xF76221572C52609D in
     #apt-key add  ~/.pgp/c52609d
@@ -152,7 +157,7 @@ installCassandra () {
 installMongoDb () {
   echo "***installMongoDb*** Installing mongodb-client" 1>&2
   $(isRoot)
-  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  #apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
   echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
   apt-get install -y mongodb-org >> $LOGFILE
   echo "***installMongoDb*** done" 1>&2
@@ -189,7 +194,6 @@ installSublime () {
 
 installVSCode () {
   echo "***installVSCode*** Installing VS Code" 1>&2
-  cd /apps
   version=1.1.0
   wget https://az764295.vo.msecnd.net/stable/c212f0908f3d29933317bbc3233568fbca7944b1/vscode-amd64.deb
   dpkg -i vscode-amd64.deb >> $LOGFILE
