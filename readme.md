@@ -37,6 +37,11 @@ sudo su -
 ssh-keygen -t rsa
 ```
 
+### Blueprint
+```sh
+sudo gem install apiaryio
+```
+
 ### NPM
 ```sh
 sudo npm install -g nodemon gulp yo
