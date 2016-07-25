@@ -23,7 +23,8 @@ addRepository () {
   add-apt-repository ppa:mkusb/ppa
   add-apt-repository ppa:webupd8team/sublime-text-3 -y
   add-apt-repository ppa:nvbn-rm/ppa -y
-  add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+  #add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+  add-apt-repository ppa:andrei-pozolotin/maven3
   add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
 
 
@@ -103,9 +104,13 @@ installCommonTools () {
 installMaven () {
   echo "***installMaven*** Installing Maven" 1>&2
   $(isRoot)
-  #sudo add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
-  #sudo apt-get update
+  #add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+  #add-apt-repository ppa:andrei-pozolotin/maven3
+  #apt-get update
+  apt-get purge maven maven2 maven3
+  apt-get install -d maven3
   apt-get install maven3 >> $LOGFILE
+
   ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
   echo "***installMaven*** done" 1>&2
 }
