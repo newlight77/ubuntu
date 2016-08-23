@@ -27,10 +27,14 @@ addRepository () {
   add-apt-repository ppa:andrei-pozolotin/maven3
   add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
 
+  apt-get install apt-transport-https ca-certificates
 
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2EA8F35793D8809A
   apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+
+  #docker
+  apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
   apt-get update >> $LOGFILE
   echo "***addRepository*** done" 1>&2
@@ -79,6 +83,7 @@ installSystemLibraries () {
   apt-get install -y nfs-kernel-server
   apt-get install -y python-support
   apt-get install -y gvfs-bin
+  apt-get install apt-transport-https ca-certificates
 
   #required for phantomjs compile
   apt-get install -y build-essential g++ flex bison gperf ruby perl \
@@ -136,6 +141,7 @@ installDocker () {
   #apt-get update >> $LOGFILE
   apt-get purge lxc-docker* >> $LOGFILE
   apt-cache policy docker-engine >> $LOGFILE
+  apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
   apt-get install -y docker-engine >> $LOGFILE
   groupadd docker
   usermod -aG docker $USER
@@ -143,7 +149,8 @@ installDocker () {
   systemctl enable docker
 
   #Docker-compose
-  curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  #curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
   echo "***installDocker*** done" 1>&2
 }
