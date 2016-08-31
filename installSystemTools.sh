@@ -83,7 +83,8 @@ installSystemLibraries () {
   apt-get install -y nfs-kernel-server
   apt-get install -y python-support
   apt-get install -y gvfs-bin
-  apt-get install apt-transport-https ca-certificates
+  apt-get install -y jq
+  apt-get install -y apt-transport-https ca-certificates
 
   #required for phantomjs compile
   apt-get install -y build-essential g++ flex bison gperf ruby perl \
