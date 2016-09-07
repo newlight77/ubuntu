@@ -65,8 +65,8 @@ installCassandraAdmin () {
 installTomcat () {
   echo "***installTomcat*** Installing Tomcat" 1>&2
   cd /apps
-  version=8.0.36
-  wget http://mirrors.ircam.fr/pub/apache/tomcat/tomcat-8/v$version/bin/apache-tomcat-$version.tar.gz
+  version=8.0.37
+  wget https://archive.apache.org/dist/tomcat/tomcat-8/v$version/bin/apache-tomcat-$version.tar.gz
   tar zxvf apache-tomcat-$version.tar.gz
   rm apache-tomcat-$version.tar.gz
   ln -s /apps/apache-tomcat-$version /apps/tomcat
