@@ -22,19 +22,19 @@ addRepository () {
   add-apt-repository ppa:webupd8team/java
   add-apt-repository ppa:mkusb/ppa
   add-apt-repository ppa:webupd8team/sublime-text-3 -y
-  add-apt-repository ppa:nvbn-rm/ppa -y
+
   #add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
-  add-apt-repository ppa:andrei-pozolotin/maven3
-  add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
-
-  apt-get install apt-transport-https ca-certificates
-
-  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2EA8F35793D8809A
-  apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  #add-apt-repository ppa:andrei-pozolotin/maven3
 
   #docker
+  add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-vivid main"
+  apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
   apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2EA8F35793D8809A
+
+  #mongo
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 
   apt-get update >> $LOGFILE
   echo "***addRepository*** done" 1>&2
@@ -107,18 +107,25 @@ installCommonTools () {
   echo "***installCommonTools*** done" 1>&2
 }
 
-installMaven () {
-  echo "***installMaven*** Installing Maven" 1>&2
-  $(isRoot)
-  #add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
-  #add-apt-repository ppa:andrei-pozolotin/maven3
-  #apt-get update
-  apt-get purge maven maven2 maven3
-  apt-get install -d maven3
-  apt-get install maven3 >> $LOGFILE
+# installMaven () {
+#   echo "***installMaven*** Installing Maven" 1>&2
+#   $(isRoot)
+#   #add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+#   #add-apt-repository ppa:andrei-pozolotin/maven3
+#   #apt-get update
+#   apt-get purge maven maven2 maven3
+#   apt-get install -d maven3
+#   apt-get install maven3 >> $LOGFILE
+#
+#   ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
+#   echo "***installMaven*** done" 1>&2
+# }
 
-  ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
-  echo "***installMaven*** done" 1>&2
+installTomcat8 () {
+  echo "***installTomcat8*** Installing Tomcat8" 1>&2
+  $(isRoot)
+  apt-get install -y tomcat8 >> $LOGFILE
+  echo "***installTomcat8*** done" 1>&2
 }
 
 installNodejs () {
@@ -236,15 +243,6 @@ installSlack () {
   dpkg -i slack-desktop-$version-amd64.deb >> $LOGFILE
   rm slack-desktop-$version-amd64.deb
   echo "***installSlack*** done" 1>&2
-}
-
-installEvernote () {
-  echo "***installEvernote*** Installing Evernote" 1>&2
-  $(isRoot)
-  #add-apt-repository ppa:nvbn-rm/ppa -y
-  #apt-get update >> $LOGFILE
-  apt-get install -y everpad >> $LOGFILE
-  echo "***installEvernote*** done" 1>&2
 }
 
 installUnitTweak () {
