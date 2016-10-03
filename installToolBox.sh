@@ -16,7 +16,8 @@ installMailUtil
 installMkUsb
 installSystemLibraries
 installCommonTools
-installMaven
+#installMaven
+installTomcat8
 installNodejs
 installDocker
 installCassandra
@@ -27,19 +28,20 @@ installSublime
 installVSCode
 installStarUml
 installSlack
-installEvernote
 installUnitTweak
+
 # Installing Dev Tools
 createAppsDir
 #installJdk8
 #installCassandra
 #installCassandraAdmin
-#installMaven
-installTomcat
+installMaven
+# installTomcat
 #installVSCode
 installDevCenter
 #installNetbeans
 installIdea
 installEclipse
+installPlay2
 addToPath
 changeAppsRights
