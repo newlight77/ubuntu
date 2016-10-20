@@ -19,6 +19,7 @@ addRepository () {
   add-apt-repository restricted
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
+
   add-apt-repository ppa:webupd8team/java
   add-apt-repository ppa:mkusb/ppa
   add-apt-repository ppa:webupd8team/sublime-text-3 -y
@@ -103,6 +104,7 @@ installCommonTools () {
   apt-get install -y terminator
   apt-get install -y git
   apt-get install -y nginx
+  apt-get install ruby
 
   echo "***installCommonTools*** done" 1>&2
 }
