@@ -25,7 +25,7 @@ sudo ./installToolBox.sh
 
 ### Customize
 ```sh
-sudo su -
+sudo su
 ./customizeRoot.sh
 ```
 
@@ -50,8 +50,8 @@ sudo npm install -g aglio drakov hercule dredd
 
 ### Atom
 ```sh
-sudo gem install scss_lint >> $LOGFILE
-sudo apm install linter-scss-lint >> $LOGFILE
+sudo gem install scss_lint
+sudo apm install linter-scss-lint
 ```
 
 ### Git config
