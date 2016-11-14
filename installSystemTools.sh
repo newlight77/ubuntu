@@ -20,15 +20,15 @@ addRepository () {
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
     #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
 
-  add-apt-repository ppa:webupd8team/java
-  add-apt-repository ppa:mkusb/ppa
-  add-apt-repository ppa:webupd8team/sublime-text-3 -y
+  add-apt-repository -y ppa:webupd8team/java
+  add-apt-repository -y ppa:mkusb/ppa
+  add-apt-repository -y ppa:webupd8team/sublime-text-3 -y
 
   #add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
   #add-apt-repository ppa:andrei-pozolotin/maven3
 
   #docker
-  add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
+  add-apt-repository -y "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
   apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
   apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
@@ -44,7 +44,7 @@ addRepository () {
 configureTime () {
   echo "***configureTime*** Configuring system time and timezone" 1>&2
   $(isRoot)
-  dpkg-reconfigure tzdata
+  dpkg-reconfigure -f noninteractive tzdata
   apt-get install -y ntp ntpdate
   echo "***configureTime*** done" 1>&2
 }
