@@ -49,33 +49,6 @@ configureTime () {
   echo "***configureTime*** done" 1>&2
 }
 
-installJdk () {
-  echo "***installJdk*** Installing Oracle Jdk8" 1>&2
-  $(isRoot)
-  #apt-get install openjdk-8-jdk -y
-  #add-apt-repository ppa:webupd8team/java
-  #apt-get update >> $LOGFILE
-  apt-get install -y oracle-java8-installer
-
-  echo "***installJdk*** done" 1>&2
-}
-
-installMailUtil () {
-  echo "***installMailUtil*** Installing mailutil" 1>&2
-  $(isRoot)
-  apt-get install -y mailutils
-  echo "***installMailUtil*** done" 1>&2
-}
-
-installMkUsb() {
-  echo "***installMkUsb*** Installing mkusb allowing to create bootable usb" 1>&2
-  $(isRoot)
-  #add-apt-repository ppa:mkusb/ppa
-  #apt-get update >> $LOGFILE
-  apt-get install -y mkusb
-  echo "***installMkUsb*** done" 1>&2
-}
-
 installSystemLibraries () {
   echo "***installSystemLibraries*** Installing system libraries" 1>&2
   $(isRoot)
@@ -107,6 +80,36 @@ installCommonTools () {
   apt-get install ruby
 
   echo "***installCommonTools*** done" 1>&2
+}
+
+installJdk () {
+  echo "***installJdk*** Installing Oracle Jdk8" 1>&2
+  $(isRoot)
+  #apt-get install openjdk-8-jdk -y
+  #add-apt-repository ppa:webupd8team/java
+  #apt-get update >> $LOGFILE
+  echo "oracle-java8-installer shared/accepted-oracle-licence-v1-1 select true" | debconf-set-selections
+  apt-get install -y oracle-java8-installer
+
+  echo "***installJdk*** done" 1>&2
+}
+
+installMailUtil () {
+  echo "***installMailUtil*** Installing mailutil" 1>&2
+  $(isRoot)
+  #debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
+  #debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+  apt-get install -y mailutils
+  echo "***installMailUtil*** done" 1>&2
+}
+
+installMkUsb() {
+  echo "***installMkUsb*** Installing mkusb allowing to create bootable usb" 1>&2
+  $(isRoot)
+  #add-apt-repository ppa:mkusb/ppa
+  #apt-get update >> $LOGFILE
+  apt-get install -y mkusb
+  echo "***installMkUsb*** done" 1>&2
 }
 
 # installMaven () {
