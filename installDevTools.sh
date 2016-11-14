@@ -65,7 +65,7 @@ installMaven () {
 installTomcat () {
   echo "***installTomcat*** Installing Tomcat" 1>&2
   cd /apps
-  version=8.0.37
+  version=8.5.8
   wget https://archive.apache.org/dist/tomcat/tomcat-8/v$version/bin/apache-tomcat-$version.tar.gz
   tar zxvf apache-tomcat-$version.tar.gz
   rm apache-tomcat-$version.tar.gz
@@ -108,7 +108,7 @@ installDevCenter () {
 installIdea () {
   echo "***installIdea*** Installing Idea" 1>&2
   cd /apps
-  version=2016.2.4
+  version=2016.2.5
   wget https://download.jetbrains.com/idea/ideaIC-$version.tar.gz
   tar zxvf ideaIC-$version.tar.gz
   rm ideaIC-$version.tar.gz
