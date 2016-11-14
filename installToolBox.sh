@@ -11,11 +11,13 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 # Installing System Tools
 addRepository
 configureTime
-installJdk
-installMailUtil
-installMkUsb
 installSystemLibraries
 installCommonTools
+installJdk
+
+#installMailUtil
+#installMkUsb
+
 #installMaven
 installTomcat8
 installNodejs
