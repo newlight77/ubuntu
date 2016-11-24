@@ -10,7 +10,7 @@ isRoot() {
 }
 
 addRepository () {
-  echo "***addRepository*** Adding repositories to system in /etc/apt/sources.list.d" 1>&2
+  echo "***addRepository*** Adding repositories to system in /etc/apt/sources.list" 1>&2
   $(isRoot)
 
   add-apt-repository main
