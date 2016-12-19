@@ -108,20 +108,20 @@ installDevCenter () {
 installIdea () {
   echo "***installIdea*** Installing Idea" 1>&2
   cd /apps
-  version=2016.2.5
+  version=2016.3
   wget https://download.jetbrains.com/idea/ideaIC-$version.tar.gz
   tar zxvf ideaIC-$version.tar.gz
   rm ideaIC-$version.tar.gz
-  ln -s /apps/idea-IC-162.2032.8 /apps/idea
+  ln -s /apps/idea-IC-163.7743.44 /apps/idea
 
-  cat <<- EOF > /usr/share/applications/eclipse.desktop
+  cat << EOF > /usr/share/applications/idea.desktop
     [Desktop Entry]
     Encoding=UTF-8
     Version=1.0
     Name=IntelliJ IDEA Community Edition
     Comment=The Drive to Develop
-    Exec=/apps/idea-IC-162.2032.8/bin/idea.sh %f
-    Icon=/apps/idea-IC-162.2032.8/bin/idea.png
+    Exec=/apps/idea/bin/idea.sh %f
+    Icon=/apps/idea/bin/idea.png
     Terminal=false
     Type=Application
     Categories=Development;IDE;
