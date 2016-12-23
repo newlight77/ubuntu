@@ -77,7 +77,7 @@ installCommonTools () {
   apt-get install -y terminator
   apt-get install -y git
   apt-get install -y nginx
-  apt-get install ruby
+  apt-get install -y ruby
 
   echo "***installCommonTools*** done" 1>&2
 }
@@ -136,6 +136,7 @@ installTomcat8 () {
 installNodejs () {
   echo "***installNodejs*** Installing NodeJs and NPM" 1>&2
   $(isRoot)
+  apt-get install libpango1.0-1 libpangox-1.0-1
   curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash -
   apt-get install -y nodejs >> $LOGFILE
   echo "***installNodejs*** done" 1>&2
