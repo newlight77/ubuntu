@@ -108,11 +108,12 @@ installDevCenter () {
 installIdea () {
   echo "***installIdea*** Installing Idea" 1>&2
   cd /apps
-  version=2016.3
+  version=2016.3.2
   wget https://download.jetbrains.com/idea/ideaIC-$version.tar.gz
   tar zxvf ideaIC-$version.tar.gz
   rm ideaIC-$version.tar.gz
-  ln -s /apps/idea-IC-163.7743.44 /apps/idea
+  rm /apps/idea
+  ln -s /apps/idea-IC-163.10154.41 /apps/idea
 
   cat << EOF > /usr/share/applications/idea.desktop
     [Desktop Entry]
@@ -135,8 +136,8 @@ installEclipse () {
   echo "***installEclipse*** Installing Eclipse" 1>&2
   cd /apps
   version=neon
-  minor=1
-  wget http://download.springsource.com/release/ECLIPSE/$verson/$minor/eclipse-jee-$version-$minor-linux-gtk-x86_64.tar.gz
+  minor=2
+  wget http://eclipse.bluemix.net/packages/$version-$minor/data/eclipse-jee-$version-$minor-linux-gtk-x86_64.tar.gz
   tar zxvf eclipse-jee-$version-$minor-linux-gtk-x86_64.tar.gz
   rm eclipse-jee-$version-$minor-linux-gtk-x86_64.tar.gz
   mv /apps/eclipse /apps/eclipse-$version
