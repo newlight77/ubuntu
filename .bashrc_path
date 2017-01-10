@@ -1,0 +1,12 @@
+export PATH=/apps/maven/bin:$PATH
+export PATH=/apps/idea:$PATH
+export PATH=/apps/eclipse:$PATH
+export PATH=/apps/tomcat/bin:$PATH
+export PATH=/apps/cassandra/bin:$PATH
+export PATH=/apps/devcenter/bin:$PATH
+export PATH=/apps/activator:$PATH
+export PATH=/apps/VSCode:$PATH
+
+export NPM_PACKAGES=${HOME}/.npm-global-pkg
+export NODE_PATH=$NPM_PACKAGES/lib/node_modules:$NODE_PATH
+export PATH=$NPM_PACKAGES/bin:$PATH

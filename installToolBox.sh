@@ -34,16 +34,14 @@ installUnitTweak
 
 # Installing Dev Tools
 createAppsDir
-#installJdk8
-#installCassandra
-#installCassandraAdmin
-installMaven
-# installTomcat
-#installVSCode
-installDevCenter
-#installNetbeans
-installIdea
-installEclipse
-installPlay2
-addToPath
-changeAppsRights
+#downloadJdk8
+#downloadCassandra
+downloadMaven
+# downloadTomcat
+downloadDevCenter
+#downloadVSCode
+#downloadNetbeans
+downloadIdea
+downloadEclipse
+#downloadSts
+downloadPlay2
