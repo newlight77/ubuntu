@@ -23,6 +23,7 @@ customizeBash() {
   cp  .bashrc_profile    /root/.ubuntu/.bashrc_profile
   cp  .bashrc_alias      /root/.ubuntu/.bashrc_alias
   cp  .bashrc_ps12       /root/.ubuntu/.bashrc_ps12
+  cp  .bashrc_path       /root/.ubuntu/.bashrc_path
   cp  .gitconfig_alias   /root/.ubuntu/.gitconfig_alias
 
   cat .bashrc            >> /root/.bashrc

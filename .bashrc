@@ -13,6 +13,10 @@ if [ -f ~/.ubuntu/.bashrc_ps12 ]; then
     source ~/.ubuntu/.bashrc_ps12
 fi
 
+if [ -f ~/.ubuntu/.bashrc_ps12 ]; then
+    source ~/.ubuntu/.bashrc_path
+fi
+
 if [ -f ~/.ubuntu/.profile ]; then
     source ~/.ubuntu/.profile
 fi

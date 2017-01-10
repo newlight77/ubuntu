@@ -1,7 +1,10 @@
-#!/usr/bin/env xdg-open
 [Desktop Entry]
-Type=Application
-Terminal=true
+Encoding=UTF-8
 Name=Eclipse
-Icon=/apps/eclipse/eclipse.png
+Comment=Eclipse IDE
 Exec=/apps/eclipse/eclipse
+Icon=/apps/eclipse/eclipse.xpm
+Terminal=false
+Type=Application
+Categories=GNOME;Application;Development;IDE;
+StartupNotify=true

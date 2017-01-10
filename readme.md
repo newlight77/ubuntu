@@ -45,7 +45,8 @@ sudo gem install apiaryio
 ### NPM
 ```sh
 sudo npm install -g nodemon gulp yo
-sudo npm install -g aglio drakov hercule dredd
+sudo npm install -g aglio drakov hercule dredd drafter
+sudo npm install -g phantomjs
 ```
 
 ### Atom
