@@ -25,8 +25,7 @@ sudo ./installToolBox.sh
 
 ### Customize
 ```sh
-sudo su
-./customizeRoot.sh
+ssh-keygen -t rsa
 ```
 
 ```sh
@@ -34,19 +33,15 @@ sudo su
 ```
 
 ```sh
-ssh-keygen -t rsa
-```
-
-### Blueprint
-```sh
-sudo gem install apiaryio
+sudo su -
+./customize.sh
 ```
 
 ### NPM
 ```sh
 sudo npm install -g nodemon gulp yo
-sudo npm install -g aglio drakov hercule dredd drafter
 sudo npm install -g phantomjs
+sudo npm install -g apiaryio aglio drakov hercule dredd drafter
 ```
 
 ### Atom
