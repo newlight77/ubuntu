@@ -1,7 +1,7 @@
 #!/bin/bash
 
 downloadIdea() {
-  echo "***installIdea***" 1>&2
+  echo "*** ------ installIdea ------ ***" 1>&2
   cd /apps
   version=2016.3.2
   wget https://download.jetbrains.com/idea/ideaIC-$version.tar.gz
@@ -27,7 +27,7 @@ downloadIdea() {
 #     StartupWMClass=jetbrains-idea-ce
 # EOF
 
-  echo "***installIdea*** done" 1>&2
+  echo "*** ------ installIdea done  ------ ***" 1>&2
 }
 
 downloadIdea

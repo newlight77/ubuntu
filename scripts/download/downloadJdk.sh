@@ -1,7 +1,7 @@
 #!/bin/bash
 
 downloadJdk8() {
-  echo "***installJdk***" 1>&2
+  echo "*** ------ installJdk ------ ***" 1>&2
   cd /apps
   wget http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
   tar zxvf jdk-8u65-linux-x64.tar.gz
@@ -10,7 +10,7 @@ downloadJdk8() {
   alternatives --set java /apps/jdk8/bin
 
   cd -
-  echo "***installJdk*** done" 1>&2
+  echo "*** ------ installJdk done  ------ ***" 1>&2
 }
 
 downloadJdk8

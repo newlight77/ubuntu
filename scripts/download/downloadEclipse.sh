@@ -1,7 +1,7 @@
 #!/bin/bash
 
 downloadEclipse() {
-  echo "***installEclipse***" 1>&2
+  echo "*** ------ installEclipse ------ ***" 1>&2
   cd /apps
   version=neon
   minor=2
@@ -29,5 +29,5 @@ downloadEclipse() {
 #     StartupNotify=true
 # EOF
 
-  echo "***installEclipse*** done" 1>&2
+  echo "*** ------ installEclipse done  ------ ***" 1>&2
 }
