@@ -1,7 +1,7 @@
 #!/bin/bash
 
 downloadPlay2() {
-  echo "***installPlay2***" 1>&2
+  echo "*** ------ installPlay2 ------ ***" 1>&2
   cd /apps
   version=1.3.10
   wget https://downloads.typesafe.com/typesafe-activator/$version/typesafe-activator-$version-minimal.zip
@@ -11,7 +11,7 @@ downloadPlay2() {
   echo "export PATH=/apps/activator:\$PATH" >> /apps/env.config
 
   cd -
-  echo "***installPlay2*** done" 1>&2
+  echo "*** ------ installPlay2 done  ------ ***" 1>&2
 }
 
 downloadPlay2

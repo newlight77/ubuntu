@@ -1,9 +1,12 @@
 #!/bin/bash
 
-. ../isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/../isRoot.sh
 
 installMongoDb() {
-  echo "***installMongoDb***" 1>&2
+  echo "*** ------ installMongoDb ------ ***" 1>&2
   $(isRoot)
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -13,7 +16,7 @@ installMongoDb() {
   apt-get purge mongodb-org*
   apt-get install -y mongodb-org
   systemctl disable mongod
-  echo "***installMongoDb*** done" 1>&2
+  echo "*** ------ installMongoDb done  ------ ***" 1>&2
 }
 
 installMongoDb

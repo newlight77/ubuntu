@@ -1,9 +1,13 @@
 #!/bin/bash
 
-. ../isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/../isRoot.sh
 
 addRepository () {
-  echo "***addRepository*** Adding repositories to system in /etc/apt/sources.list" 1>&2
+  echo "*** ------ addRepository ------ ***" 1>&2
+  echo "*** ------ Adding repositories to system in /etc/apt/sources.list ------ ***" 1>&2
   $(isRoot)
 
   add-apt-repository main
@@ -14,11 +18,11 @@ addRepository () {
   #add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
 
   apt-get update
-  echo "***addRepository*** done" 1>&2
+  echo "*** ------ addRepository done  ------ ***" 1>&2
 }
 
 addPublicKeys () {
-  echo "***addRepository*** Adding repositories to system in /etc/apt/sources.list" 1>&2
+  echo "*** ------ addRepository ------ ***" 1>&2
   $(isRoot)
 
   #apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -26,11 +30,11 @@ addPublicKeys () {
 
   #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2EA8F35793D8809A
 
-  echo "***addRepository*** done" 1>&2
+  echo "*** ------ addRepository done  ------ ***" 1>&2
 }
 
 installSystemLibraries() {
-  echo "***installSystemLibraries*** Installing system libraries" 1>&2
+  echo "*** ------ installSystemLibraries ------ ***" 1>&2
   $(isRoot)
 
   apt-get install -y ntp ntpdate
@@ -53,7 +57,7 @@ installSystemLibraries() {
   apt-get install -y nginx
   #apt-get install -y ruby
 
-  echo "***installSystemLibraries*** done" 1>&2
+  echo "*** ------ installSystemLibraries done  ------ ***" 1>&2
 }
 
 addRepository

@@ -1,32 +1,36 @@
 #!/bin/bash
 
-. ./isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/isRoot.sh
 
 install() {
-  echo "***install***" 1>&2
+  echo "*** ------ install ------ ***" 1>&2
   $(isRoot)
 
-  #./install/installSystemPackages.sh
-  #./install/installJdk.sh # interactive
+  $DIR/install/installSystemPackages.sh
+  $DIR/install/installJdk.sh # interactive
 
-  ./install/installMailUtil.sh
-  ./install/installMkUsb.sh
+  $DIR/install/installMailUtil.sh
+  $DIR/install/installMkUsb.sh
 
-  #./install/installMaven.sh
-  #./install/installTomcat8.sh
-  ./install/installNodejs.sh
-  ./install/installDocker.sh
-  ./install/installCassandra.sh
-  #./install/installMongoDb.sh
-  ./install/installChrome.sh
-  ./install/installAtom.sh
-  ./install/installSublime.sh
-  ./install/installVSCode.sh
-  ./install/installStarUml.sh
-  ./install/installSlack.sh
-  ./install/installUnitTweak.sh
+  #$DIR/install/installMaven.sh
+  #$DIR/install/installTomcat8.sh
+  $DIR/install/installNodejs.sh
+  $DIR/install/installDocker.sh
+  $DIR/install/installCassandra.sh
 
-  echo "***install*** done" 1>&2
+  #$DIR/install/installMongoDb.sh
+  $DIR/install/installChrome.sh
+  $DIR/install/installAtom.sh
+  $DIR/install/installSublime.sh
+  $DIR/install/installVSCode.sh
+  $DIR/install/installStarUml.sh
+  $DIR/install/installSlack.sh
+  $DIR/install/installUnitTweak.sh
+
+  echo "*** ------ install done  ------ ***" 1>&2
 }
 
 install

@@ -3,7 +3,7 @@
 source ./isRoot.sh
 
 uninstallDocker() {
-  echo "***uninstallDocker***" 1>&2
+  echo "*** ------ uninstallDocker ------ ***" 1>&2
   $(isRoot)
 
   apt-get remove docker
@@ -28,14 +28,14 @@ uninstallDocker() {
   #sudo rm /etc/apparmor.d/docker
   sudo groupdel docker
 
-  echo "***uninstallDocker*** done" 1>&2
+  echo "*** ------ uninstallDocker done  ------ ***" 1>&2
 }
 
 uninstallDockerCompose() {
-  echo "***uninstallDockerCompose***" 1>&2
+  echo "*** ------ uninstallDockerCompose ------ ***" 1>&2
   $(isRoot)
 
   rm /usr/local/bin/docker-compose
 
-  echo "***uninstallDockerCompose*** done" 1>&2
+  echo "*** ------ uninstallDockerCompose done  ------ ***" 1>&2
 }

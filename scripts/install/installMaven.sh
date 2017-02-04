@@ -1,9 +1,12 @@
 #!/bin/bash
 
-. ../isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/../isRoot.sh
 
 installMaven() {
-  echo "***installMaven***" 1>&2
+  echo "*** ------ installMaven ------ ***" 1>&2
   $(isRoot)
   #add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
   #add-apt-repository ppa:andrei-pozolotin/maven3
@@ -13,7 +16,7 @@ installMaven() {
   apt-get install maven3
 
   ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
-  echo "***installMaven*** done" 1>&2
+  echo "*** ------ installMaven done  ------ ***" 1>&2
 }
 
 installMaven
