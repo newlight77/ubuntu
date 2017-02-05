@@ -10,12 +10,12 @@ download() {
   $DIR/download/downloadStarUml.sh
   $DIR/download/downloadDevcenter.sh
   $DIR/download/downloadEclipse.sh
+  $DIR/download/downloadIdea.sh
   $DIR/download/downloadTomcat.sh
   $DIR/download/downloadCodeStyle.sh
   $DIR/download/downloadAtom.sh
   $DIR/download/downloadVSCode.sh
   #$DIR/download/downloadCassandra.sh
-  #$DIR/download/downloadIdea.sh
   #$DIR/download/downloadJdk.sh
   #$DIR/download/downloadPlay2.sh
   #$DIR/download/downloadSts.sh
