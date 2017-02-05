@@ -3,11 +3,11 @@
 downloadIdea() {
   echo "*** ------ installIdea ------ ***" 1>&2
   cd /apps
-  version=2016.3.2
-  wget https://download.jetbrains.com/idea/ideaIC-$version.tar.gz
+  version=2016.3.4
+  wget https://download-cf.jetbrains.com/idea/ideaIC-$version.tar.gz
   tar zxvf ideaIC-$version.tar.gz /tmp
   rm ideaIC-$version.tar.gz
-  ln -s /apps/idea-IC-163.10154.41 /apps/idea
+  ln -s /apps/idea-IC-163.12024.16 /apps/idea
   echo "export PATH=/apps/idea:\$PATH" >> /apps/env.config
 
   cd -

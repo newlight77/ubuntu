@@ -18,6 +18,23 @@ git clone https://github.com/newlight77/ubuntu.git
 cd ubuntu
 ```
 
+### Interactive install
+
+Installing JDK require interactive prompt
+```sh
+./scripts/install/installJdk.sh
+```
+
+### Downloads scripts at risk
+
+As links might have changed, script tools may not be successfully downloaded. Re-run them manually.
+
+```sh
+./scripts/download/dowloadIdea.sh
+./scripts/download/dowloadTomcat.sh
+./scripts/download/downloadAtom.sh
+```
+
 ### Install Tools
 ```sh
 sudo ./installToolBox.sh

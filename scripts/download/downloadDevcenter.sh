@@ -14,3 +14,5 @@ downloadDevCenter() {
   cd -
   echo "*** ------ installDevCenter done  ------ ***" 1>&2
 }
+
+downloadDevCenter
