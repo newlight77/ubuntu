@@ -13,3 +13,5 @@ downloadCassandra() {
   cd -
   echo "*** ------ installCassandra done  ------ ***" 1>&2
 }
+
+downloadCassandra

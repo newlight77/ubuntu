@@ -1,19 +1,24 @@
 #!/bin/bash
 
-echo "*** Customize *** Customizing User env" 1>&2
+DIR=${0%/*}
+echo "current dir: " $DIR
+
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+echo "*** ------  Customize "*** ------  Customizing User env" 1>&2
 
 if [ ! -d ~/.bash-git-prompt ]; then
   git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
 fi
 
 mkdir -p ~/.ubuntu
-cp  .bashrc_natelandau ~/.ubuntu/.bashrc_natelandau
-cp  .bashrc_profile    ~/.ubuntu/.bashrc_profile
-cp  .bashrc_alias      ~/.ubuntu/.bashrc_alias
-cp  .bashrc_path       ~/.ubuntu/.bashrc_path
-cp  .bashrc_ps12       ~/.ubuntu/.bashrc_ps12
-cp  .gitconfig_alias   ~/.ubuntu/.gitconfig_alias
-cp  .bashrc            ~/.ubuntu/.bashrc
+cp  ./customization/.bashrc_natelandau ~/.ubuntu/.bashrc_natelandau
+cp  ./customization/.bashrc_profile    ~/.ubuntu/.bashrc_profile
+cp  ./customization/.bashrc_alias      ~/.ubuntu/.bashrc_alias
+cp  ./customization/.bashrc_path       ~/.ubuntu/.bashrc_path
+cp  ./customization/.bashrc_ps12       ~/.ubuntu/.bashrc_ps12
+cp  ./customization/.gitconfig_alias   ~/.ubuntu/.gitconfig_alias
+cp  ./customization/.bashrc            ~/.ubuntu/.bashrc
 
-cat .bashrc_profile    >> ~/.bashrc
-cat .gitconfig         >> ~/.gitconfig
+cat ./customization/.bashrc_profile    >> ~/.bashrc
+cat ./customization/.gitconfig         >> ~/.gitconfig

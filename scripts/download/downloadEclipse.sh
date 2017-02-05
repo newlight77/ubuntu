@@ -31,3 +31,5 @@ downloadEclipse() {
 
   echo "*** ------ installEclipse done  ------ ***" 1>&2
 }
+
+downloadEclipse

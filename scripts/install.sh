@@ -23,11 +23,7 @@ install() {
 
   #$DIR/install/installMongoDb.sh
   $DIR/install/installChrome.sh
-  $DIR/install/installAtom.sh
   $DIR/install/installSublime.sh
-  $DIR/install/installVSCode.sh
-  $DIR/install/installStarUml.sh
-  $DIR/install/installSlack.sh
   $DIR/install/installUnitTweak.sh
 
   echo "*** ------ install done  ------ ***" 1>&2

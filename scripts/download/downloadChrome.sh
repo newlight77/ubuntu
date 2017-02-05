@@ -11,3 +11,5 @@ installChrome() {
   cd -
   echo "*** ------ installChrome done  ------ ***" 1>&2
 }
+
+installChrome
