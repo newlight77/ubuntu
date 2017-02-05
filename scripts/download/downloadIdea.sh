@@ -1,17 +1,20 @@
 #!/bin/bash
 
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
 downloadIdea() {
   echo "*** ------ installIdea ------ ***" 1>&2
   cd /apps
   version=2016.3.4
-  wget https://download-cf.jetbrains.com/idea/ideaIC-$version.tar.gz
-  tar zxvf ideaIC-$version.tar.gz /tmp
-  rm ideaIC-$version.tar.gz
-  ln -s /apps/idea-IC-163.12024.16 /apps/idea
+  #wget https://download-cf.jetbrains.com/idea/ideaIC-$version.tar.gz
+  #tar zxvf ideaIC-$version.tar.gz /tmp
+  #rm ideaIC-$version.tar.gz
+  #ln -s /apps/idea-IC-163.12024.16 /apps/idea
   echo "export PATH=/apps/idea:\$PATH" >> /apps/env.config
 
   cd -
-  cp ../../customization/idea.desktop /usr/share/applications/idea.desktop
+  cp $DIR/../../customization/idea.desktop /usr/share/applications/idea.desktop
 
 #  cat << EOF > /usr/share/applications/idea.desktop
 #    [Desktop Entry]

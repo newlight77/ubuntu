@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
 downloadEclipse() {
   echo "*** ------ installEclipse ------ ***" 1>&2
   cd /apps
@@ -12,8 +15,8 @@ downloadEclipse() {
   echo "export PATH=/apps/eclipse:\$PATH" >> /apps/env.config
 
   cd -
-  cp ../../customization/eclipse.desktop /usr/share/applications/eclipse.desktop
-  cp ../../customization/eclipse.png /apps/eclipse/eclipse.png
+  cp $DIR/../../customization/eclipse.desktop /usr/share/applications/eclipse.desktop
+  cp $DIR/../../customization/eclipse.png /apps/eclipse/eclipse.png
 #   touch /usr/share/applications/eclipse.desktop
 #   chmod a+w /usr/share/applications/eclipse.desktop
 #   cat <<- EOF > /usr/share/applications/eclipse.desktop
