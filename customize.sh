@@ -5,7 +5,7 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
-echo "*** ------  Customize "*** ------  Customizing User env" 1>&2
+echo "*** ------  Customize ------ ***" 1>&2
 
 if [ ! -d ~/.bash-git-prompt ]; then
   git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
