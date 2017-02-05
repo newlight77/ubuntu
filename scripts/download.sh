@@ -3,22 +3,24 @@
 DIR=${0%/*}
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
+LOGFILE=`basename $0`.log
+
 download() {
   echo "*** ------ download ------ ***" 1>&2
-  $DIR/download/downloadMaven.sh
-  $DIR/download/downloadSlack.sh
-  $DIR/download/downloadStarUml.sh
-  $DIR/download/downloadDevcenter.sh
-  $DIR/download/downloadEclipse.sh
-  $DIR/download/downloadIdea.sh
-  $DIR/download/downloadTomcat.sh
-  $DIR/download/downloadCodeStyle.sh
-  $DIR/download/downloadAtom.sh
-  $DIR/download/downloadVSCode.sh
-  #$DIR/download/downloadCassandra.sh
-  #$DIR/download/downloadJdk.sh
-  #$DIR/download/downloadPlay2.sh
-  #$DIR/download/downloadSts.sh
+  $DIR/download/downloadMaven.sh >> $LOGFILE
+  $DIR/download/downloadSlack.sh >> $LOGFILE
+  $DIR/download/downloadStarUml.sh >> $LOGFILE
+  $DIR/download/downloadDevcenter.sh >> $LOGFILE
+  $DIR/download/downloadEclipse.sh >> $LOGFILE
+  $DIR/download/downloadIdea.sh >> $LOGFILE
+  $DIR/download/downloadTomcat.sh >> $LOGFILE
+  $DIR/download/downloadCodeStyle.sh >> $LOGFILE
+  $DIR/download/downloadAtom.sh >> $LOGFILE
+  $DIR/download/downloadVSCode.sh >> $LOGFILE
+  #$DIR/download/downloadCassandra.sh >> $LOGFILE
+  #$DIR/download/downloadJdk.sh >> $LOGFILE
+  #$DIR/download/downloadPlay2.sh >> $LOGFILE
+  #$DIR/download/downloadSts.sh >> $LOGFILE
   echo "*** ------ download done  ------ ***" 1>&2
 }
 
