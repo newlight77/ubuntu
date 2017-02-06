@@ -5,6 +5,8 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
 LOGFILE=`basename $0`.log
 
+echo "" > $LOGFILE
+
 download() {
   echo "*** ------ download ------ ***" 1>&2
   $DIR/download/downloadMaven.sh >> $LOGFILE
