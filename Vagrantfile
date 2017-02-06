@@ -9,8 +9,8 @@ Vagrant.configure("2") do |config|
     # Tweak VirtualBox configuration for GUI applications
     config.vm.provider :virtualbox do |v|
       v.gui = true
-      v.customize ["modifyvm", :id, "--memory", 4048]
-      v.customize ["modifyvm", :id, "--cpus", 2]
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--cpus", 1]
       v.customize ["modifyvm", :id, "--vram", "128"]
       v.customize ["setextradata", "global", "GUI/MaxGuestResolution", "any"]
       v.customize ["setextradata", :id, "CustomVideoMode1", "1024x768x32"]
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
 
     # forwarded ports
     #config.vm.network :forwarded_port, guest: 80, host: 80, auto_correct: true
-    [8081, 8082, 8083, 8084, 8089, 8001, 8080, 8443].each do |p|
+    [8443].each do |p|
         config.vm.network :forwarded_port, guest: p, host: p
     end
 
@@ -32,9 +32,9 @@ Vagrant.configure("2") do |config|
     #config.vm.synced_folder ".", "/vagrant", :type => "nfs"
     config.vm.synced_folder ".", "/vagrant"
 
-    config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install ubuntu-desktop -y"
-    config.vm.provision "shell", inline: "sudo /vagrant/installToolBox.sh"
-    config.vm.provision "shell", inline: "/vagrant/customize.sh"
+    #config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install ubuntu-desktop -y"
+    #config.vm.provision "shell", inline: "sudo /vagrant/installToolBox.sh"
+    #config.vm.provision "shell", inline: "/vagrant/customize.sh"
     #config.vm.provision :shell, path: "./installToolBox.sh", :privileged => true
     #config.vm.provision :shell, path: "./customizeRoot.sh", :privileged => true
     #config.vm.provision :shell, path: "./customize.sh", :privileged => true

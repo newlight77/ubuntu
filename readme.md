@@ -18,6 +18,23 @@ git clone https://github.com/newlight77/ubuntu.git
 cd ubuntu
 ```
 
+### Interactive install
+
+Installing JDK require interactive prompt
+```sh
+./scripts/install/installJdk.sh
+```
+
+### Downloads scripts at risk
+
+As links might have changed, script tools may not be successfully downloaded. Re-run them manually.
+
+```sh
+./scripts/download/dowloadIdea.sh
+./scripts/download/dowloadTomcat.sh
+./scripts/download/downloadAtom.sh
+```
+
 ### Install Tools
 ```sh
 sudo ./installToolBox.sh
@@ -25,8 +42,7 @@ sudo ./installToolBox.sh
 
 ### Customize
 ```sh
-sudo su
-./customizeRoot.sh
+ssh-keygen -t rsa
 ```
 
 ```sh
@@ -34,19 +50,15 @@ sudo su
 ```
 
 ```sh
-ssh-keygen -t rsa
-```
-
-### Blueprint
-```sh
-sudo gem install apiaryio
+sudo su -
+./customize.sh
 ```
 
 ### NPM
 ```sh
 sudo npm install -g nodemon gulp yo
-sudo npm install -g aglio drakov hercule dredd drafter
 sudo npm install -g phantomjs
+sudo npm install -g apiaryio aglio drakov hercule dredd drafter
 ```
 
 ### Atom
