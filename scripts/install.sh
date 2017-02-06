@@ -16,7 +16,6 @@ install() {
   $DIR/install/installSystemPackages.sh >> $LOGFILE
   $DIR/install/configureTime.sh >> $LOGFILE
   $DIR/install/installJdk.sh >> $LOGFILE # interactive
-
   $DIR/install/installMailUtil.sh >> $LOGFILE
   $DIR/install/installMkUsb.sh >> $LOGFILE
 
