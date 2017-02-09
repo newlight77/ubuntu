@@ -3,6 +3,11 @@
 DIR=${0%/*}
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
+if [ ! -d "/apps" ]; then
+  echo "/apps dir does not exist!"
+  exit 1;
+fi
+
 LOGFILE=`basename $0`.log
 
 echo "" > $LOGFILE
@@ -23,6 +28,8 @@ download() {
   #$DIR/download/downloadJdk.sh >> $LOGFILE
   #$DIR/download/downloadPlay2.sh >> $LOGFILE
   #$DIR/download/downloadSts.sh >> $LOGFILE
+
+  #$DIR/postDownload.sh >> $LOGFILE
   echo "*** ------ download done  ------ ***" 1>&2
 }
 

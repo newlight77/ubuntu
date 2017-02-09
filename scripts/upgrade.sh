@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../isRoot.sh
+. ./isRoot.sh
 
 # change the value of Prompt=lts to Prompt=normal
 # vi /etc/update-manager/release-upgrades

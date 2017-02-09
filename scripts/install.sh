@@ -13,8 +13,8 @@ install() {
   echo "*** ------ install ------ ***" 1>&2
   $(isRoot)
 
-  $DIR/install/configureTime.sh >> $LOGFILE
-  $DIR/install/installJdk.sh >> $LOGFILE # interactive
+  $DIR/configureTime.sh >> $LOGFILE
+  $DIR/install/installJdk.sh >> $LOGFILE
   $DIR/install/installSystemPackages.sh >> $LOGFILE
   $DIR/install/installMailUtil.sh >> $LOGFILE
   $DIR/install/installMkUsb.sh >> $LOGFILE
@@ -29,6 +29,8 @@ install() {
   $DIR/install/installChrome.sh >> $LOGFILE
   $DIR/install/installSublime.sh >> $LOGFILE
   $DIR/install/installUnitTweak.sh >> $LOGFILE
+
+  $DIR/createDirs
 
   echo "*** ------ install done  ------ ***" 1>&2
 }
