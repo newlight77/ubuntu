@@ -13,9 +13,9 @@ install() {
   echo "*** ------ install ------ ***" 1>&2
   $(isRoot)
 
-  $DIR/install/installSystemPackages.sh >> $LOGFILE
   $DIR/install/configureTime.sh >> $LOGFILE
   $DIR/install/installJdk.sh >> $LOGFILE # interactive
+  $DIR/install/installSystemPackages.sh >> $LOGFILE
   $DIR/install/installMailUtil.sh >> $LOGFILE
   $DIR/install/installMkUsb.sh >> $LOGFILE
 

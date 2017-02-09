@@ -55,6 +55,7 @@ installSystemLibraries() {
   apt-get install -y terminator
   apt-get install -y git
   apt-get install -y nginx
+  apt-get install -y ruby2.2 ruby2.2-dev
   #apt-get install -y ruby
 
   echo "*** ------ installSystemLibraries done  ------ ***" 1>&2

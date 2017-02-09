@@ -5,7 +5,7 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
 . $DIR/../isRoot.sh
 
-installDocker() {
+installDocker() {
   echo "*** ------ installDocker ------ ***" 1>&2
   $(isRoot)
 
@@ -25,7 +25,7 @@ installDocker() {
 
   apt-get update
   apt-cache madison docker-engine
-  apt-get -y install docker-engine=1.13.1-0~ubuntu-trusty
+  #apt-get -y install docker-engine=1.13.1-0~ubuntu-trusty
   apt-get install -y docker-engine
 
   groupadd docker
