@@ -34,10 +34,7 @@ Vagrant.configure("2") do |config|
 
     #config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install ubuntu-desktop -y"
     #config.vm.provision "shell", inline: "sudo /vagrant/installToolBox.sh"
-    #config.vm.provision "shell", inline: "/vagrant/customize.sh"
-    #config.vm.provision :shell, path: "./installToolBox.sh", :privileged => true
-    #config.vm.provision :shell, path: "./customizeRoot.sh", :privileged => true
-    #config.vm.provision :shell, path: "./customize.sh", :privileged => true
+    #config.vm.provision "shell", inline: "sudo /vagrant/customize.sh"
 
     #config.vm.provision "shell", inline: <<-SHELL
 

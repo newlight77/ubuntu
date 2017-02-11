@@ -14,8 +14,8 @@ install() {
   $(isRoot)
 
   $DIR/configureTime.sh >> $LOGFILE
-  $DIR/install/installJdk.sh >> $LOGFILE
   $DIR/install/installSystemPackages.sh >> $LOGFILE
+  $DIR/install/installJdk.sh >> $LOGFILE
   $DIR/install/installMailUtil.sh >> $LOGFILE
   $DIR/install/installMkUsb.sh >> $LOGFILE
 
@@ -30,7 +30,7 @@ install() {
   $DIR/install/installSublime.sh >> $LOGFILE
   $DIR/install/installUnitTweak.sh >> $LOGFILE
 
-  $DIR/createDirs
+  $DIR/createDirs.sh >> $LOGFILE
 
   echo "*** ------ install done  ------ ***" 1>&2
 }

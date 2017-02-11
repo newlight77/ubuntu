@@ -40,23 +40,19 @@ installSystemLibraries() {
   apt-get install -y ntp ntpdate
   apt-get install -y libgconf2-4 libnss3-1d libxss1
   apt-get install -y nfs-kernel-server
+  apt-get install -y g++
+  apt-get install -y perl
+  apt-get install -y ruby
+  apt-get install -y flex
+  apt-get install -y python
   apt-get install -y python-support
   apt-get install -y gvfs-bin
   apt-get install -y jq
-  apt-get install -y apt-transport-https ca-certificates
-
-  #required for phantomjs compile
-  apt-get install -y build-essential g++ flex bison gperf ruby perl \
-    libsqlite3-dev libfontconfig1-dev libicu52 libfreetype6 libssl-dev \
-    libpng-dev libjpeg-dev python libx11-dev libxext-dev
-
-  apt-get install -y gksu
   apt-get install -y curl
   apt-get install -y terminator
   apt-get install -y git
-  apt-get install -y nginx
-  apt-get install -y ruby2.2 ruby2.2-dev
-  #apt-get install -y ruby
+  apt-get install -y apt-transport-https ca-certificates
+  apt-get install -y gksu
 
   echo "*** ------ installSystemLibraries done  ------ ***" 1>&2
 }
