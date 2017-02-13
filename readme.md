@@ -54,6 +54,12 @@ sudo su -
 ./customize.sh
 ```
 
+Pin Eclipse to the Unity launcher
+```sh
+sudo su -
+gnome-desktop-item-edit --create-new /usr/share/applications/
+```
+
 ### NPM
 ```sh
 sudo npm install -g nodemon gulp yo
