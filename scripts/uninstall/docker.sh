@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source ./isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/isRoot.sh
 
 uninstallDocker() {
   echo "*** ------ uninstallDocker ------ ***" 1>&2

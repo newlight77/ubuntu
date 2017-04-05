@@ -18,11 +18,13 @@ git clone https://github.com/newlight77/ubuntu.git
 cd ubuntu
 ```
 
-### Interactive install
-
-Installing JDK require interactive prompt
+### Install Tools
 ```sh
-./scripts/install/installJdk.sh
+sudo ./scripts/install.sh
+sudo ./scripts/download.sh
+
+or
+sudo ./scripts/install/installToolBox.sh
 ```
 
 ### Downloads scripts at risk
@@ -33,11 +35,6 @@ As links might have changed, script tools may not be successfully downloaded. Re
 ./scripts/download/dowloadIdea.sh
 ./scripts/download/dowloadTomcat.sh
 ./scripts/download/downloadAtom.sh
-```
-
-### Install Tools
-```sh
-sudo ./installToolBox.sh
 ```
 
 ### Customize
@@ -64,7 +61,7 @@ gnome-desktop-item-edit --create-new /usr/share/applications/
 ```sh
 sudo npm install -g nodemon gulp yo
 sudo npm install -g phantomjs
-sudo npm install -g apiaryio aglio drakov hercule dredd drafter
+sudo npm install -g apiaryio aglio drakov hercule dredd drafter fury-cli
 ```
 
 ### Atom
@@ -83,4 +80,9 @@ git config --global user.email "newlight77@gmail.com"
 ### Uninstall NodeJs
 ```sh
 removeNodeJs.sh
+```
+
+### Uninstall Docker
+```sh
+docker.sh
 ```

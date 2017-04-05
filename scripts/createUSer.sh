@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. ./isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/isRoot.sh
 
 USER=$1
 if [ -z "$USER" ] ; then

@@ -11,6 +11,10 @@ if [ ! -d ~/.bash-git-prompt ]; then
   git clone https://github.com/magicmonty/bash-git-prompt.git  ~/.bash-git-prompt
 fi
 
+if [ ! -f ~/.git-completion.bash ]; then
+  curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+fi
+
 mkdir -p ~/.ubuntu
 cp  ./customization/.bashrc_natelandau ~/.ubuntu/.bashrc_natelandau
 cp  ./customization/.bashrc_profile    ~/.ubuntu/.bashrc_profile

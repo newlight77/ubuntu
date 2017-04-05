@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. ./isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/isRoot.sh
 
 # change the value of Prompt=lts to Prompt=normal
 # vi /etc/update-manager/release-upgrades

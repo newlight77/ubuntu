@@ -25,6 +25,10 @@ if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
     source ~/.bash-git-prompt/gitprompt.sh
 fi
 
+if [ -f ~/.completion.sh ]; then
+    source ~/.git-completion.bash
+fi
+
 # Set config variables first
 GIT_PROMPT_ONLY_IN_REPO=1
 

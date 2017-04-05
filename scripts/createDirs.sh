@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. ./isRoot.sh
+DIR=${0%/*}
+if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
+
+. $DIR/isRoot.sh
 
 createAppsDir() {
   echo "*** ------ createAppsDir ------ ***" 1>&2
