@@ -64,6 +64,13 @@ sudo npm install -g phantomjs
 sudo npm install -g apiaryio aglio drakov hercule dredd drafter fury-cli
 ```
 
+### phantomjs
+```sh
+sudo npm install -g phantomjs
+wget http://launchpadlibrarian.net/201330288/libicu52_52.1-8_amd64.deb
+sudo dpkg -i libicu52_52.1-8_amd64.deb
+```
+
 ### Atom
 ```sh
 sudo gem install scss_lint
