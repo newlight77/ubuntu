@@ -24,6 +24,7 @@ download() {
   $DIR/download/downloadCodeStyle.sh >> $LOGFILE
   $DIR/download/downloadAtom.sh >> $LOGFILE
   $DIR/download/downloadVSCode.sh >> $LOGFILE
+  $DIR/download/downloadSqlectron.sh >> $LOGFILE
   #$DIR/download/downloadCassandra.sh >> $LOGFILE
   #$DIR/download/downloadJdk.sh >> $LOGFILE
   #$DIR/download/downloadPlay2.sh >> $LOGFILE
