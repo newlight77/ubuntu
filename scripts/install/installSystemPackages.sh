@@ -54,6 +54,7 @@ installSystemLibraries() {
   apt-get install -y apt-transport-https ca-certificates
   apt-get install -y gksu
   apt-get install -y gnome-panel
+  apt-get install -y htop
 
   echo "*** ------ installSystemLibraries done  ------ ***" 1>&2
 }
