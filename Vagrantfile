@@ -1,12 +1,10 @@
 # -*- mode: ruby -*-
- # vi: set ft=ruby :
- #
- # Copy this file to ``Vagrantfile`` and customize it as you see fit.
+# vi: set ft=ruby :
 
- VAGRANTFILE_API_VERSION = "2"
+VAGRANTFILE_API_VERSION = "2"
 
 
-os = ENV['OS'] || 'centos'
+os = ENV['OS'] || 'fedora'
 if os == 'ubuntu'
   box_name = 'ubuntu/xenial64'
 # elsif os == 'redhat'
@@ -19,15 +17,19 @@ end
 
 
 
- Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = box_name
 
   # Tweak VirtualBox configuration for GUI applications
   config.vm.provider :virtualbox do |v|
+    v.name = os
+    v.memory = 2048
+    v.cpus = 1
+
     # v.gui = true
-    v.customize ["modifyvm", :id, "--memory", 3072]
-    v.customize ["modifyvm", :id, "--cpus", 1]
-    v.customize ["modifyvm", :id, "--vram", "128"]
+    # v.customize ["modifyvm", :id, "--memory", 3072]
+    # v.customize ["modifyvm", :id, "--cpus", 1]
+    # v.customize ["modifyvm", :id, "--vram", "128"]
     # v.customize ["setextradata", "global", "GUI/MaxGuestResolution", "any"]
     # v.customize ["setextradata", :id, "CustomVideoMode1", "1024x768x32"]
     # v.customize ["modifyvm", :id, "--ioapic", "on"]
