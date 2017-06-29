@@ -1,95 +1,42 @@
-## Install Ubuntu
--Install ubuntu : http://www.ubuntu.com/download/desktop/install-ubuntu-desktop
--Ensure to choose "encrypt user home" during the installation
+## Install Fedora on target host
 
-## Install tools
+* Install Fedora : https://getfedora.org/en/workstation/download/
+* Install ubuntu : http://www.ubuntu.com/download/desktop/install-ubuntu-desktop
 
-### install git
-Install git as it is required at first to retrieve the ubuntu toolbox scripts from github.com
+V2 using Ansible is in progress, under fedora folder.
+Meanwhile, you still can use the V1 with shell scripts, under ubuntu folder.
+
+## Pre-requisites
+
+### Fedora
 
 ```sh
-sudo apt-get install git
+sudo yum upgrade
+sudo yum -y install git
+sudo yum -y install python2-dnf libselinux-python yum
+sudo yum -y install ansible
 ```
 
-### clone Ubuntu install scripts
+### Ubuntu
+```sh
+sudo get-apt upgrade
+sudo get-apt install git
+sudo get-apt install python2 libselinux-python
+sudo get-apt install ansible
+```
+
+### clone this
 ```sh
 cd ~
 git clone https://github.com/newlight77/ubuntu.git
 cd ubuntu
 ```
 
-### Install Tools
-```sh
-sudo ./scripts/install.sh
-sudo ./scripts/download.sh
 
-or
-sudo ./scripts/install/installToolBox.sh
-```
+## Ansible
 
-### Downloads scripts at risk
-
-As links might have changed, script tools may not be successfully downloaded. Re-run them manually.
+### Run ansible playbook
 
 ```sh
-./scripts/download/dowloadIdea.sh
-./scripts/download/dowloadTomcat.sh
-./scripts/download/downloadAtom.sh
-```
-
-### Customize
-```sh
-ssh-keygen -t rsa
-```
-
-```sh
-./customize.sh
-```
-
-```sh
-sudo su -
-./customize.sh
-```
-
-Pin Eclipse to the Unity launcher
-```sh
-sudo su -
-gnome-desktop-item-edit --create-new /usr/share/applications/
-```
-
-### NPM
-```sh
-sudo npm install -g nodemon gulp yo
-sudo npm install -g phantomjs
-sudo npm install -g apiaryio aglio drakov hercule dredd drafter fury-cli
-```
-
-### phantomjs
-```sh
-sudo npm install -g phantomjs
-wget http://launchpadlibrarian.net/201330288/libicu52_52.1-8_amd64.deb
-sudo dpkg -i libicu52_52.1-8_amd64.deb
-```
-
-### Atom
-```sh
-sudo gem install scss_lint
-sudo apm install linter-scss-lint
-```
-
-### Git config
-```sh
-git config --global user.name "Kong TO"
-git config --global user.email "newlight77@gmail.com"
-```
-
-## Uninstall
-### Uninstall NodeJs
-```sh
-removeNodeJs.sh
-```
-
-### Uninstall Docker
-```sh
-docker.sh
+sudo ansible-playbook -b -u vagrant ubuntu/fedora/ansible/playbook.yml
 ```
