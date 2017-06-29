@@ -1,0 +1,37 @@
+---
+__common_packages:
+  - autoconf
+  - bash-completion
+  - build-essential
+  - bzip2
+  - colortest
+  - curl
+  - diffutils
+  - dnf
+  - dos2unix
+  - gawk
+  - gcc
+  - git
+  - grep
+  - gzip
+  - htop
+  - httping
+  - iftop
+  - iotop
+  - less
+  - make
+  - nano
+  - nmap
+  - ntop
+  - openssl
+  - p7zip
+  - pbzip2
+  - pwgen
+  - software-properties-common
+  - tar
+  - unzip
+  - vim
+  - wget
+  - whois
+  - zip
+  - unzip

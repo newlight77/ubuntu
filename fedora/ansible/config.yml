@@ -1,0 +1,11 @@
+---
+
+fedora_current: 25
+
+ansible_sudo_pass: "vagrant"
+
+system_packages:
+  - git
+
+npm_packages:
+  - name: webpack

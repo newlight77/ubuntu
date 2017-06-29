@@ -1,0 +1,10 @@
+---
+# Control handlers for sshd
+- name: start sshd
+  service: name=sshd state=started
+
+- name: stop sshd
+  service: name=sshd state=stopped
+
+- name: restart sshd
+  service: name=sshd state=restarted

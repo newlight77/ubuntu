@@ -1,0 +1,65 @@
+---
+
+fedora_current: 25
+
+configure_sudoers: yes
+
+downloads: ~/.ansible-downloads/
+
+common_packages:
+  - autoconf
+  - bash-completion
+  - bzip2
+  - curl
+  - diffutils
+  - dnf
+  - dos2unix
+  - gawk
+  - gcc
+  - git
+  - gpg
+  - grep
+  - gzip
+  - htop
+  - iftop
+  - iotop
+  - less
+  - make
+  - nano
+  - nmap
+  - ntop
+  - openssl
+  - p7zip
+  - pbzip2
+  - pwgen
+  - tar
+  - unzip
+  - wget
+  - whois
+  - zip
+  - unzip
+
+system_packages:
+  # - ansible # Install
+  - node
+  - docker
+  - dropbox
+  - firefox
+  - google-chrome
+  - slack
+  - sublime-text
+  - vagrant
+  - virtualbox
+
+gem_packages: []
+  # - name: drush
+  #   state: present # present/absent, default: present
+  #   version: "^8.1" # default: N/A
+npm_packages: []
+  # - name: webpack
+  #   state: present # present/absent/latest, default: present
+  #   version: "^2.6" # default: N/A
+pip_packages: []
+  # - name: drush
+  #   state: present # present/absent, default: present
+  #   version: "^8.1" # default: N/A

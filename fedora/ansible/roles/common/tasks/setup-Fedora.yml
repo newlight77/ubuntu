@@ -1,0 +1,5 @@
+---
+- name: Ensure common packages are installed.
+  package: "name={{ item }} state=installed"
+  with_items: "{{ common_packages }}"
+  become: yes
