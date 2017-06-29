@@ -3,7 +3,7 @@
 * Install Fedora : https://getfedora.org/en/workstation/download/
 * Install ubuntu : http://www.ubuntu.com/download/desktop/install-ubuntu-desktop
 
-V2 using Ansible is in progress, under fedora folder.
+V2 using Ansible is in progress, under ansible folder.
 Meanwhile, you still can use the V1 with shell scripts, under ubuntu folder.
 
 ## Pre-requisites
