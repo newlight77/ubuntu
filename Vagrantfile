@@ -46,17 +46,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder ".", "/vagrant"
 
-  config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
-    #sudo dnf upgrade -y
-    sudo dnf -y install python2-dnf libselinux-python yum
-    sudo dnf -y install ansible
-  SHELL
+  if os == 'ubuntu'
+    config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
+      sudo apt-get install software-properties-common
+      sudo apt-add-repository ppa:ansible/ansible
+      sudo apt-get update
+      sudo apt-get install ansible
+    SHELL
+  else
+    config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
+      #sudo dnf upgrade -y
+      sudo dnf -y install python2-dnf libselinux-python yum
+      sudo dnf -y install ansible
+    SHELL
+  end
 
   config.vm.provision "run", type: "shell", inline: <<-SHELL
     cd /vagrant/ansible
     ansible-playbook -b -u vagrant playbook.yml
   SHELL
-
-
 
  end
