@@ -13,9 +13,9 @@
 
   tasks:
     - include: tasks/ansible-setup.yml
-    - include: tasks/gem-packages.yml
-    - include: tasks/npm-packages.yml
-    - include: tasks/ppip-ackages.yml
+    # - include: tasks/gem-packages.yml
+    # - include: tasks/npm-packages.yml
+    # - include: tasks/ppip-ackages.yml
     - include: tasks/cleanup.yml
 
   handlers:
