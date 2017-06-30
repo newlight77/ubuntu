@@ -53,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   SHELL
 
   config.vm.provision "run", type: "shell", inline: <<-SHELL
-    cd /vagrant/fedora/ansible
+    cd /vagrant/ansible
     ansible-playbook -b -u vagrant playbook.yml
   SHELL
 
