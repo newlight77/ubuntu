@@ -7,8 +7,7 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
 installVSCode() {
   echo "*** ------ installVSCode ------ ***" 1>&2
-  version=1.1.0
-  wget https://az764295.vo.msecnd.net/stable/c212f0908f3d29933317bbc3233568fbca7944b1/vscode-amd64.deb
+  wget https://az764295.vo.msecnd.net/stable/379d2efb5539b09112c793d3d9a413017d736f89/code_1.13.1-1497464373_amd64.deb
   dpkg -i vscode-amd64.deb
   rm vscode-amd64.deb
   echo "*** ------ installVSCode done  ------ ***" 1>&2

@@ -8,7 +8,7 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 installAtom() {
   echo "*** ------ installAtom ------ ***" 1>&2
   $(isRoot)
-  version=1.7.2
+  version=1.18.0
   wget https://github.com/atom/atom/releases/download/v$version/atom-amd64.deb
   dpkg -i atom-amd64.deb
   rm atom-amd64.deb

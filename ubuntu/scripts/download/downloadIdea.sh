@@ -6,11 +6,11 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 downloadIdea() {
   echo "*** ------ installIdea ------ ***" 1>&2
   cd /apps
-  version=2016.3.4
-  wget https://download-cf.jetbrains.com/idea/ideaIC-$version.tar.gz
+  version=2017.1.4
+  wget https://download-cf.jetbrains.com/idea/ideaIC-$version-no-jdk.tar.gz
   tar zxvf ideaIC-$version.tar.gz
   rm ideaIC-$version.tar.gz
-  ln -s /apps/idea-IC-163.12024.16 /apps/idea
+  ln -s /apps/idea-IC-171.4694.23 /apps/idea
   echo "export PATH=/apps/idea:\$PATH" >> /apps/env.config
 
   cd -
