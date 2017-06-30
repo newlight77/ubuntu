@@ -7,7 +7,7 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
 downloadSqlectron() {
   echo "*** ------ installSqlectron ------ ***" 1>&2
-  version=1.21.0
+  version=1.22.0
   curl -O https://github.com/sqlectron/sqlectron-gui/releases/download/v$version/Sqlectron_$version_amd64.deb
   dpkg -i Sqlectron_$version_amd64.deb
   rm Sqlectron_$version_amd64.deb

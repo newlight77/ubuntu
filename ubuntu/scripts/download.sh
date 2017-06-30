@@ -27,7 +27,6 @@ download() {
   $DIR/download/downloadSqlectron.sh >> $LOGFILE
   #$DIR/download/downloadCassandra.sh >> $LOGFILE
   #$DIR/download/downloadJdk.sh >> $LOGFILE
-  #$DIR/download/downloadPlay2.sh >> $LOGFILE
   #$DIR/download/downloadSts.sh >> $LOGFILE
 
   #$DIR/postDownload.sh >> $LOGFILE

@@ -18,15 +18,15 @@ installDocker() {
   apt-get install -y apt-transport-https ca-certificates software-properties-common
 
   curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
-  apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
+  apt-key fingerprint 0EBFCD88
   #apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
   apt-get update
-  apt-cache madison docker-engine
-  apt-get install -y docker-engine
+  apt-get install -y docker-ce
+  #apt-cache madison docker-ce
 
   groupadd docker
-  usermod -aG docker $USER
+  #usermod -aG docker $USER
 
   systemctl enable docker
 
@@ -37,7 +37,7 @@ installDockerCompose() {
   echo "*** ------ installDockerCompose ------ ***" 1>&2
   $(isRoot)
 
-  curl -L "https://github.com/docker/compose/releases/download/1.11.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  curl -L "https://github.com/docker/compose/releases/download/1.14.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
 
   echo "*** ------ installDockerCompose done  ------ ***" 1>&2
