@@ -1,0 +1,22 @@
+---
+
+- name: Ensure old versions of Docker along with its dependencies are not installed.
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - docker
+    - docker-engine
+    - docker.io
+
+- name: Installing apt-key
+  apt_key: id="0EBFCD88" url=https://download.docker.com/linux/ubuntu/gpg state=present
+
+- name: Add deb repository
+  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main' state=present
+
+- name: Install
+  apt: pkg="{{ item }}" state=latest update_cache=yes
+  with_items:
+    - linux-image-extra-virtual
+    - docker-ce

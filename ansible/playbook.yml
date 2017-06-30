@@ -27,3 +27,4 @@
     - role: motd
     - role: sudoers
     - role: rpmfusion
+    - role: docker

@@ -39,6 +39,13 @@ common_packages:
   - zip
   - unzip
 
+docker:
+  start: true
+  service_enabled: yes
+
+docker_compose:
+  version: "1.9.0"
+
 system_packages:
   # - ansible # Install
   - node
