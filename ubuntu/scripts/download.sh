@@ -16,7 +16,7 @@ download() {
   echo "*** ------ download ------ ***" 1>&2
   $DIR/download/downloadMaven.sh >> $LOGFILE
   $DIR/download/downloadSlack.sh >> $LOGFILE
-  $DIR/download/downloadStarUml.sh >> $LOGFILE
+  #$DIR/download/downloadStarUml.sh >> $LOGFILE
   $DIR/download/downloadDevcenter.sh >> $LOGFILE
   $DIR/download/downloadEclipse.sh >> $LOGFILE
   $DIR/download/downloadIdea.sh >> $LOGFILE
