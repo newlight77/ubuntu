@@ -12,7 +12,7 @@
       tags: ['always']
 
   tasks:
-    - include: tasks/ansible-setup.yml
+    # - include: tasks/ansible-setup.yml
     # - include: tasks/gem-packages.yml
     # - include: tasks/npm-packages.yml
     # - include: tasks/ppip-ackages.yml

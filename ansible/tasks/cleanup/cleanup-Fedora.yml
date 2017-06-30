@@ -1,18 +1,22 @@
 ---
 - name: remove additional packages
-  yum: pkg={{ item }}
+  dnf: pkg={{ item }}
        state=absent
+  become: yes
   with_items:
-    - yum
+    - test
 
 - name: cleaning task for yum
   command: /usr/bin/yum clean all
+  become: yes
 
 - name: delete cache files
   file: path=/var/cache/{{ item }}
         state=absent
   with_items:
     - yum
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+  become: yes
+# 
+# - name: reload firewall configuration
+#   command: /usr/bin/firewall-cmd --reload
+#   become: yes

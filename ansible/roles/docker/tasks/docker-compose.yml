@@ -15,8 +15,10 @@
   file:
     path: "{{ docker_compose.path }}"
     state: absent
-  when: docker_compose_update
+  when: docker_compose_update is defined
+  become: yes
 
 - name: Install docker-compose
   get_url: url="https://github.com/docker/compose/releases/download/{{docker_compose.version}}/docker-compose-Linux-x86_64" dest={{docker_compose.path}} force=no mode=0755
-  when: docker_compose_update
+  when: docker_compose_update is defined
+  become: yes

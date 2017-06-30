@@ -7,6 +7,7 @@ __common_packages:
   - diffutils
   - dnf
   - dos2unix
+  # - firewalld
   - gawk
   - gcc
   - git
@@ -24,6 +25,7 @@ __common_packages:
   - p7zip
   - pbzip2
   - pwgen
+  - python2-dnf
   - tar
   - unzip
   - wget

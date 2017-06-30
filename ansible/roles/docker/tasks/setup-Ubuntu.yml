@@ -4,6 +4,7 @@
   package:
     name: '{{ item }}'
     state: absent
+  become: yes
   with_items:
     - docker
     - docker-engine
@@ -11,12 +12,15 @@
 
 - name: Installing apt-key
   apt_key: id="0EBFCD88" url=https://download.docker.com/linux/ubuntu/gpg state=present
+  become: yes
 
 - name: Add deb repository
   apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main' state=present
+  become: yes
 
 - name: Install
   apt: pkg="{{ item }}" state=latest update_cache=yes
+  become: yes
   with_items:
     - linux-image-extra-virtual
     - docker-ce
