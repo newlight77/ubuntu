@@ -1,0 +1,34 @@
+---
+
+nodejs:
+  # Vversion of Node.js ("5.x", "6.x", "7.x").
+  # https://github.com/nodesource/distributions
+  version: "6.x"
+  # The user for whom the npm packages will be installed.
+
+npm:
+  user: "{{ ansible_env.USER | default(ansible_user) }}"
+  config_prefix: "{{ ansible_env.HOME }}/.npm-global-pkg"
+  packages_json_path: package.json.j2
+
+  #  Install a specific version of a package.
+  #  - name: jslint
+  #    version: 0.9.3
+  #  Install the latest stable release of a package.
+  #  - name: node-sass
+  #  This syntax also works.
+  #  - node-sass
+  global_packages:
+    - jslint
+    - eslint
+    - gulp
+    - nodemon
+    - yo
+    - phantomjs
+    - hercule
+    - dredd
+    - drakov
+    - aglio
+    - apiaryio
+    - drafter
+    - fury-cli

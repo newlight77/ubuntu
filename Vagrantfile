@@ -63,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "run", type: "shell", inline: <<-SHELL
     cd /vagrant/ansible
-    ansible-playbook -b -u vagrant playbook.yml
+    su -c "ansible-playbook -u vagrant playbook.yml" vagrant
   SHELL
 
  end
