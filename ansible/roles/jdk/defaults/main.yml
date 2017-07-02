@@ -1,0 +1,8 @@
+---
+
+jdk:
+  version: 1.8.0_131
+  # url: http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-x64.rpm
+  # url: http://download.oracle.com/otn-pub/java/jdk/8u131-b11/jdk-8u131-linux-x64.rpm
+  file: jdk-8u131-linux-x64.rpm
+  tmp: /tmp

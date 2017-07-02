@@ -1,0 +1,42 @@
+---
+
+- name: Ensure jdk dependencies are  installed.
+  package:
+    name: '{{ item }}'
+    state: present
+  become: yes
+  with_items:
+    - software-properties-common
+    - python-software-properties
+    - debconf-utils
+
+- name: Import WebUpd8 PGP key
+  apt_key: keyserver=keyserver.ubuntu.com id=0xEEA14886 state=present
+  become: yes
+
+- name: add repository for Oracke jdk 8
+  apt_repository: repo=ppa:webupd8team/java state=present
+  become: yes
+
+# - name: set licence selected
+#   shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+#   become: yes
+#
+# - name: set licence seen
+#   shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
+#   become: yes
+
+- name: Accept Java 8 License
+  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+  become: yes
+
+- name: Install Oracle Jkd 8
+  apt: name={{item}} state=latest
+  with_items:
+    - oracle-java8-installer
+    - ca-certificates
+    - oracle-java8-set-default
+  become: yes
+
+- name: Set this as default Java; also environment variables
+  apt: pkg="oracle-java8-set-default" state=present force=yes

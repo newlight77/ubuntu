@@ -28,4 +28,5 @@
     # - role: sudoers
     # - role: rpmfusion
     # - role: docker
-    - role: nodejs
+    # - role: nodejs
+    - role: jdk

@@ -1,0 +1,7 @@
+---
+
+- debug:
+    msg: "JDK Version: {{ jdk.version }}"
+
+# Setup/install tasks.
+- include: setup-{{ ansible_distribution }}.yml
