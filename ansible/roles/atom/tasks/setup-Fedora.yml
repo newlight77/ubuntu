@@ -14,12 +14,12 @@
 # - name: get Atom RPM
 #   get_url:
 #     url:     "{{ atom.url }}"
-#     dest:    "/tmp/{{ atom.file }}"
+#     dest:    "/tmp/{{ atom.file_rpm }}"
 #   when: current_version.stdout is defined and atom.version not in current_version.stdout
 #
 # - name: Install Atom package.
 #   yum:
-#      name: "/tmp/{{ atom.file}}"
+#      name: "/tmp/{{ atom.file_rpm}}"
 #      state: present
 #   when: current_version.stdout is defined and atom.version not in current_version.stdout
 #   become: yes

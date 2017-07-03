@@ -4,4 +4,5 @@ slack:
   version: 2.6.3
   url_rpm: https://downloads.slack-edge.com/linux_releases/slack-2.6.3-0.1.fc21.x86_64.rpm
   url_deb: https://downloads.slack-edge.com/linux_releases/slack-desktop-2.6.3-amd64.deb
-  file: slack-2.6.3-0.1.fc21.x86_64.rpm
+  file_rpm: slack-2.6.3-0.1.fc21.x86_64.rpm
+  file_deb: slack-desktop-2.6.3-amd64.deb

@@ -1,0 +1,20 @@
+---
+
+- name: check if Sqlectron is installed?
+  command: "dnf list installed | grep -i sqlectron | grep {{ sqlectron.version }}"
+  register: current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+
+- debug:
+    msg: "current_version : {{ current_version.stdout }}"
+
+- name: install the Sqlectron packages
+  package: name={{ item }}
+       state=present
+  with_items:
+    - "{{ sqlectron.url_rpm}}"
+  when: current_version.stdout is defined and sqlectron.version not in current_version.stdout
+  become: yes

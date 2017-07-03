@@ -1,0 +1,8 @@
+---
+
+sqlectron:
+  version: 1.22.0
+  url_rpm: https://github.com/sqlectron/sqlectron-gui/releases/download/v1.22.0/Sqlectron-1.22.0.rpm
+  url_deb: https://github.com/sqlectron/sqlectron-gui/releases/download/v1.22.0/Sqlectron_1.22.0_amd64.deb
+  file_rpm: Sqlectron-1.22.0.rpm
+  file_deb: Sqlectron_1.22.0_amd64.deb

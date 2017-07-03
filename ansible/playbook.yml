@@ -33,4 +33,7 @@
     # - role: maven
     # - role: sublime
     # - role: atom
-    - role: cassandra
+    # - role: cassandra
+    # - role: slack
+    - role: chrome
+    - role: sqlectron
