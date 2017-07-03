@@ -1,0 +1,23 @@
+---
+
+# - name: Ensure dependencies are installed.
+#   package:
+#     name: '{{ item }}'
+#     state: present
+#   become: yes
+#   with_items:
+#     - software-properties-common
+
+- name: Adding Cassandra repository keys
+  apt_key: keyserver=https://www.apache.org/dist/cassandra/KEYS state=present
+  become: yes
+
+- name: add repository cassandra
+  apt_repository: repo="deb http://www.apache.org/dist/cassandra/debian 311x main" state=present
+  become: yes
+
+- name: Install Cassandra
+  apt: name={{item}} state=latest
+  with_items:
+    - cassandra
+  become: yes

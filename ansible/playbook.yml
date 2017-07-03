@@ -30,6 +30,7 @@
     #- role: docker
     #- role: nodejs
     #- role: jdk
-    - role: maven
-    - role: sublime
-    - role: atom
+    # - role: maven
+    # - role: sublime
+    # - role: atom
+    - role: cassandra
