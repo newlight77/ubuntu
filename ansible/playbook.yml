@@ -29,4 +29,5 @@
     # - role: rpmfusion
     # - role: docker
     # - role: nodejs
-    - role: jdk
+    # - role: jdk
+    - role: maven

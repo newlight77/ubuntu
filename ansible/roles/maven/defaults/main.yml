@@ -1,0 +1,9 @@
+---
+
+maven:
+  major: 3
+  version: 3.5.0
+  home_parent_dir: /apps
+
+apps:
+  dir: /apps
