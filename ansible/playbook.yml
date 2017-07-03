@@ -31,4 +31,5 @@
     # - role: nodejs
     # - role: jdk
     # - role: maven
-    - role: sublime
+    # - role: sublime
+    - role: atom

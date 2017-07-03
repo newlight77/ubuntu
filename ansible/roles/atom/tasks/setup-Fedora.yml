@@ -1,0 +1,33 @@
+---
+
+- name: check if Atom is installed?
+  command: "dnf list installed | grep atom | grep {{ atom.version }}"
+  register: current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+
+- debug:
+    msg: "current_version : {{ current_version.stdout }}"
+
+# - name: get Atom RPM
+#   get_url:
+#     url:     "{{ atom.url }}"
+#     dest:    "/tmp/{{ atom.file }}"
+#   when: current_version.stdout is defined and atom.version not in current_version.stdout
+#
+# - name: Install Atom package.
+#   yum:
+#      name: "/tmp/{{ atom.file}}"
+#      state: present
+#   when: current_version.stdout is defined and atom.version not in current_version.stdout
+#   become: yes
+
+- name: install the atom packages
+  yum: name={{ item }}
+       state=present
+  with_items:
+    - "{{ atom.url}}"
+  when: current_version.stdout is defined and atom.version not in current_version.stdout
+  become: yes

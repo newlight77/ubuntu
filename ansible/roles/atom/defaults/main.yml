@@ -1,0 +1,7 @@
+---
+
+atom:
+  version: 1.18.0
+  # url: http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-x64.rpm
+  url: https://github.com/atom/atom/releases/download/v1.18.0/atom.x86_64.rpm
+  file: atom.x86_64.rpm
