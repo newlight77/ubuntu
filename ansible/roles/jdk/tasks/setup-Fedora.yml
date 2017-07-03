@@ -44,9 +44,11 @@
   when: jdk_current_version.stdout is defined and jdk.version not in jdk_current_version.stdout
 
 - name: install Oracle JDK
-  command: rpm --force -Uvh  {{ jdk.file }}
-  args:
-    creates: "{{ jdk.tmp }}/jdk-{{ jdk.version }}"
-    chdir:   "{{ jdk.tmp }}"
+  package:
+    name: /tmp/{{ jdk.file }}
+  # command: rpm --force -Uvh  {{ jdk.file }}
+  # args:
+  #   creates: "{{ jdk.tmp }}/jdk-{{ jdk.version }}"
+  #   chdir:   "{{ jdk.tmp }}"
   when: jdk_current_version.stdout is defined and jdk.version not in jdk_current_version.stdout
   become: yes
