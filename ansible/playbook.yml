@@ -35,5 +35,6 @@
     # - role: atom
     # - role: cassandra
     # - role: slack
-    - role: chrome
-    - role: sqlectron
+    # - role: chrome
+    # - role: sqlectron
+    - role: tomcat

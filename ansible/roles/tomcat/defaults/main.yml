@@ -1,0 +1,9 @@
+---
+
+tomcat:
+  major: 8
+  version: 8.0.45
+  home_parent_dir: /apps
+
+apps:
+  dir: /apps
