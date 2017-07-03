@@ -1,0 +1,10 @@
+---
+
+eclipse:
+  major: 4
+  minor: 0
+  version: oxygen
+  home_parent_dir: /apps
+
+apps:
+  dir: /apps
