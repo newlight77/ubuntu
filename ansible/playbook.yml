@@ -23,18 +23,20 @@
    - include: handlers/services.yml
 
   roles:
-    #- role: common
-    #- role: motd
-    #- role: sudoers
-    #- role: rpmfusion
-    #- role: docker
-    #- role: nodejs
-    #- role: jdk
-    # - role: maven
-    # - role: sublime
-    # - role: atom
-    # - role: cassandra
-    # - role: slack
-    # - role: chrome
-    # - role: sqlectron
+    - role: common
+    - role: motd
+    - role: sudoers
+    - role: rpmfusion
+    - role: docker
+    - role: nodejs
+    - role: jdk
+    - role: maven
+    - role: sublime
+    - role: atom
+    - role: cassandra
+    - role: slack
+    - role: chrome
+    - role: sqlectron
     - role: tomcat
+    - role: eclipse
+    - role: idea
