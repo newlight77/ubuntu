@@ -1,0 +1,20 @@
+---
+
+- name: check if Slack is installed?
+  command: "dnf list installed | grep slack | grep {{ slack.version }}"
+  register: current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+
+- debug:
+    msg: "current_version : {{ current_version.stdout }}"
+
+- name: install the Slack packages
+  package: name={{ item }}
+       state=present
+  with_items:
+    - "{{ slack.url_rpm}}"
+  when: current_version.stdout is defined and slack.version not in current_version.stdout
+  become: yes
