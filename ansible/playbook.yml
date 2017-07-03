@@ -11,17 +11,6 @@
         - config.yml
       tags: ['always']
 
-  tasks:
-    # - include: tasks/ansible-setup.yml
-    # - include: tasks/gem-packages.yml
-    # - include: tasks/npm-packages.yml
-    # - include: tasks/ppip-ackages.yml
-    # - include: tasks/cleanup.yml
-
-  handlers:
-   - include: handlers/system.yml
-   - include: handlers/services.yml
-
   roles:
     - role: common
     - role: motd
@@ -40,3 +29,14 @@
     - role: tomcat
     - role: eclipse
     - role: idea
+
+  tasks:
+    # - include: tasks/ansible-setup.yml
+    # - include: tasks/gem-packages.yml
+    # - include: tasks/npm-packages.yml
+    # - include: tasks/ppip-ackages.yml
+    - include: tasks/cleanup.yml
+
+  handlers:
+   - include: handlers/system.yml
+   - include: handlers/services.yml

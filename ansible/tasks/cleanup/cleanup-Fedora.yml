@@ -7,7 +7,7 @@
     - test
 
 - name: cleaning task for yum
-  command: /usr/bin/yum clean all
+  command: dnf clean all
   become: yes
 
 - name: delete cache files
@@ -16,7 +16,7 @@
   with_items:
     - yum
   become: yes
-# 
+#
 # - name: reload firewall configuration
 #   command: /usr/bin/firewall-cmd --reload
 #   become: yes
