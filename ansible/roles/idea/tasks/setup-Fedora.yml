@@ -1,0 +1,36 @@
+---
+
+- name: Create /apps directory
+  file:
+    path: "{{ apps.dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+  become: yes
+
+- debug:
+    msg: "download url : https://download-cf.jetbrains.com/idea/ideaIC-{{ idea.version }}-no-jdk.tar.gz"
+
+- name: get Idea Intellij tarball
+  get_url:
+    url: "https://download-cf.jetbrains.com/idea/ideaIC-{{ idea.version }}-no-jdk.tar.gz"
+    dest: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
+
+- name: Unarchive Eclipse
+  unarchive:
+    src: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
+    dest: "{{idea.home_parent_dir}}"
+    copy: no
+
+- name: Remove old path configuration
+  file:
+    path: /etc/profile.d/idea.sh
+    state: absent
+  become: yes
+
+- name: "Configuring Idea Intellij {{idea.home_parent_dir}}/{{idea.exploded_dir}} and add $PATH."
+  template:
+    src: idea.sh.j2
+    dest: /etc/profile.d/idea.sh
+    mode: 0644
+  become: yes
