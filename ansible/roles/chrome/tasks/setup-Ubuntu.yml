@@ -1,0 +1,15 @@
+---
+
+- name: Adding Google-Chrome repository keys
+  apt_key: keyserver=https://dl-ssl.google.com/linux/linux_signing_key.pub state=present
+  become: yes
+
+- name: add repository Google-Chrome
+  apt_repository: repo="deb https://dl.google.com/linux/chrome/deb/ stable main" state=present
+  become: yes
+
+- name: Install Google Chrome
+  apt: name={{item}} state=latest
+  with_items:
+    - google-chrome-stable
+  become: yes

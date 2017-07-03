@@ -1,0 +1,14 @@
+---
+
+- name: Adding Google-Chrome repository
+  template:
+    src: google-chrome.repo.j2
+    dest: /etc/yum.repos.d/google-chrome.repo
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+
+- name: Install Google Chrome.
+  package: name=google-chrome-stable state=present
+  become: yes
