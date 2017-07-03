@@ -25,9 +25,9 @@
 #   become: yes
 
 - name: install the atom packages
-  yum: name={{ item }}
+  package: name={{ item }}
        state=present
   with_items:
-    - "{{ atom.url}}"
+    - "{{ atom.url_rpm}}"
   when: current_version.stdout is defined and atom.version not in current_version.stdout
   become: yes
