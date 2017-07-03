@@ -1,0 +1,33 @@
+---
+
+- name: Create /apps directory
+  file:
+    path: "{{ apps.dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+  become: yes
+
+- name: get Tomcat tarball
+  get_url:
+    url: "https://archive.apache.org/dist/tomcat/tomcat-{{ tomcat.major }}/v{{ tomcat.version }}/bin/apache-tomcat-{{ tomcat.version }}.tar.gz"
+    dest: "/tmp/apache-tomcat-{{ tomcat.version }}.tar.gz"
+
+- name: Unarchive Tomcat
+  unarchive:
+    src: "/tmp/apache-tomcat-{{ tomcat.version }}.tar.gz"
+    dest: "{{tomcat.home_parent_dir}}"
+    copy: no
+
+- name: Remove old path configuration
+  file:
+    path: /etc/profile.d/tomcat.sh
+    state: absent
+  become: yes
+
+- name: "Configuring Tomcat home {{tomcat.home_parent_dir}}/apache-tomcat-{{tomcat.version}} and add $PATH."
+  template:
+    src: tomcat.sh.j2
+    dest: /etc/profile.d/tomcat.sh
+    mode: 0644
+  become: yes
