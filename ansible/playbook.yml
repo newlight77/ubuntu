@@ -30,4 +30,5 @@
     # - role: docker
     # - role: nodejs
     # - role: jdk
-    - role: maven
+    # - role: maven
+    - role: sublime

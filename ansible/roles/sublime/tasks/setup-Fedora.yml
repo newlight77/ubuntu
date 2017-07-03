@@ -1,0 +1,22 @@
+---
+- name: Import Sublime RPM key
+  rpm_key:
+    key: https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+    state: present
+  become: yes
+
+- name: Add Sublime repository.
+  get_url:
+    url: "https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo"
+    dest: '/etc/yum.repos.d/sublime.repo'
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+
+- name: Ensure Sublime is installed.
+  package:
+    name: sublime-text
+    state: present
+    enablerepo: 'sublimetext'
+  become: yes
