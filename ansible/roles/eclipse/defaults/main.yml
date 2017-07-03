@@ -1,8 +1,7 @@
 ---
 
 eclipse:
-  major: 4
-  minor: 0
+  major: 8
   version: oxygen
   home_parent_dir: /apps
 

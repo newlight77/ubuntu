@@ -8,6 +8,9 @@
     state: directory
   become: yes
 
+- debug:
+    msg: "download url : https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&r=1"
+
 - name: get Eclipse tarball
   get_url:
     # url: "http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/neon/R/eclipse-jee-neon-R-linux-gtk-x86_64.tar.gz&mirror_id=96"
