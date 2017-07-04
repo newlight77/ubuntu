@@ -29,6 +29,7 @@
     - role: tomcat
     - role: eclipse
     - role: idea
+    - role: bash-customization
 
   tasks:
     # - include: tasks/ansible-setup.yml
