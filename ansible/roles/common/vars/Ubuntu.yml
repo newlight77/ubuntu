@@ -18,17 +18,21 @@ __common_packages:
   - httping
   - iftop
   - iotop
+  - jq
   - less
   - make
   - nano
   - nmap
   - ntop
+  - ntp
+  - ntpdate
   - openssl
   - p7zip
   - pbzip2
   - pwgen
   - software-properties-common
   - tar
+  - terminator
   - unzip
   - vim
   - wget

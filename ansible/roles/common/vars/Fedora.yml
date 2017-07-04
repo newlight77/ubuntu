@@ -16,17 +16,21 @@ __common_packages:
   - htop
   - iftop
   - iotop
+  - jq
   - less
   - make
   - nano
   - nmap
   - ntop
+  - ntp
+  - ntpdate
   - openssl
   - p7zip
   - pbzip2
   - pwgen
   - python2-dnf
   - tar
+  - terminator
   - unzip
   - wget
   - whois
