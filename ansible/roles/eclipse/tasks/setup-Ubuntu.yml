@@ -36,3 +36,10 @@
     dest: /etc/profile.d/eclipse.sh
     mode: 0644
   become: yes
+
+- name: "Add Eclipse to system applications"
+  template:
+    src: Eclipse.desktop.j2
+    dest: /usr/share/applications/Eclipse.desktop
+    mode: 0644
+  become: yes

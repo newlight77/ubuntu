@@ -34,3 +34,10 @@
     dest: /etc/profile.d/idea.sh
     mode: 0644
   become: yes
+
+- name: "Add Intellij to system applications"
+  template:
+    src: ideam.desktop.j2
+    dest: /usr/share/applications/idea.desktop
+    mode: 0644
+  become: yes
