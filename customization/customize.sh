@@ -16,13 +16,13 @@ if [ ! -f ~/.git-completion.bash ]; then
 fi
 
 mkdir -p ~/.ubuntu
-cp  ./profile/.bashrc_natelandau ~/.ubuntu/.bashrc_natelandau
-cp  ./profile/.bashrc_profile    ~/.ubuntu/.bashrc_profile
-cp  ./profile/.bashrc_alias      ~/.ubuntu/.bashrc_alias
-cp  ./profile/.bashrc_path       ~/.ubuntu/.bashrc_path
-cp  ./profile/.bashrc_ps12       ~/.ubuntu/.bashrc_ps12
-cp  ./profile/.gitconfig_alias   ~/.ubuntu/.gitconfig_alias
-cp  ./profile/.bashrc            ~/.ubuntu/.bashrc
+cp  ${DIR}/profile/.bashrc_natelandau ~/.ubuntu/.bashrc_natelandau
+cp  ${DIR}/profile/.bashrc_profile    ~/.ubuntu/.bashrc_profile
+cp  ${DIR}/profile/.bashrc_alias      ~/.ubuntu/.bashrc_alias
+cp  ${DIR}/profile/.bashrc_path       ~/.ubuntu/.bashrc_path
+cp  ${DIR}/profile/.bashrc_ps12       ~/.ubuntu/.bashrc_ps12
+cp  ${DIR}/profile/.gitconfig_alias   ~/.ubuntu/.gitconfig_alias
+cp  ${DIR}/profile/.bashrc            ~/.ubuntu/.bashrc
 
-cat ./profile/.bashrc_profile    >> ~/.bashrc
-cat ./profile/.gitconfig         >> ~/.gitconfig
+cat ${DIR}/profile/.bashrc_profile    >> ~/.bashrc
+cat ${DIR}/profile/.gitconfig         >> ~/.gitconfig

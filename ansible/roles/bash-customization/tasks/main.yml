@@ -2,5 +2,3 @@
 
 - name: Customizing
   shell: "{{ playbook_dir }}/../customization/customize.sh"
-  changed_when: false
-  failed_when: false
