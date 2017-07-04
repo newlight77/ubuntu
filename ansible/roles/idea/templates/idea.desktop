@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=IntelliJ IDEA Community Edition
+Icon=/apps/idea/bin/idea.png
+Exec="/apps/idea/bin/idea.sh" %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-idea-ce

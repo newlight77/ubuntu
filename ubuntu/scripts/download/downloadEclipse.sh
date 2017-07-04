@@ -15,11 +15,11 @@ downloadEclipse() {
   echo "export PATH=/apps/eclipse:\$PATH" >> /apps/env.config
 
   cd -
-  cp $DIR/../../customization/Eclipse.desktop /usr/share/applications/Eclipse.desktop
-  cp $DIR/../../customization/eclipse.png /apps/eclipse/eclipse.png
-#   touch /usr/share/applications/eclipse.desktop
-#   chmod a+w /usr/share/applications/eclipse.desktop
-#   cat <<- EOF > /usr/share/applications/eclipse.desktop
+  cp $DIR/../../../customization/applications/Eclipse.desktop /usr/share/applications/Eclipse.desktop
+  cp $DIR/../../../customization/applications/eclipse.png /apps/eclipse/eclipse.png
+#   touch /usr/share/applications/Eclipse.desktop
+#   chmod a+w /usr/share/applications/Eclipse.desktop
+#   cat <<- EOF > /usr/share/applications/Eclipse.desktop
 #     [Desktop Entry]
 #     Encoding=UTF-8
 #     Name=Eclipse

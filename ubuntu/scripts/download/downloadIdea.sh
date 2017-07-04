@@ -14,7 +14,7 @@ downloadIdea() {
   echo "export PATH=/apps/idea:\$PATH" >> /apps/env.config
 
   cd -
-  cp $DIR/../../customization/idea.desktop /usr/share/applications/idea.desktop
+  cp $DIR/../../../customization/applications/idea.desktop /usr/share/applications/idea.desktop
 
 #  cat << EOF > /usr/share/applications/idea.desktop
 #    [Desktop Entry]
