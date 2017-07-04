@@ -1,9 +1,10 @@
 ---
 
+
+apps:
+  dir: /apps
+
 eclipse:
   major: 8
   version: oxygen
   home_parent_dir: /apps
-
-apps:
-  dir: /apps

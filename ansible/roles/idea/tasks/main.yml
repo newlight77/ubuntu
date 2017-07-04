@@ -1,4 +1,63 @@
 ---
 
-# Setup/install tasks.
-- include: setup-{{ ansible_distribution }}.yml
+- stat:
+    path: "{{idea.home_parent_dir}}/{{ idea.exploded_dir }}"
+  register: idea_dir
+
+- block:
+  - name: Create {{ idea.home_parent_dir }} directory
+    file:
+      path: "{{ idea.home_parent_dir }}"
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      state: directory
+    become: yes
+
+  - debug:
+      msg: "download url : https://download-cf.jetbrains.com/idea/ideaIC-{{ idea.version }}-no-jdk.tar.gz"
+
+  - name: get Idea Intellij tarball
+    get_url:
+      url: "https://download-cf.jetbrains.com/idea/ideaIC-{{ idea.version }}-no-jdk.tar.gz"
+      dest: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
+
+  - name: Unarchive Intellij
+    unarchive:
+      src: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
+      dest: "{{idea.home_parent_dir}}"
+      copy: no
+
+  when: idea_dir is not defined and idea_dir.stat.isdir == False
+
+
+- name: Remove old symlink
+  file:
+    path: "{{idea.home_parent_dir}}/idea"
+    state: absent
+
+- file:
+    src: "{{idea.home_parent_dir}}/{{ idea.exploded_dir }}"
+    dest: "{{idea.home_parent_dir}}/idea"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: link
+
+- name: Remove old path configuration
+  file:
+    path: /etc/profile.d/idea.sh
+    state: absent
+  become: yes
+
+- name: "Configuring Idea Intellij {{idea.home_parent_dir}}/{{idea.exploded_dir}} and add $PATH."
+  template:
+    src: idea.sh.j2
+    dest: /etc/profile.d/idea.sh
+    mode: 0644
+  become: yes
+
+- name: "Add Intellij to system applications"
+  template:
+    src: idea.desktop.j2
+    dest: /usr/share/applications/idea.desktop
+    mode: 0644
+  become: yes
