@@ -1,19 +1,31 @@
 ---
-- name: Import Nodesource RPM key
-  rpm_key:
-    key: http://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
-    state: present
-  become: yes
 
-- name: Add Nodesource repositories for Node.js
-  yum:
-    name: "http://rpm.nodesource.com/pub_{{ nodejs.version }}/fc/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-fc{{ ansible_distribution_major_version }}-1.noarch.rpm"
-    state: present
-  become: yes
+- name: check if NodeJs is installed?
+  shell: node -v 2>&1 | sed 's/v//'
+  register: node_current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
 
-- name: Ensure Node.js and npm are installed.
-  package:
-    name: nodejs
-    state: present
-    enablerepo: 'epel,nodesource'
-  become: yes
+- block:
+  - name: Import Nodesource RPM key
+    rpm_key:
+      key: http://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
+      state: present
+    become: yes
+
+  - name: Add Nodesource repositories for Node.js
+    yum:
+      name: "http://rpm.nodesource.com/pub_{{ nodejs.version }}/fc/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-fc{{ ansible_distribution_major_version }}-1.noarch.rpm"
+      state: present
+    become: yes
+
+  - name: Ensure Node.js and npm are installed.
+    package:
+      name: nodejs
+      state: present
+      enablerepo: 'epel,nodesource'
+    become: yes
+
+  when: node_current_version.stdout | version_compare(nodejs.version, '>')
