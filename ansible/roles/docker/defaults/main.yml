@@ -1,6 +1,7 @@
 ---
 
 docker:
+  version: 1.12.6
   start: true
   service_enabled: yes
 

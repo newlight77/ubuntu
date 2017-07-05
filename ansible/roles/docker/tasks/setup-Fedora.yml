@@ -1,32 +1,47 @@
 ---
 
-- name: Ensure old versions of Docker along with its dependencies are not installed.
-  package:
-    name: '{{ item }}'
-    state: absent
-  become: yes
-  with_items:
-    - docker
-    - docker-common
-    - container-selinux
-    - docker-selinux
-    - docker-engine
+- name: check version of docker
+  command: "docker --version"
+  register: docker_current_version
+  changed_when: false
+  # failed_when: false
+  ignore_errors: true
+  args:
+    warn: no
 
-- name: Add Docker GPG key.
-  rpm_key:
-    key: https://download.docker.com/linux/centos/gpg
-    state: present
-  become: yes
+- debug:
+    msg: "Required version = {{ docker.version }} and docker_current_version = {{ docker_current_version.stdout }}"
 
-- name: Add Docker repository.
-  get_url:
-    url: "https://download.docker.com/linux/fedora/docker-ce.repo"
-    dest: '/etc/yum.repos.d/docker-ce.repo'
-    owner: root
-    group: root
-    mode: 0644
-  become: yes
+- block:
+  - name: Ensure old versions of Docker along with its dependencies are not installed.
+    package:
+      name: '{{ item }}'
+      state: absent
+    become: yes
+    with_items:
+      - docker
+      - docker-common
+      - container-selinux
+      - docker-selinux
+      - docker-engine
 
-- name: Install Docker.
-  package: name=docker state=present
-  become: yes
+  - name: Add Docker GPG key.
+    rpm_key:
+      key: https://download.docker.com/linux/centos/gpg
+      state: present
+    become: yes
+
+  - name: Add Docker repository.
+    get_url:
+      url: "https://download.docker.com/linux/fedora/docker-ce.repo"
+      dest: '/etc/yum.repos.d/docker-ce.repo'
+      owner: root
+      group: root
+      mode: 0644
+    become: yes
+
+  - name: Install Docker.
+    package: name=docker state=present
+    become: yes
+
+  when: docker_current_version.stdout is defined and docker.version not in docker_current_version.stdout

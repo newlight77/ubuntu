@@ -1,7 +1,8 @@
 ---
 
 - name: check if Oracle JDK is installed?
-  command: "dnf list installed | grep jdk{{ jdk.version }}"
+  shell: java -version 2>&1 | grep -i 'Java(TM) SE Runtime Environment' | awk '{print $6}' | sed 's/)/ /'
+  # shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
   register: jdk_current_version
   changed_when: false
   # failed_when: false
@@ -10,45 +11,47 @@
     warn: no
 
 - debug:
-    msg: "jdk_current_version : {{ jdk_current_version.stdout }}"
+    msg: "Required version = {{ jdk.version }} and jdk_current_version = {{ jdk_current_version.stdout }}"
 
-- name: Retrieve download url for Oracle JDK 8
-  # command: "curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.rpm/" | grep -o 'http.*\.rpm'"
-  shell: "{{ playbook_dir }}/roles/jdk/scripts/getDownloadUrl.sh -o=linux -a=x64 -f=rpm"
-  register: jdk_download_url
-  changed_when: false
-  failed_when: false
+- block:
+  - name: Retrieve download url for Oracle JDK 8
+    # command: "curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.rpm/" | grep -o 'http.*\.rpm'"
+    shell: "{{ playbook_dir }}/roles/jdk/scripts/getDownloadUrl.sh -o=linux -a=x64 -f=rpm"
+    register: jdk_download_url
+    changed_when: false
+    failed_when: false
 
-- debug:
-    msg: "Download URL : {{ jdk_download_url.stdout }}"
+  - debug:
+      msg: "Download URL : {{ jdk_download_url.stdout }}"
 
-# - name: Set download URL
-#   set_fact:
-#     jdk_download_url: "{{ get_download_url.stdout }}"
-#   when: get_download_url is defined
+  # - name: Set download URL
+  #   set_fact:
+  #     jdk_download_url: "{{ get_download_url.stdout }}"
+  #   when: get_download_url is defined
 
 
-# using curl
-# - name: get Oracle JDK  tarball (as RPM file)
-#   command: curl -L  -H 'Cookie:oraclelicense=accept-securebackup-cookie'  -o {{ jdk.file }}  {{ jdk.url }}
-#   args:
-#     creates: "{{ jdk.tmp }}/jdk-tarball-{{ jdk.version }}"
-#     chdir:   "{{ jdk.tmp }}"
-#   when: jdk_current_version.stdout is defined
+  # using curl
+  # - name: get Oracle JDK  tarball (as RPM file)
+  #   command: curl -L  -H 'Cookie:oraclelicense=accept-securebackup-cookie'  -o {{ jdk.file }}  {{ jdk.url }}
+  #   args:
+  #     creates: "{{ jdk.tmp }}/jdk-tarball-{{ jdk.version }}"
+  #     chdir:   "{{ jdk.tmp }}"
+  #   when: jdk_current_version.stdout is defined
 
-- name: get Oracle JDK tarball (as RPM file)
-  get_url:
-    url:     "{{ jdk_download_url.stdout }}"
-    headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-    dest:    "{{ jdk.tmp }}/{{ jdk.file }}"
+  - name: get Oracle JDK tarball (as RPM file)
+    get_url:
+      url:     "{{ jdk_download_url.stdout }}"
+      headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
+      dest:    "{{ jdk.tmp }}/{{ jdk.file }}"
+
+  - name: install Oracle JDK
+    package:
+      name: /tmp/{{ jdk.file }}
+    # command: rpm --force -Uvh  {{ jdk.file }}
+    # args:
+    #   creates: "{{ jdk.tmp }}/jdk-{{ jdk.version }}"
+    #   chdir:   "{{ jdk.tmp }}"
+
+    become: yes
+
   when: jdk_current_version.stdout is defined and jdk.version not in jdk_current_version.stdout
-
-- name: install Oracle JDK
-  package:
-    name: /tmp/{{ jdk.file }}
-  # command: rpm --force -Uvh  {{ jdk.file }}
-  # args:
-  #   creates: "{{ jdk.tmp }}/jdk-{{ jdk.version }}"
-  #   chdir:   "{{ jdk.tmp }}"
-  when: jdk_current_version.stdout is defined and jdk.version not in jdk_current_version.stdout
-  become: yes
