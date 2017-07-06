@@ -4,14 +4,15 @@
     path: "{{idea.home_parent_dir}}/{{ idea.exploded_dir }}"
   register: idea_dir
 
+- name: Create {{ idea.home_parent_dir }} directory
+  file:
+    path: "{{ idea.home_parent_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+  become: yes
+
 - block:
-  - name: Create {{ idea.home_parent_dir }} directory
-    file:
-      path: "{{ idea.home_parent_dir }}"
-      owner: "{{ ansible_user }}"
-      group: "{{ ansible_user }}"
-      state: directory
-    become: yes
 
   - debug:
       msg: "download url : https://download-cf.jetbrains.com/idea/ideaIC-{{ idea.version }}-no-jdk.tar.gz"
@@ -27,7 +28,7 @@
       dest: "{{idea.home_parent_dir}}"
       copy: no
 
-  when: idea_dir is not defined and idea_dir.stat.isdir == False
+  when: idea_dir.stat.isdir is not defined
 
 
 - name: Remove old symlink

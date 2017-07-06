@@ -5,14 +5,15 @@
     path: "{{ eclipse.home_parent_dir }}/eclipse"
   register: eclipse_dir
 
+- name: "Create {{ eclipse.home_parent_dir }} directory"
+  file:
+    path: "{{ eclipse.home_parent_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+  become: yes
+
 - block:
-  - name: "Create {{ eclipse.home_parent_dir }} directory"
-    file:
-      path: "{{ eclipse.home_parent_dir }}"
-      owner: "{{ ansible_user }}"
-      group: "{{ ansible_user }}"
-      state: directory
-    become: yes
 
   - debug:
       msg: "download url : https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&r=1"
@@ -30,7 +31,7 @@
       dest: "{{ eclipse.home_parent_dir }}"
       copy: no
 
-  when: eclipse_dir is not defined and eclipse_dir.stat.isdir == False
+  when: eclipse_dir.stat.isdir is not defined
 
 
 - name: Remove old path configuration

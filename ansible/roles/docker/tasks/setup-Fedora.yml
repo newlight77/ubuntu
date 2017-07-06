@@ -1,16 +1,18 @@
 ---
 
 - name: check version of docker
-  command: "docker --version"
+  shell: docker --version 2>&1
   register: docker_current_version
   changed_when: false
-  # failed_when: false
+  failed_when: false
   ignore_errors: true
   args:
     warn: no
+  become: yes
 
 - debug:
-    msg: "Required version = {{ docker.version }} and docker_current_version = {{ docker_current_version.stdout }}"
+    msg: "Required version = {{ docker.version }} and docker_current_version = {{ docker_current_version }}"
+  when: docker_current_version is defined
 
 - block:
   - name: Ensure old versions of Docker along with its dependencies are not installed.
@@ -44,4 +46,4 @@
     package: name=docker state=present
     become: yes
 
-  when: docker_current_version.stdout is defined and docker.version not in docker_current_version.stdout
+  when: docker.version not in docker_current_version.stdout

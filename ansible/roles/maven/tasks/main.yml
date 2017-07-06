@@ -4,14 +4,19 @@
     path: "{{ maven.home_parent_dir }}/apache-maven-{{ maven.version }}"
   register: maven_dir
 
+- debug:
+    msg: "maven_dir = {{ maven_dir.stat.isdir }}"
+  when: maven_dir.stat.isdir is defined
+
+- name: "Create {{ maven.home_parent_dir }} directory"
+  file:
+    path: "{{ maven.home_parent_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+  become: yes
+
 - block:
-  - name: "Create {{ maven.home_parent_dir }} directory"
-    file:
-      path: "{{ maven.home_parent_dir }}"
-      owner: "{{ ansible_user }}"
-      group: "{{ ansible_user }}"
-      state: directory
-    become: yes
 
   - name: get Maven tarball
     get_url:
@@ -24,7 +29,7 @@
       dest: "{{maven.home_parent_dir}}"
       copy: no
 
-  when: maven_dir is not defined and maven_dir.stat.isdir == False
+  when: maven_dir.stat.isdir is not defined
 
 
 - name: Remove old symlink
