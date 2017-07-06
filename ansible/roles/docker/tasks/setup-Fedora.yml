@@ -43,7 +43,7 @@
     become: yes
 
   - name: Install Docker.
-    package: name=docker state=present
+    package: name=docker-ce state=present
     become: yes
 
   when: docker.version not in docker_current_version.stdout

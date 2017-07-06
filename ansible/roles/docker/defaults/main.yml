@@ -1,11 +1,11 @@
 ---
 
 docker:
-  version: 1.12.6
+  version: 17.06.0-ce
   start: true
   service_enabled: yes
 
 docker_compose:
     install: true
-    version: "1.9.0"
+    version: "1.14.0"
     path: /usr/local/bin/docker-compose
