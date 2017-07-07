@@ -1,0 +1,5 @@
+---
+
+- name: Restart mailhog
+  service: name=mailhog state=started enable=yes
+  become: yes

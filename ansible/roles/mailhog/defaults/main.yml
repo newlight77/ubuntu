@@ -1,0 +1,7 @@
+---
+
+mailhog:
+  version: 1.0.0
+  dir: /opt/mailhog
+mhsendmail:
+  version: 0.2.0

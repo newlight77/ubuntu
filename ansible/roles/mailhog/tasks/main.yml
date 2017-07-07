@@ -1,0 +1,41 @@
+---
+- name: Ensure mailhog install directory exists.
+  file:
+    path: "{{ mailhog.dir }}"
+    owner: root
+    group: root
+    state: directory
+    mode: 0775
+  become: yes
+
+- name: Download mailhog and mhsendmail binaries.
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - url: "https://github.com/mailhog/MailHog/releases/download/v{{ mailhog.version }}/MailHog_linux_amd64"
+      dest: "{{ mailhog.dir }}/mailhog"
+    - url: "https://github.com/mailhog/mhsendmail/releases/download/v{{ mhsendmail.version }}/mhsendmail_linux_amd64"
+      dest: "{{ mailhog.dir }}/mhsendmail"
+  become: yes
+
+- name: Install mailhog init script
+  template:
+    src: mailhog.j2
+    dest: /etc/init.d/mailhog
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
+# - name: Install mailhog systemd unit file
+#   template:
+#     src: mailhog.service.j2
+#     dest: /etc/systemd/system/mailhog.service
+#     owner: root
+#     group: root
+#     mode: 0755
+#   become: yes
