@@ -1,0 +1,7 @@
+---
+
+- name: Ensure vagrant is installed.
+  apt:
+    name: vagrant
+    state: present
+  become: yes
