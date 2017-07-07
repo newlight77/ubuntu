@@ -16,13 +16,13 @@
 - block:
 
   - debug:
-      msg: "download url : https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&r=1"
+      msg: "download url : https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&mirror_id=1"
 
   - name: get Eclipse tarball
     get_url:
       # url: "http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/neon/R/eclipse-jee-neon-R-linux-gtk-x86_64.tar.gz&mirror_id=96"
       # url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz&r=1"
-      url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&r=1"
+      url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&mirror_id=1"
       dest: "/tmp/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz"
 
   - name: Unarchive Eclipse
