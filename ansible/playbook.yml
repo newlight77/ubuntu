@@ -30,6 +30,9 @@
     - role: eclipse
     - role: idea
     - role: bash-customization
+    # - role: virtualbox
+    # - role: vagrant
+    # - role: mailhog
 
   tasks:
     # - include: tasks/ansible-setup.yml
