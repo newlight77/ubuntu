@@ -1,0 +1,28 @@
+---
+
+- name: Add virutalbox apt key.
+  apt_key:
+    url: http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc
+    id: "68576280"
+    state: present
+  become: yes
+
+- name: Add VirtualBox repositories.
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib"
+  register: virutalbox_repo
+  become: yes
+
+- name: Update apt cache if repo was added.
+  apt: update_cache=yes
+  when: virutalbox_repo.changed
+  become: yes
+
+- name: Ensure VirtualBox is installed.
+  apt:
+    name: VirtualBox
+    state: present
+  become: yes
