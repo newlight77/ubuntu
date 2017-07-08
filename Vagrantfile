@@ -48,10 +48,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   if os == 'ubuntu'
     config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
-      sudo apt-get install software-properties-common
       sudo apt-add-repository ppa:ansible/ansible
-      sudo apt-get update
-      sudo apt-get install ansible
+      sudo apt-get -y update
+      sudo apt-get -y install software-properties-common ansible
+    SHELL
+    config.vm.provision "run", type: "shell", inline: <<-SHELL
+      cd /vagrant/ansible
+      su -c "ansible-playbook -u ubuntu playbook.yml" ubuntu
     SHELL
   else
     config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
@@ -59,11 +62,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       sudo dnf -y install python2-dnf libselinux-python yum
       sudo dnf -y install ansible
     SHELL
+
+    config.vm.provision "run", type: "shell", inline: <<-SHELL
+      cd /vagrant/ansible
+      su -c "ansible-playbook -u vagrant playbook.yml" vagrant
+    SHELL
   end
 
-  config.vm.provision "run", type: "shell", inline: <<-SHELL
-    cd /vagrant/ansible
-    su -c "ansible-playbook -u vagrant playbook.yml" vagrant
-  SHELL
 
  end

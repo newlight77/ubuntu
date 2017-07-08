@@ -1,7 +1,7 @@
 ---
 
 - name: Adding Google-Chrome repository keys
-  apt_key: keyserver=https://dl-ssl.google.com/linux/linux_signing_key.pub state=present
+  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state=present
   become: yes
 
 - name: add repository Google-Chrome

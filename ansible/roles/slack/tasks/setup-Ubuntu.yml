@@ -1,20 +1,23 @@
 ---
 
 - name: check if Slack is installed?
-  command: "dnf list installed | grep slack | grep {{ slack.version }}"
+  command: "apt list --installed | grep slack | grep {{ slack.version }}"
   register: current_version
   changed_when: false
   ignore_errors: true
   args:
     warn: no
+#
+# - debug:
+#     msg: "current_version : {{ current_version.stdout }}"
 
-- debug:
-    msg: "current_version : {{ current_version.stdout }}"
+- block:
+  - name: Download slack for Debian OS family
+    get_url: url={{ slack.url_deb }} dest={{slack.file_deb}}
 
-- name: install the slack packages
-  -package: name={{ item }}
-       state=present
-  with_items:
-    - "{{ slack.url_deb}}"
-  when: current_version.stdout is defined and slack.version not in current_version.stdout
-  become: yes
+  - name: Install slack for Debian OS family
+    apt: deb={{slack.file_deb}}
+    become: yes
+
+  # when: current_version.stdout is defined and slack.version not in current_version.stdout
+  when: current_version.stdout | version_compare(slack.version, '>')

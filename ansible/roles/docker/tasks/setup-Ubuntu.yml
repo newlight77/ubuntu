@@ -15,12 +15,14 @@
   become: yes
 
 - name: Add deb repository
-  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main' state=present
+  # apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main' state=present
+  apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable" state=present
   become: yes
 
 - name: Install
   apt: pkg="{{ item }}" state=latest update_cache=yes
   become: yes
   with_items:
-    - linux-image-extra-virtual
+    # - linux-image-extra-$(uname -r)
+    # - linux-image-extra-virtual
     - docker-ce

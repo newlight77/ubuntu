@@ -2,11 +2,14 @@
 
 - name: check if NPM is installed?
   shell: npm -v 2>&1
-  register: npm_current_version
+  register: current_version
   changed_when: false
   ignore_errors: true
   args:
     warn: no
+
+- debug:
+    msg: "current_version={{ current_version }}"
 
 - block:
   - name: Define npm user
@@ -48,4 +51,4 @@
       path: "{{ npm.package_json_path }}"
     when: npm.package_json_path is defined and npm.package_json_path
 
-  when: npm_current_version.stdout | version_compare(npm.version, '>')
+  when: current_version.stdout | version_compare(npm.version, '>')

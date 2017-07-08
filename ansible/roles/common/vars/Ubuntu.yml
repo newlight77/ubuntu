@@ -7,7 +7,6 @@ __common_packages:
   - colortest
   - curl
   - diffutils
-  - dnf
   - dos2unix
   - gawk
   - gcc

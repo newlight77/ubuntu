@@ -1,7 +1,7 @@
 ---
 
 - name: check if Sqlectron is installed?
-  command: "dnf list installed | grep -i sqlectron | grep {{ sqlectron.version }}"
+  command: "apt list --installed | grep -i sqlectron | grep {{ sqlectron.version }}"
   register: current_version
   changed_when: false
   ignore_errors: true
@@ -11,10 +11,13 @@
 - debug:
     msg: "current_version : {{ current_version.stdout }}"
 
-- name: install the Sqlectron packages
-  yum: name={{ item }}
-       state=present
-  with_items:
-    - "{{ sqlectron.url_deb}}"
-  when: current_version.stdout is defined and sqlectron.version not in current_version.stdout
-  become: yes
+- block:
+
+  - name: Download sqlectron for Debian OS family
+    get_url: url={{ sqlectron.url_deb }} dest={{sqlectron.file_deb}}
+
+  - name: Install sqlectron for Debian OS family
+    apt: deb={{sqlectron.file_deb}}
+    become: yes
+
+  when: current_version.stdout | version_compare(sqlectron.version, '>')

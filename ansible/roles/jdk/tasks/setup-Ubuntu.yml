@@ -3,7 +3,7 @@
 - name: check if Oracle JDK is installed?
   shell: java -version 2>&1 | grep -i 'Java(TM) SE Runtime Environment' | awk '{print $6}' | sed 's/)/ /'
   # shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
-  register: jdk_current_version
+  register: current_version
   changed_when: false
   # failed_when: false
   ignore_errors: true
@@ -11,7 +11,7 @@
     warn: no
 
 - debug:
-    msg: "Required version = {{ jdk.version }} and jdk_current_version = {{ jdk_current_version.stdout }}"
+    msg: "Required version = {{ jdk.version }} and current_version = {{ current_version.stdout }}"
 
 - block:
   - name: Ensure jdk dependencies are  installed.
@@ -55,4 +55,5 @@
   - name: Set this as default Java; also environment variables
     apt: pkg="oracle-java8-set-default" state=present force=yes
 
-  when: jdk_current_version.stdout is defined and jdk.version not in jdk_current_version.stdout
+  when: current_version.stdout is defined and jdk.version not in current_version.stdout
+  # when: current_version.stdout | version_compare(jdk.version, '>')

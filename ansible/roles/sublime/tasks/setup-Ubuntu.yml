@@ -3,25 +3,29 @@
   apt: name=apt-transport-https state=present
   become: yes
 
-- name: Add Nodesource apt key.
+- name: Add sublime-text apt key.
   apt_key:
     url: https://download.sublimetext.com/sublimehq-pub.gpg
     id: "68576280"
     state: present
   become: yes
 
-- name: Add Sublime repositories for Sublime.
-  apt_repository:
-    repo: "{{ item }}"
-    state: present
-  with_items:
-    - "deb deb https://download.sublimetext.com/ apt/stable/"
-  register: sublime_repo
-  become: yes
+# - name: Add sublime-text repositories for Sublime.
+#   apt_repository:
+#     repo: "{{ item }}"
+#     state: present
+#   with_items:
+#     - "deb https://download.sublimetext.com/ apt/stable/"
+#   register: sublime_repo
+#   become: yes
 
-- name: Update apt cache if repo was added.
-  apt: update_cache=yes
-  when: sublime_repo.changed
+# - name: Update apt cache if repo was added.
+#   apt: update_cache=yes
+#   when: sublime_repo.changed
+#   become: yes
+
+- name: add repository for sublime-text
+  apt_repository: repo=ppa:webupd8team/sublime-text-3 state=present
   become: yes
 
 - name: Ensure Sublime is installed.

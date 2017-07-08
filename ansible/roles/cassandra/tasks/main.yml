@@ -1,7 +1,7 @@
 ---
 
 - debug:
-    msg: "JDK Version: {{ cassandra.version }}"
+    msg: "cassandra Version: {{ cassandra.version }}"
 
 # Setup/install tasks.
 - include: setup-{{ ansible_distribution }}.yml

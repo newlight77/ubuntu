@@ -3,8 +3,7 @@
   dnf: pkg={{ item }}
        state=absent
   become: yes
-  with_items:
-    - test
+  with_items: []
 
 - name: cleaning task for yum
   command: dnf clean all

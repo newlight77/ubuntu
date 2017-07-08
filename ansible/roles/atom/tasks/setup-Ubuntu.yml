@@ -1,20 +1,20 @@
 ---
 
 - name: check if Atom is installed?
-  command: "dnf list installed | grep atom | grep {{ atom.version }}"
+  command: "apt list --installed | grep atom | grep {{ atom.version }}"
   register: current_version
   changed_when: false
   ignore_errors: true
   args:
     warn: no
 
-- debug:
-    msg: "current_version : {{ current_version.stdout }}"
+- block:
+  - name: Download atom for Debian OS family
+    get_url: url={{ atom.url_deb }} dest={{atom.file_deb}}
 
-- name: install the atom packages
-  yum: name={{ item }}
-       state=present
-  with_items:
-    - "{{ atom.url_rpm}}"
-  when: current_version.stdout is defined and atom.version not in current_version.stdout
-  become: yes
+  - name: Install atom for Debian OS family
+    apt: deb={{atom.file_deb}}
+    become: yes
+
+  # when: current_version.stdout is defined and atom.version not in current_version.stdout
+  when: current_version.stdout | version_compare(atom.version, '>')

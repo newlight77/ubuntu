@@ -2,17 +2,20 @@
 - name: remove additional packages
   apt: name={{ item }}
        state=absent
-  with_items:
-    - zip
+  become: yes
+  with_items: []
 
-- name: cleaning task for yum
-  command: /usr/bin/yum clean all
+- name: cleaning task for apt
+  command: apt clean autoremove
+  become: yes
 
 - name: delete cache files
   file: path=/var/cache/{{ item }}
         state=absent
+  become: yes
   with_items:
     - zip
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+# 
+# - name: reload firewall configuration
+#   command: /usr/bin/firewall-cmd --reload
+#   become: yes
