@@ -3,8 +3,7 @@
 * Install Fedora : https://getfedora.org/en/workstation/download/
 * Install ubuntu : http://www.ubuntu.com/download/desktop/install-ubuntu-desktop
 
-V2 using Ansible is in progress, under ansible folder.
-Meanwhile, you still can use the V1 with shell scripts, under ubuntu folder.
+V2 using Ansible is ready, under ansible folder.
 
 ## Pre-requisites
 
@@ -38,5 +37,12 @@ cd ubuntu
 ### Run ansible playbook
 
 ```sh
-sudo ansible-playbook -b -u vagrant ubuntu/fedora/ansible/playbook.yml
+sudo echo prompt password
+ansible-playbook ansible/playbook.yml
 ```
+
+### Contributors
+
+```sh
+sudo echo prompt password
+ansible-playbook -b -u vagrant ansible/playbook.yml
