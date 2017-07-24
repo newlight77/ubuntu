@@ -21,12 +21,12 @@ if [ -f ~/.ubuntu/.profile ]; then
     source ~/.ubuntu/.profile
 fi
 
-if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
-    source ~/.bash-git-prompt/gitprompt.sh
+if [ -f ~/.ubuntu/.bash-git-prompt/gitprompt.sh ]; then
+    source ~/.ubuntu/.bash-git-prompt/gitprompt.sh
 fi
 
-if [ -f ~/.completion.sh ]; then
-    source ~/.git-completion.bash
+if [ -f ~/.ubuntu/.git-completion.bash ]; then
+    source ~/.ubuntu/.git-completion.bash
 fi
 
 # Set config variables first
