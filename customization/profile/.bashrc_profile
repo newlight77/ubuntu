@@ -1,8 +1,8 @@
 #############################################
 # github.com/newlight77/ubuntu [customization
 
-if [ -f ~/.ubuntu/.bashrc ]; then
-    source ~/.ubuntu/.bashrc
+if [ -f ~/.bash_custom/.bashrc ]; then
+    source ~/.bash_custom/.bashrc
 fi
 
 # github.com/newlight77/ubuntu customization]

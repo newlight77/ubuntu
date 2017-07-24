@@ -1,32 +1,32 @@
 #############################################
 # github.com/newlight77/ubuntu [customization
 
-if [ -f ~/.ubuntu/.bashrc_natelandau ]; then
-    source ~/.ubuntu/.bashrc_natelandau
+if [ -f ~/.bash_custom/.bashrc_natelandau ]; then
+    source ~/.bash_custom/.bashrc_natelandau
 fi
 
-if [ -f ~/.ubuntu/.bashrc_aliases ]; then
-    source ~/.ubuntu/.bashrc_aliases
+if [ -f ~/.bash_custom/.bashrc_aliases ]; then
+    source ~/.bash_custom/.bashrc_aliases
 fi
 
-if [ -f ~/.ubuntu/.bashrc_ps12 ]; then
-    source ~/.ubuntu/.bashrc_ps12
+if [ -f ~/.bash_custom/.bashrc_ps12 ]; then
+    source ~/.bash_custom/.bashrc_ps12
 fi
 
-if [ -f ~/.ubuntu/.bashrc_ps12 ]; then
-    source ~/.ubuntu/.bashrc_path
+if [ -f ~/.bash_custom/.bashrc_ps12 ]; then
+    source ~/.bash_custom/.bashrc_path
 fi
 
-if [ -f ~/.ubuntu/.profile ]; then
-    source ~/.ubuntu/.profile
+if [ -f ~/.bash_custom/.profile ]; then
+    source ~/.bash_custom/.profile
 fi
 
-if [ -f ~/.ubuntu/.bash-git-prompt/gitprompt.sh ]; then
-    source ~/.ubuntu/.bash-git-prompt/gitprompt.sh
+if [ -f ~/.bash_custom/.bash-git-prompt/gitprompt.sh ]; then
+    source ~/.bash_custom/.bash-git-prompt/gitprompt.sh
 fi
 
-if [ -f ~/.ubuntu/.git-completion.bash ]; then
-    source ~/.ubuntu/.git-completion.bash
+if [ -f ~/.bash_custom/.git-completion.bash ]; then
+    source ~/.bash_custom/.git-completion.bash
 fi
 
 # Set config variables first
