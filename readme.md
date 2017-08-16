@@ -41,6 +41,70 @@ sudo echo prompt password
 ansible-playbook ansible/playbook.yml
 ```
 
+#### Common packages installed by default
+
+This list of packages can be overridden by changing the default-config.yml.
+
+* autoconf
+* bash-completion
+* bzip2
+* curl
+* diffutils
+* dnf
+* dos2unix
+* gawk
+* gcc
+* git
+* grep
+* gzip
+* htop
+* iftop
+* iotop
+* jq
+* less
+* make
+* nano
+* nmap
+* ntop
+* ntp
+* ntpdate
+* openssl
+* p7zip
+* pbzip2
+* pwgen
+* python2-dnf
+* tar
+* terminator
+* unzip
+* wget
+* whois
+* zip
+* unzip
+
+#### Installed Tools
+
+This list of tools can be overridden by deleting roles in the playbook.
+
+* atom
+* cassandra
+* chrome
+* docker
+* eclipse
+* intellij
+* jdk8
+* mailhog
+* maven
+* motd
+* nodejs and npm
+* slack
+* sqlectron
+* sublime
+* tomcat
+* vagrant
+* virtualbox
+* bash customization
+
+
 ### Contributors
 
 ```sh
