@@ -1,0 +1,58 @@
+---
+
+- stat:
+    path: "{{ gradle.home_parent_dir }}/gradle-{{ gradle.version }}"
+  register: gradle_dir
+
+- debug:
+    msg: "gradle_dir = {{ gradle_dir.stat.isdir }}"
+  when: gradle_dir.stat.isdir is defined
+
+- name: "Create {{ gradle.home_parent_dir }} directory"
+  file:
+    path: "{{ gradle.home_parent_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+  become: yes
+
+- block:
+
+  - name: get gradle tarball
+    get_url:
+      url: "https://services.gradle.org/distributions/gradle-{{ gradle.version }}-bin.zip"
+      dest:    "/tmp/gradle-{{ gradle.version }}-bin.zip"
+
+  - name: Unarchive gradle
+    unarchive:
+      src: "/tmp/gradle-{{ gradle.version }}-bin.zip"
+      dest: "{{gradle.home_parent_dir}}"
+      copy: no
+
+  when: gradle_dir.stat.isdir is not defined
+
+
+- name: Remove old symlink
+  file:
+    path: "{{gradle.home_parent_dir}}/gradle"
+    state: absent
+
+- file:
+    src: "{{gradle.home_parent_dir}}/gradle-{{ gradle.version }}"
+    dest: "{{gradle.home_parent_dir}}/gradle"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: link
+
+- name: Remove old path configuration
+  file:
+    path: /etc/profile.d/gradle.sh
+    state: absent
+  become: yes
+
+- name: "Configuring gradle home {{gradle.home_parent_dir}}/gradle-{{gradle.version}} and add $PATH."
+  template:
+    src: gradle.sh.j2
+    dest: /etc/profile.d/gradle.sh
+    mode: 0644
+  become: yes

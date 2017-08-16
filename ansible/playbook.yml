@@ -20,6 +20,7 @@
     - role: nodejs
     - role: jdk
     - role: maven
+    - role: gradle
     - role: sublime
     - role: atom
     - role: cassandra
