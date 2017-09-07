@@ -7,6 +7,19 @@ alias la='ls -A'
 alias l='ls -CF'
 alias cd..='cd ..'
 
+
+alias gsta=’git status’
+alias gche=’git checkout’
+alias gbra=’git branch’
+alias gche=’git cherry-pick’
+alias greb=’git rebase’
+alias gmer=’git merge’
+alias gcom=’git commit’
+alias glog=’git log’
+alias gres=’git reset’
+alias gpus=’git push’
+alias gpul=’git pull’
+
 alias pull=’git pull’
 alias push=’git push’
 alias commit=’git commit -a’
