@@ -5,8 +5,8 @@ if [ -f ~/.bash_custom/.bashrc_natelandau ]; then
     source ~/.bash_custom/.bashrc_natelandau
 fi
 
-if [ -f ~/.bash_custom/.bashrc_aliases ]; then
-    source ~/.bash_custom/.bashrc_aliases
+if [ -f ~/.bash_custom/.bashrc_alias ]; then
+    source ~/.bash_custom/.bashrc_alias
 fi
 
 if [ -f ~/.bash_custom/.bashrc_ps12 ]; then
