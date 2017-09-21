@@ -7,26 +7,25 @@ alias la='ls -A'
 alias l='ls -CF'
 alias cd..='cd ..'
 
-
-alias gsta=’git status’
-alias gche=’git checkout’
-alias gbra=’git branch’
-alias gche=’git cherry-pick’
-alias greb=’git rebase’
-alias gmer=’git merge’
-alias gcom=’git commit’
-alias glog=’git log’
-alias gres=’git reset’
-alias gpus=’git push’
-alias gpul=’git pull’
-
-alias pull=’git pull’
-alias push=’git push’
-alias commit=’git commit -a’
-alias add=’git add’
+alias pull='git pull'
+alias push='git push'
+alias commit='git commit -a'
+alias add='git add'
 #git aliased to git-publish -> push current branch` to origin and then track
-alias publish=’git publish’
-alias status=’git status’
+alias publish='git publish'
+alias status='git status'
+
+alias gsta='git status'
+alias gche='git checkout'
+alias gbra='git branch'
+alias gche='git cherry-pick'
+alias greb='git rebase'
+alias gmer='git merge'
+alias gcom='git commit'
+alias glog='git log'
+alias gres='git reset'
+alias gpus='git push'
+alias gpul='git pull'
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
