@@ -18,6 +18,7 @@
     - role: rpmfusion
     - role: docker
     - role: nodejs
+    - role: npm
     - role: jdk
     - role: maven
     - role: gradle

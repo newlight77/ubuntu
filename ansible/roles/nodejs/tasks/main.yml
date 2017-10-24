@@ -1,3 +1,2 @@
 ---
 - include: setup-{{ ansible_distribution }}.yml
-- include: npm.yml

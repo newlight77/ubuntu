@@ -1,11 +1,5 @@
 ---
 
-nodejs:
-  # Vversion of Node.js ("5.x", "6.x", "7.x").
-  # https://github.com/nodesource/distributions
-  version: "6.x"
-  # The user for whom the npm packages will be installed.
-
 npm:
   version: 3.10.10
   user: "{{ ansible_env.USER | default(ansible_user) }}"
