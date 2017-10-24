@@ -55,5 +55,18 @@
   - name: Set this as default Java; also environment variables
     apt: pkg="oracle-java8-set-default" state=present force=yes
 
+  - name: Remove old path configuration
+    file:
+      path: /etc/profile.d/jdk.sh
+      state: absent
+    become: yes
+
+  - name: "Configuring JAVA_HOME and add $PATH."
+    template:
+      src: jdk.sh.j2
+      dest: /etc/profile.d/jdk.sh
+      mode: 0644
+    become: yes
+    
   when: current_version.stdout is defined and jdk.version not in current_version.stdout
   # when: current_version.stdout | version_compare(jdk.version, '>')

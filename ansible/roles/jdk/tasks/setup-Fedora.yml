@@ -54,4 +54,18 @@
 
     become: yes
 
+
+  - name: Remove old path configuration
+    file:
+      path: /etc/profile.d/jdk.sh
+      state: absent
+    become: yes
+
+  - name: "Configuring JAVA_HOME and add $PATH."
+    template:
+      src: jdk.sh.j2
+      dest: /etc/profile.d/jdk.sh
+      mode: 0644
+    become: yes
+
   when: jdk_current_version.stdout is defined and jdk.version not in jdk_current_version.stdout
