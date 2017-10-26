@@ -1,0 +1,9 @@
+---
+
+- name: Define gem_packages.
+  set_fact:
+    gem_packages: "{{ gem.packages | list }}"
+  when: gem_packages is undefined
+
+# Setup/install tasks.
+- include: gem-packages.yml

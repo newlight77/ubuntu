@@ -1,10 +1,8 @@
 ---
 
-npm:
-  version: 3.10.10
+gem:
+  version: 2.5.2.1
   user: "{{ ansible_env.USER | default(ansible_user) }}"
-  config_prefix: "{{ ansible_env.HOME }}/.npm-global-pkg"
-  packages_json_path: package.json.j2
 
   #  Install a specific version of a package.
   #  - name: jslint
@@ -14,8 +12,4 @@ npm:
   #  This syntax also works.
   #  - node-sass
   packages:
-    - jslint
-    - eslint
-    - gulp
-    - nodemon
-    - yo
+    - drush

@@ -1,0 +1,33 @@
+---
+
+- name: check if GEM is installed?
+  shell: gem -v 2>&1
+  register: current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+
+- debug:
+    msg: "current_version={{ current_version }}"
+
+- block:
+  - name: Define gem user
+    set_fact:
+      gem.user: "{{ ansible_user }}"
+    when: gem.user is not defined
+
+  - debug:
+      msg: "Installing GEM packges with user {{ gem.user }}"
+
+  - name: Install global Ruby gems.
+    gem:
+      name: "{{ item.name | default(item) }}"
+      state: "{{ item.state | default('present') }}"
+      version: "{{ item.version | default(omit) }}"
+      user_install: no
+      executable: "{{ item.executable | default(omit) }}"
+    with_items: "{{ gem_packages }}"
+    ignore_errors: yes
+
+  when: current_version.stdout | version_compare(gem.version, '>=')

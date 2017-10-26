@@ -1,0 +1,9 @@
+---
+
+- name: Define pip_packages.
+  set_fact:
+    pip_packages: "{{ pip.packages | list }}"
+  when: pip_packages is undefined
+
+# Setup/install tasks.
+- include: pip-packages.yml

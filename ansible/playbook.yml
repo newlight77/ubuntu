@@ -3,7 +3,7 @@
   connection: local
 
   vars_files:
-    - vars/default-config.yml
+    - config.yml
 
   pre_tasks:
     - include_vars: "{{ item }}"
@@ -19,6 +19,8 @@
     - role: docker
     - role: nodejs
     - role: npm
+    - role: gem
+    - role: pip
     - role: jdk
     - role: maven
     - role: gradle
@@ -32,15 +34,12 @@
     - role: eclipse
     - role: idea
     - role: bash-customization
-    # - role: virtualbox
-    # - role: vagrant
-    # - role: mailhog
+    - role: virtualbox
+    - role: vagrant
+    - role: mailhog
 
   tasks:
     # - include: tasks/ansible-setup.yml
-    # - include: tasks/gem-packages.yml
-    # - include: tasks/npm-packages.yml
-    # - include: tasks/ppip-ackages.yml
     - include: tasks/cleanup.yml
 
   handlers:

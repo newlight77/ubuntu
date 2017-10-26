@@ -1,0 +1,32 @@
+---
+
+- name: check if PIP is installed?
+  shell: pip -v 2>&1
+  register: current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+
+- debug:
+    msg: "current_version={{ current_version }}"
+
+- block:
+  - name: Define pip user
+    set_fact:
+      pip.user: "{{ ansible_user }}"
+    when: pip.user is not defined
+
+  - debug:
+      msg: "Installing PIP packges with user {{ pip.user }}"
+
+  - name: Install global Pip packages.
+    pip:
+      name: "{{ item.name | default(item) }}"
+      state: "{{ item.state | default('present') }}"
+      version: "{{ item.version | default(omit) }}"
+      executable: "{{ item.executable | default(omit) }}"
+    with_items: "{{ pip_packages }}"
+    ignore_errors: yes
+
+  when: current_version.stdout | version_compare(pip.version, '>=')
