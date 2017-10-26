@@ -20,7 +20,7 @@
 
 - name: Ensure VirtualBox is installed.
   package:
-    name: VirtualBox
+    name: VirtualBox-{{virtualbox.version}}
     state: present
     enablerepo: 'virtualbox'
   become: yes

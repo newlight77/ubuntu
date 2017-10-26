@@ -41,4 +41,4 @@
       state: present
     become: yes
 
-  when: node_current_version.stdout | version_compare(nodejs.version, '>')
+  when: node_current_version.stdout | version_compare(nodejs.version, '>=')

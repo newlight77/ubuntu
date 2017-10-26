@@ -56,13 +56,3 @@
     dest: /etc/profile.d/maven.sh
     mode: 0644
   become: yes
-
-# - name: Maven path configuration
-#   lineinfile:
-#     dest: /etc/profile.d/maven.sh
-#     line: "{{ item.line }}"
-#     create: yes
-#     state: present
-#   with_items:
-#     - { line: 'M2_HOME={{maven.home_parent_dir}}/apache-maven-{{maven.version}}' }
-#     - { line: 'PATH=$PATH:$M2_HOME/bin' }

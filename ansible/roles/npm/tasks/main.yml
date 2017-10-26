@@ -51,4 +51,4 @@
       path: "{{ npm.package_json_path }}"
     when: npm.package_json_path is defined and npm.package_json_path
 
-  when: current_version.stdout | version_compare(npm.version, '>')
+  when: current_version.stdout | version_compare(npm.version, '>=')

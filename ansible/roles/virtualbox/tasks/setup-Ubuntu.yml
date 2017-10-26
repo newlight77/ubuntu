@@ -23,6 +23,6 @@
 
 - name: Ensure VirtualBox is installed.
   apt:
-    name: VirtualBox
+    name: VirtualBox-{{virtualbox.version}}
     state: present
   become: yes

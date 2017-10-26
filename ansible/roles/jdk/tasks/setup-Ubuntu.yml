@@ -2,10 +2,8 @@
 
 - name: check if Oracle JDK is installed?
   shell: java -version 2>&1 | grep -i 'Java(TM) SE Runtime Environment' | awk '{print $6}' | sed 's/)/ /'
-  # shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
   register: current_version
   changed_when: false
-  # failed_when: false
   ignore_errors: true
   args:
     warn: no
@@ -31,14 +29,6 @@
   - name: add repository for Oracke jdk 8
     apt_repository: repo=ppa:webupd8team/java state=present
     become: yes
-
-  # - name: set licence selected
-  #   shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-  #   become: yes
-  #
-  # - name: set licence seen
-  #   shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
-  #   become: yes
 
   - name: Accept Java 8 License
     debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
@@ -67,6 +57,5 @@
       dest: /etc/profile.d/jdk.sh
       mode: 0644
     become: yes
-    
+
   when: current_version.stdout is defined and jdk.version not in current_version.stdout
-  # when: current_version.stdout | version_compare(jdk.version, '>')
