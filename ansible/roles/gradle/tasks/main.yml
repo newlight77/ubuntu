@@ -20,7 +20,7 @@
 
   - name: get gradle tarball
     get_url:
-      url: "https://services.gradle.org/distributions/gradle-{{ gradle.version }}-bin.zip"
+      url: "{{gradle.url}}"
       dest:    "/tmp/gradle-{{ gradle.version }}-bin.zip"
 
   - name: Unarchive gradle

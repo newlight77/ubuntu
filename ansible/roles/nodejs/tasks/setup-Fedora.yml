@@ -16,7 +16,7 @@
     become: yes
 
   - name: Add Nodesource repositories for Node.js
-    yum:
+    dnf:
       name: "http://rpm.nodesource.com/pub_{{ nodejs.version }}/fc/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-fc{{ ansible_distribution_major_version }}-1.noarch.rpm"
       state: present
     become: yes

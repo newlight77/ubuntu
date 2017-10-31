@@ -2,3 +2,4 @@
 
 vagrant:
   version: 2.0.0
+  url: https://releases.hashicorp.com/vagrant/{{vagrant.version}}/vagrant_2.0.0_x86_64.rpm

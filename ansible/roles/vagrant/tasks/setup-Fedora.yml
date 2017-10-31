@@ -15,6 +15,6 @@
   package: name={{ item }}
        state=present
   with_items:
-    - https://releases.hashicorp.com/vagrant/{{vagrant.version}}/vagrant_{{vagrant.version}}_x86_64.rpm
+    - "{{vagrant.url}}"
   when: ansible_os_family == "RedHat"
   become: yes

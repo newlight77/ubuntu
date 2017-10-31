@@ -1,10 +1,7 @@
 ---
 
-
-apps:
-  dir: /apps
-
 eclipse:
   major: 8
   version: oxygen
+  url: https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz&mirror_id=1
   home_parent_dir: /apps

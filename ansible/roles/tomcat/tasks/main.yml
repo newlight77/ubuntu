@@ -1,12 +1,17 @@
 ---
 
+- name: Define apps_dir
+  set_fact:
+    apps_dir: "{{ tomcat.home_parent_dir }}"
+  when: apps_dir is undefined
+
 - stat:
-    path: "{{ tomcat.home_parent_dir }}/apache-tomcat-{{ tomcat.version }}"
+    path: "{{ apps_dir }}/apache-tomcat-{{ tomcat.version }}"
   register: tomcat_dir
 
-- name: "Create {{ tomcat.home_parent_dir }} directory"
+- name: "Create {{ apps_dir }} directory"
   file:
-    path: "{{ tomcat.home_parent_dir }}"
+    path: "{{ apps_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: directory
@@ -16,13 +21,13 @@
 
   - name: get Tomcat tarball
     get_url:
-      url: "https://archive.apache.org/dist/tomcat/tomcat-{{ tomcat.major }}/v{{ tomcat.version }}/bin/apache-tomcat-{{ tomcat.version }}.tar.gz"
+      url: "{{tomcat.url}}"
       dest: "/tmp/apache-tomcat-{{ tomcat.version }}.tar.gz"
 
   - name: Unarchive Tomcat
     unarchive:
       src: "/tmp/apache-tomcat-{{ tomcat.version }}.tar.gz"
-      dest: "{{tomcat.home_parent_dir}}"
+      dest: "{{apps_dir}}"
       copy: no
 
   when: tomcat_dir.stat.isdir is not defined
@@ -30,12 +35,12 @@
 
 - name: Remove old symlink
   file:
-    path: "{{tomcat.home_parent_dir}}/tomcat"
+    path: "{{apps_dir}}/tomcat"
     state: absent
 
 - file:
-    src: "{{tomcat.home_parent_dir}}/apache-tomcat-{{ tomcat.version }}"
-    dest: "{{tomcat.home_parent_dir}}/tomcat"
+    src: "{{apps_dir}}/apache-tomcat-{{ tomcat.version }}"
+    dest: "{{apps_dir}}/tomcat"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: link
@@ -46,7 +51,7 @@
     state: absent
   become: yes
 
-- name: "Configuring Tomcat home {{tomcat.home_parent_dir}}/apache-tomcat-{{tomcat.version}} and add $PATH."
+- name: "Configuring Tomcat home {{apps_dir}}/apache-tomcat-{{tomcat.version}} and add $PATH."
   template:
     src: tomcat.sh.j2
     dest: /etc/profile.d/tomcat.sh

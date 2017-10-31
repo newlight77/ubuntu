@@ -2,7 +2,5 @@
 
 gradle:
   version: 4.1
+  url: https://services.gradle.org/distributions/gradle-4.1-bin.zip
   home_parent_dir: /apps
-
-apps:
-  dir: /apps

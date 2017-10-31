@@ -6,6 +6,3 @@ idea:
   url: https://download-cf.jetbrains.com/idea/ideaIC-2017.1.4-no-jdk.tar.gz
   exploded_dir: idea-IC-171.4694.23
   home_parent_dir: /apps
-
-apps:
-  dir: /apps

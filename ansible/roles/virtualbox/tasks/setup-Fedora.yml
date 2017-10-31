@@ -11,7 +11,7 @@
 
 - name: Add VirtualBox repository.
   get_url:
-    url: "http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo"
+    url: "{{rpm_repo_url}}"
     dest: '/etc/yum.repos.d/virtualbox.repo'
     owner: root
     group: root

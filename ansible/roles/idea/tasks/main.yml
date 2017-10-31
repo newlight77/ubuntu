@@ -1,12 +1,17 @@
 ---
 
+- name: Define apps_dir
+  set_fact:
+    apps_dir: "{{ apps_dir }}"
+  when: apps_dir is undefined
+
 - stat:
-    path: "{{idea.home_parent_dir}}/{{ idea.exploded_dir }}"
+    path: "{{apps_dir}}/{{ idea.exploded_dir }}"
   register: idea_dir
 
-- name: Create {{ idea.home_parent_dir }} directory
+- name: Create {{ apps_dir }} directory
   file:
-    path: "{{ idea.home_parent_dir }}"
+    path: "{{ apps_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: directory
@@ -15,17 +20,17 @@
 - block:
 
   - debug:
-      msg: "download url : https://download-cf.jetbrains.com/idea/ideaIC-{{ idea.version }}-no-jdk.tar.gz"
+      msg: "download url : {{idea.url}}"
 
   - name: get Idea Intellij tarball
     get_url:
-      url: "https://download-cf.jetbrains.com/idea/ideaIC-{{ idea.version }}-no-jdk.tar.gz"
+      url: "{{idea.url}}"
       dest: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
 
   - name: Unarchive Intellij
     unarchive:
       src: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
-      dest: "{{idea.home_parent_dir}}"
+      dest: "{{apps_dir}}"
       copy: no
 
   when: idea_dir.stat.isdir is not defined
@@ -33,12 +38,12 @@
 
 - name: Remove old symlink
   file:
-    path: "{{idea.home_parent_dir}}/idea"
+    path: "{{apps_dir}}/idea"
     state: absent
 
 - file:
-    src: "{{idea.home_parent_dir}}/{{ idea.exploded_dir }}"
-    dest: "{{idea.home_parent_dir}}/idea"
+    src: "{{apps_dir}}/{{ idea.exploded_dir }}"
+    dest: "{{apps_dir}}/idea"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: link
@@ -49,7 +54,7 @@
     state: absent
   become: yes
 
-- name: "Configuring Idea Intellij {{idea.home_parent_dir}}/{{idea.exploded_dir}} and add $PATH."
+- name: "Configuring Idea Intellij {{apps_dir}}/{{idea.exploded_dir}} and add $PATH."
   template:
     src: idea.sh.j2
     dest: /etc/profile.d/idea.sh

@@ -1,13 +1,17 @@
 ---
 
+- name: Define apps_dir
+  set_fact:
+    apps_dir: "{{ apps_dir }}"
+  when: apps_dir is undefined
 
 - stat:
-    path: "{{ eclipse.home_parent_dir }}/eclipse"
+    path: "{{ apps_dir }}/eclipse"
   register: eclipse_dir
 
-- name: "Create {{ eclipse.home_parent_dir }} directory"
+- name: "Create {{ apps_dir }} directory"
   file:
-    path: "{{ eclipse.home_parent_dir }}"
+    path: "{{ apps_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: directory
@@ -16,19 +20,17 @@
 - block:
 
   - debug:
-      msg: "download url : https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&mirror_id=1"
+      msg: "download url : {{eclipse.url}}"
 
   - name: get Eclipse tarball
     get_url:
-      # url: "http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/neon/R/eclipse-jee-neon-R-linux-gtk-x86_64.tar.gz&mirror_id=96"
-      # url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz&r=1"
-      url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{eclipse.version}}/R/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz&mirror_id=1"
+      url: "{{eclipse.url}}"
       dest: "/tmp/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz"
 
   - name: Unarchive Eclipse
     unarchive:
       src: "/tmp/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz"
-      dest: "{{ eclipse.home_parent_dir }}"
+      dest: "{{ apps_dir }}"
       copy: no
 
   when: eclipse_dir.stat.isdir is not defined
@@ -40,7 +42,7 @@
     state: absent
   become: yes
 
-- name: "Configuring Eclipse {{eclipse.home_parent_dir}}/eclipse-{{eclipse.version}} and add $PATH."
+- name: "Configuring Eclipse {{apps_dir}}/eclipse-{{eclipse.version}} and add $PATH."
   template:
     src: eclipse.sh.j2
     dest: /etc/profile.d/eclipse.sh
@@ -57,6 +59,6 @@
 - name: "Add Eclipse logo to eclipse application"
   copy:
     src: eclipse.png
-    dest: "{{ eclipse.home_parent_dir }}/eclipse/eclipse.png"
+    dest: "{{ apps_dir }}/eclipse/eclipse.png"
     mode: 0644
   become: yes

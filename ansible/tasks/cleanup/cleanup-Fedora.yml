@@ -5,8 +5,10 @@
   become: yes
   with_items: []
 
-- name: cleaning task for yum
-  command: dnf clean all
+- name: cleaning task for dnf packages
+  shell: dnf clean all
+  args:
+    warn: false
   become: yes
 
 - name: delete cache files

@@ -7,7 +7,7 @@
 
 - name: Add Sublime repository.
   get_url:
-    url: "https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo"
+    url: "{{rpm_repo_url}}"
     dest: '/etc/yum.repos.d/sublime.repo'
     owner: root
     group: root

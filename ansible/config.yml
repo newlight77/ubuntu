@@ -4,8 +4,7 @@ fedora_current: 25
 
 configure_sudoers: yes
 
-apps:
-  dir: /apps
+apps_dir: /apps
 
 downloads: ~/.ansible-downloads/
 
@@ -68,8 +67,7 @@ npm_packages:
   - fury-cli
   - slack
 
-pip_packages:
+pip_packages: []
   # - name: drush
   #   state: present # present/absent, default: present
   #   version: "^8.1" # default: N/A
-  - drush
