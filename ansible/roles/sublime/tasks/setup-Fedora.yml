@@ -7,7 +7,7 @@
 
 - name: Add Sublime repository.
   get_url:
-    url: "{{rpm_repo_url}}"
+    url: "{{sublime.rpm_repo_url}}"
     dest: '/etc/yum.repos.d/sublime.repo'
     owner: root
     group: root
