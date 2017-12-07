@@ -19,6 +19,19 @@
   apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable" state=present
   become: yes
 
+
+- name: Remove devicemapper folder
+  file:
+    path: "/var/lib/docker/devicemapper/devicemapper"
+    state: absent
+
+- name: "Configuring docker daemon"
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    mode: 0411
+  become: yes
+
 - name: Install
   apt: pkg="{{ item }}" state=latest update_cache=yes
   become: yes

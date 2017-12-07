@@ -42,6 +42,18 @@
       mode: 0644
     become: yes
 
+  - name: Remove devicemapper folder
+    file:
+      path: "/var/lib/docker/devicemapper/devicemapper"
+      state: absent
+
+  - name: "Configuring docker daemon"
+    template:
+      src: daemon.json.j2
+      dest: /etc/docker/daemon.json
+      mode: 0411
+    become: yes
+
   - name: Install Docker.
     package: name=docker-ce state=present
     become: yes

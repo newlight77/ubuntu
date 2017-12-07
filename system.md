@@ -8,3 +8,11 @@ At least on Fedora 26, I found that "pkcon refresh force" cleared out PackageKit
 $ pkcon refresh force
 
 ```
+
+```sh
+sudo dnf clean all
+sudo dnf autoremove
+sudo dnf remove --setopt=clean_requirements_on_remove=1
+sudo dnf repoquery --unneeded
+
+```
