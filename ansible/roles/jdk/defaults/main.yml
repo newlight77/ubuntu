@@ -1,8 +1,9 @@
 ---
 
+minor: 161
 jdk:
-  build: b16
-  version: 1.8.0_152
-  minor: 152
-  file: jdk-8u152-linux-x64.rpm
+  version: 1.8.0
+  minor: "{{minor}}"
+  file_rpm: "jdk-8u{{minor}}-linux-x64.rpm"
+  file_gz: "jdk-8u{{minor}}-linux-x64.tar.gz"
   tmp: /tmp

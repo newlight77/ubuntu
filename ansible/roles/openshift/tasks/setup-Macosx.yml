@@ -1,0 +1,29 @@
+---
+
+- name: check if openshift is installed?
+  command: "oc version | grep -i oc | cut -d'v' -f2 | cut -d'-' -f1 | grep -E '\d+.\d+.\d+'"
+  register: current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+
+- debug:
+    msg: "current_version : {{ current_version.stdout }}"
+
+- name: Define gem user
+  set_fact:
+    gem.user: "{{ ansible_user }}"
+  when: gem.user is not defined
+
+- debug:
+    msg: "Installing openshift packges with user {{ gem.user }}"
+
+- name: Install global RHC gems.
+  command: "gem install rhc"
+  ignore_errors: yes
+  become: yes
+
+- name: Updating gems.
+  command: "gem update"
+  become: yes

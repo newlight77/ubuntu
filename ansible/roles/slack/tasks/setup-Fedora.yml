@@ -11,10 +11,15 @@
 - debug:
     msg: "current_version : {{ current_version.stdout }}"
 
-- name: install the Slack packages
-  package: name={{ item }}
-       state=present
-  with_items:
-    - "{{ slack.url_rpm}}"
-  when: current_version.stdout is defined and slack.version not in current_version.stdout
-  become: yes
+- block:
+
+  - name: install the Slack packages
+    package:
+      name: {{ item }}
+      state: present
+    with_items:
+      - "{{slack.url_rpm}}"
+    when: current_version.stdout is defined and slack.version not in current_version.stdout
+    become: yes
+
+  when: current_version.stdout | version_compare(slack.version, '>')

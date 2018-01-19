@@ -2,6 +2,7 @@
 
 docker:
   version: 17.06.0-ce
+  repo_url: "https://download.docker.com/linux/fedora/docker-ce.repo"
   start: true
   service_enabled: yes
 

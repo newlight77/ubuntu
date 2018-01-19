@@ -11,23 +11,19 @@
 - debug:
     msg: "current_version : {{ current_version.stdout }}"
 
-# - name: get Atom RPM
-#   get_url:
-#     url:     "{{ atom.url }}"
-#     dest:    "/tmp/{{ atom.file_rpm }}"
-#   when: current_version.stdout is defined and atom.version not in current_version.stdout
-#
-# - name: Install Atom package.
-#   yum:
-#      name: "/tmp/{{ atom.file_rpm}}"
-#      state: present
-#   when: current_version.stdout is defined and atom.version not in current_version.stdout
-#   become: yes
+- block:
 
-- name: install the atom packages
-  package: name={{ item }}
-       state=present
-  with_items:
-    - "{{ atom.url_rpm}}"
-  when: current_version.stdout is defined and atom.version not in current_version.stdout
-  become: yes
+  - name : unistall older version
+    package:
+      name: atom
+      state: absent
+
+  - name: install the atom packages
+    package:
+      name: {{ item }}
+      state: present
+    with_items:
+      - "{{ atom.url_rpm}}"
+    become: yes
+
+  when: current_version.stdout | version_compare(atom.version, '>')

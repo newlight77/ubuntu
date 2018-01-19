@@ -11,10 +11,15 @@
 - debug:
     msg: "current_version : {{ current_version.stdout }}"
 
-- name: install the Sqlectron packages
-  package: name={{ item }}
-       state=present
-  with_items:
-    - "{{ sqlectron.url_rpm}}"
-  when: current_version.stdout is defined and sqlectron.version not in current_version.stdout
-  become: yes
+- block:
+  
+  - name: install the Sqlectron packages
+    package:
+      name: {{ item }}
+      state: present
+    with_items:
+      - "{{ sqlectron.url_rpm}}"
+    become: yes
+    when: current_version.stdout is defined and sqlectron.version not in current_version.stdout
+
+  when: current_version.stdout | version_compare(sqlectron.version, '>')

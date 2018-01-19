@@ -13,11 +13,13 @@
 
 - block:
 
-  - name: Download sqlectron for Debian OS family
-    get_url: url={{ sqlectron.url_deb }} dest={{sqlectron.file_deb}}
-
-  - name: Install sqlectron for Debian OS family
-    apt: deb={{sqlectron.file_deb}}
+  - name: install the Sqlectron packages
+    package:
+      name: {{ item }}
+      state: present
+    with_items:
+      - "{{ sqlectron.url_rpm}}"
     become: yes
+    when: current_version.stdout is defined and sqlectron.version not in current_version.stdout
 
   when: current_version.stdout | version_compare(sqlectron.version, '>')

@@ -1,7 +1,10 @@
 ---
 
+version : oxygen
+parent_dir: "{{ apps_dir | '/apps'}}"
 eclipse:
   major: 8
-  version: oxygen
-  url: https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz&mirror_id=1
-  home_parent_dir: /apps
+  version: "{{version}}"
+  url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{version}}/R/eclipse-jee-{{version}}-R-linux-gtk-{{ansible_architecture}}.tar.gz"
+  dir : "{{parent_dir}}/eclipse-{{version}}"
+  file: "eclipse-jee-{{version}}-R-linux-gtk-{{ansible_architecture}}.tar.gz"

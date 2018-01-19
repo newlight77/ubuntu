@@ -1,21 +1,16 @@
 ---
 
-- name: Define apps_dir
-  set_fact:
-    apps_dir: "{{ apps_dir }}"
-  when: apps_dir is undefined
-
 - stat:
-    path: "{{ apps_dir }}/apache-maven-{{ maven.version }}"
+    path: "{{ maven.dir }}"
   register: maven_dir
 
 - debug:
     msg: "maven_dir = {{ maven_dir.stat.isdir }}"
   when: maven_dir.stat.isdir is defined
 
-- name: "Create {{ apps_dir }} directory"
+- name: "Create {{ parent_dir }} directory"
   file:
-    path: "{{ apps_dir }}"
+    path: "{{ parent_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: directory
@@ -26,28 +21,27 @@
   - name: get Maven tarball
     get_url:
       url: "{{maven.url}}"
-      dest:    "/tmp/apache-maven-{{ maven.version }}-bin.tar.gz"
+      dest: "/tmp/{{maven.file}}"
 
   - name: Unarchive maven
     unarchive:
-      src: "/tmp/apache-maven-{{ maven.version }}-bin.tar.gz"
-      dest: "{{apps_dir}}"
+      src: "/tmp/{{maven.file}}"
+      dest: "{{maven.dir}}"
       copy: no
 
+  - name: Remove old symlink
+    file:
+      path: "{{parent_dir}}/maven"
+      state: absent
+
+  - file:
+      src: "{{maven.dir}}"
+      dest: "{{parent_dir}}/maven"
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      state: link
+
   when: maven_dir.stat.isdir is not defined
-
-
-- name: Remove old symlink
-  file:
-    path: "{{apps_dir}}/maven"
-    state: absent
-
-- file:
-    src: "{{apps_dir}}/apache-maven-{{ maven.version }}"
-    dest: "{{apps_dir}}/maven"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    state: link
 
 - name: Remove old path configuration
   file:
@@ -55,7 +49,7 @@
     state: absent
   become: yes
 
-- name: "Configuring maven home {{apps_dir}}/apache-maven-{{maven.version}} and add $PATH."
+- name: "Configuring maven home {{maven.dir}} and add $PATH."
   template:
     src: maven.sh.j2
     dest: /etc/profile.d/maven.sh

@@ -10,11 +10,13 @@
 
 - block:
   - name: Download atom for Debian OS family
-    get_url: url={{ atom.url_deb }} dest={{atom.file_deb}}
+    get_url:
+      url: "{{ atom.url_deb }}"
+      dest: "{{atom.file_deb}}"
 
   - name: Install atom for Debian OS family
-    apt: deb={{atom.file_deb}}
+    apt:
+      deb: "{{atom.file_deb}}"
     become: yes
 
-  # when: current_version.stdout is defined and atom.version not in current_version.stdout
   when: current_version.stdout | version_compare(atom.version, '>')

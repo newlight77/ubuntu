@@ -7,11 +7,15 @@
   become: yes
 
 - name: add repository cassandra
-  apt_repository: repo="deb http://www.apache.org/dist/cassandra/debian 311x main" state=present
+  apt_repository:
+    repo: "deb http://www.apache.org/dist/cassandra/debian {{cassandra.version}}x main"
+    state: present
   become: yes
 
 - name: Install Cassandra
-  apt: name={{item}} state=latest
+  apt:
+    name: {{item}}
+    state: latest
   with_items:
     - cassandra
   become: yes

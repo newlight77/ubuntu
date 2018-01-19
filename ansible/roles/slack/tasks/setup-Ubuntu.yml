@@ -12,11 +12,14 @@
 #     msg: "current_version : {{ current_version.stdout }}"
 
 - block:
-  - name: Download slack for Debian OS family
-    get_url: url={{ slack.url_deb }} dest={{slack.file_deb}}
-
-  - name: Install slack for Debian OS family
-    apt: deb={{slack.file_deb}}
+  
+  - name: install the Slack packages
+    package:
+      name: {{ item }}
+      state: present
+    with_items:
+      - "{{slack.url_rpm}}"
+    when: current_version.stdout is defined and slack.version not in current_version.stdout
     become: yes
 
   # when: current_version.stdout is defined and slack.version not in current_version.stdout

@@ -8,8 +8,10 @@
   args:
     warn: no
 
+
+
 - debug:
-    msg: "Required version = {{ jdk.version }} and current_version = {{ current_version.stdout }}"
+    msg: "Required version = {{jdk.version}}_{{jdk.minor}} and current_version = {{current_version.stdout}}"
 
 - block:
   - name: Ensure jdk dependencies are  installed.

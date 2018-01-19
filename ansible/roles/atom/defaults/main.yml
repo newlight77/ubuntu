@@ -1,8 +1,9 @@
 ---
 
+version: 1.23.3
 atom:
-  version: 1.18.0
-  url_rpm: https://github.com/atom/atom/releases/download/v1.18.0/atom.x86_64.rpm
-  url_deb: https://github.com/atom/atom/releases/download/v1.18.0/atom-amd64.deb
+  version: "{{version}}"
+  url_rpm: "https://github.com/atom/atom/releases/download/v{{version}}/atom.x86_64.rpm"
+  url_deb: "https://github.com/atom/atom/releases/download/v{{version}}/atom-amd64.deb"
   file_rpm: /tmp/atom.x86_64.rpm
   file_deb: /tmp/atom-amd64.deb

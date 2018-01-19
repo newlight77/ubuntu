@@ -16,12 +16,12 @@
     - role: motd
     - role: sudoers
     - role: rpmfusion
+    - role: jdk
     - role: docker
     - role: nodejs
     - role: npm
     - role: gem
     - role: pip
-    - role: jdk
     - role: maven
     - role: gradle
     - role: sublime

@@ -1,0 +1,12 @@
+---
+
+- name: check if openshift is installed?
+  command: "oc version | grep -i oc | grep {{ openshift.version }}"
+  register: current_version
+  changed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+
+- debug:
+    msg: "current_version : {{ current_version.stdout }}"

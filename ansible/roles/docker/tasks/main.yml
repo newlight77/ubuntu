@@ -5,11 +5,16 @@
 - include: docker-compose.yml
 
 - name: Create Docker group
-  group: name=docker state=present
+  group:
+    name: docker
+    state: present
   become: yes
 
 - name: Add current user to Docker group
-  user: name="{{ ansible_env.USER }}" groups=docker append=yes
+  user:
+    name: "{{ ansible_env.USER }}" 
+    groups: docker
+    append: yes
   become: yes
 
 - name: "Ensure Docker is {{ docker.start | ternary('started','stopped') }}"

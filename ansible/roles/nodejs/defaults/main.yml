@@ -1,7 +1,9 @@
 ---
 
+version: "8.x"
 nodejs:
   # Vversion of Node.js ("5.x", "6.x", "7.x").
   # https://github.com/nodesource/distributions
-  version: "6.x"
+  version: "{{version}}"
+  rpm_url: "http://rpm.nodesource.com/pub_{{version}}/fc/{{ansible_distribution_major_version}}/{{ansible_architecture}}/nodesource-release-fc{{ansible_distribution_major_version}}-1.noarch.rpm"
   # The user for whom the npm packages will be installed.

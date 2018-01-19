@@ -2,34 +2,34 @@
 
 - name: check if Oracle JDK is installed?
   shell: java -version 2>&1 | grep -i 'Java(TM) SE Runtime Environment' | awk '{print $6}' | sed 's/)/ /'
-  register: jdk_current_version
+  register: current_version
   changed_when: false
   ignore_errors: true
   args:
     warn: no
 
 - debug:
-    msg: "Required version = {{ jdk.version }} and jdk_current_version = {{ jdk_current_version.stdout }}"
+    msg: "Required version = {{jdk.version}}_{{jdk.minor}} and current_version = {{current_version.stdout}}"
 
 - block:
   - name: Retrieve download url for Oracle JDK 8
-    shell: "{{ playbook_dir }}/roles/jdk/scripts/getDownloadUrl.sh -o=linux -a=x64 -f=rpm -v={{ jdk.minor }}"
+    shell: "{{playbook_dir}}/roles/jdk/scripts/getDownloadUrl.sh -o=linux -a=x64 -f=rpm -v={{jdk.minor}}"
     register: jdk_download_url
     changed_when: false
     failed_when: false
 
   - debug:
-      msg: "Download URL : {{ jdk_download_url.stdout }}"
+      msg: "Download URL : {{jdk_download_url.stdout}}"
 
   - name: get Oracle JDK tarball (as RPM file)
     get_url:
-      url:     "{{ jdk_download_url.stdout }}"
+      url:     "{{jdk_download_url.stdout}}"
       headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-      dest:    "{{ jdk.tmp }}/{{ jdk.file }}"
+      dest:    "/tmp/{{jdk.file_rpm}}"
 
   - name: install Oracle JDK
     package:
-      name: /tmp/{{ jdk.file }}
+      name: /tmp/{{jdk.file_rpm}}
     become: yes
 
 
@@ -46,4 +46,4 @@
       mode: 0644
     become: yes
 
-  when: jdk_current_version.stdout is defined and jdk.version not in jdk_current_version.stdout
+  when: current_version.stdout is defined and jdk.version not in current_version.stdout

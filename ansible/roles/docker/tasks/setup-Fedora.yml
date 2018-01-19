@@ -2,7 +2,7 @@
 
 - name: check version of docker
   shell: docker --version 2>&1
-  register: docker_current_version
+  register: current_version
   changed_when: false
   failed_when: false
   ignore_errors: true
@@ -11,8 +11,7 @@
   become: yes
 
 - debug:
-    msg: "Required version = {{ docker.version }} and docker_current_version = {{ docker_current_version }}"
-  when: docker_current_version is defined
+    msg: "Required version = {{ docker.version }} and current_version = {{ current_version }}"
 
 - block:
   - name: Ensure old versions of Docker along with its dependencies are not installed.
@@ -35,7 +34,7 @@
 
   - name: Add Docker repository.
     get_url:
-      url: "https://download.docker.com/linux/fedora/docker-ce.repo"
+      url: "{{docker.repo_url}}"
       dest: '/etc/yum.repos.d/docker-ce.repo'
       owner: root
       group: root
@@ -58,4 +57,4 @@
     package: name=docker-ce state=present
     become: yes
 
-  when: docker.version not in docker_current_version.stdout
+  when: docker.version not in current_version.stdout

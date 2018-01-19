@@ -1,17 +1,12 @@
 ---
 
-- name: Define apps_dir
-  set_fact:
-    apps_dir: "{{ apps_dir }}"
-  when: apps_dir is undefined
-
 - stat:
-    path: "{{ apps_dir }}/eclipse"
+    path: "{{ eclipse.dir }}"
   register: eclipse_dir
 
-- name: "Create {{ apps_dir }} directory"
+- name: "Create {{ parent_dir }} directory"
   file:
-    path: "{{ apps_dir }}"
+    path: "{{ parent_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: directory
@@ -25,13 +20,25 @@
   - name: get Eclipse tarball
     get_url:
       url: "{{eclipse.url}}"
-      dest: "/tmp/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz"
+      dest: "/tmp/{{eclipse.file}}"
 
   - name: Unarchive Eclipse
     unarchive:
-      src: "/tmp/eclipse-jee-{{eclipse.version}}-R-linux-gtk-x86_64.tar.gz"
-      dest: "{{ apps_dir }}"
+      src: "/tmp/{{eclipse.file}}"
+      dest: "{{ eclipse.dir }}"
       copy: no
+
+  - name: Remove old symlink
+    file:
+      path: "{{parent_dir}}/eclipse"
+      state: absent
+
+  - file:
+      src: "{{eclipse.dir}}"
+      dest: "{{parent_dir}}/eclipse"
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      state: link
 
   when: eclipse_dir.stat.isdir is not defined
 
@@ -42,7 +49,7 @@
     state: absent
   become: yes
 
-- name: "Configuring Eclipse {{apps_dir}}/eclipse-{{eclipse.version}} and add $PATH."
+- name: "Configuring Eclipse {{eclipse.dir}} and add $PATH."
   template:
     src: eclipse.sh.j2
     dest: /etc/profile.d/eclipse.sh

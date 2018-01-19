@@ -12,7 +12,7 @@ if os == 'ubuntu'
 # elsif os == 'centos'
 #   box_name = 'centos/7'
 else
-  box_name = 'fedora/25-cloud-base'
+  box_name = 'fedora/26-cloud-base'
 end
 
 
@@ -37,12 +37,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # v.customize ["modifyvm", :id, "--accelerate3d", "on"]
     # v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
-
-  # forwarded ports
-  #config.vm.network :forwarded_port, guest: 80, host: 80, auto_correct: true
-  # [8443].each do |p|
-      # config.vm.network :forwarded_port, guest: p, host: p
-  # end
 
   config.vm.synced_folder ".", "/vagrant"
 

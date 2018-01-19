@@ -1,11 +1,5 @@
 ---
 
-# - name: Import Datastax RPM key
-#   rpm_key:
-#     key: https://www.apache.org/dist/cassandra/KEYS
-#     state: present
-#   become: yes
-
 - name: Adding Datastax repository
   template:
     src: cassandra.repo.j2
@@ -16,5 +10,7 @@
   become: yes
 
 - name: Install Cassandra.
-  package: name=cassandra state=present
+  package:
+    name: cassandra
+    state: present
   become: yes

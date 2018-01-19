@@ -1,7 +1,11 @@
 ---
 
+major: 8
+version: 8.0.45
+parent_dir: "{{ apps_dir | '/apps'}}"
 tomcat:
   major: 8
-  version: 8.0.45
-  url: https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.45/bin/apache-tomcat-8.0.45.tar.gz
-  home_parent_dir: /apps
+  version: "{{version}}"
+  url: "https://archive.apache.org/dist/tomcat/tomcat{{major}}-/v{{version}}/bin/apache-tomcat-{{version}}.tar.gz"
+  file: "apache-tomcat-{{version}}.tar.gz"
+  dir: "{{parent_dir}}/tomcat-{{version}}"

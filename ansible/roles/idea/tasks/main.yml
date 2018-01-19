@@ -1,17 +1,12 @@
 ---
 
-- name: Define apps_dir
-  set_fact:
-    apps_dir: "{{ apps_dir }}"
-  when: apps_dir is undefined
-
 - stat:
-    path: "{{apps_dir}}/{{ idea.exploded_dir }}"
+    path: "{{idea.dir}}"
   register: idea_dir
 
-- name: Create {{ apps_dir }} directory
+- name: Create {{ parent_dir }} directory
   file:
-    path: "{{ apps_dir }}"
+    path: "{{ parent_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     state: directory
@@ -19,34 +14,37 @@
 
 - block:
 
+  - name: Create {{ idea.dir }} directory
+    file:
+      path: "{{ idea.dir }}"
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      state: directory
+
   - debug:
       msg: "download url : {{idea.url}}"
 
   - name: get Idea Intellij tarball
     get_url:
       url: "{{idea.url}}"
-      dest: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
+      dest: "/tmp/{{idea.file}}"
 
   - name: Unarchive Intellij
-    unarchive:
-      src: "/tmp/ideaIC-{{ idea.version}}}-no-jdk.tar.gz"
-      dest: "{{apps_dir}}"
-      copy: no
+    shell: "tar xfz /tmp/{{idea.file}} --strip-components 1 -C {{idea.dir}}"
+
+  - name: Remove old symlink
+    file:
+      path: "{{idea.parent_dir}}/idea"
+      state: absent
+
+  - file:
+      src: "{{idea.dir }}"
+      dest: "{{idea.parent_dir}}/idea"
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      state: link
 
   when: idea_dir.stat.isdir is not defined
-
-
-- name: Remove old symlink
-  file:
-    path: "{{apps_dir}}/idea"
-    state: absent
-
-- file:
-    src: "{{apps_dir}}/{{ idea.exploded_dir }}"
-    dest: "{{apps_dir}}/idea"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    state: link
 
 - name: Remove old path configuration
   file:
@@ -54,7 +52,7 @@
     state: absent
   become: yes
 
-- name: "Configuring Idea Intellij {{apps_dir}}/{{idea.exploded_dir}} and add $PATH."
+- name: "Configuring Idea Intellij {{idea.dir}} and add $PATH."
   template:
     src: idea.sh.j2
     dest: /etc/profile.d/idea.sh
