@@ -1,9 +1,17 @@
 ## Install Fedora on target host
 
+This toolkit use Ansible to install all necessary tools for developers working on Linux. For now, this will only cover Fedora and Ubuntu. Later I will add scripts for Mac OS and Redhat.
+
 * Install Fedora : https://getfedora.org/en/workstation/download/
 * Install ubuntu : http://www.ubuntu.com/download/desktop/install-ubuntu-desktop
 
-V2 using Ansible is ready, under ansible folder.
+
+### clone this
+```sh
+cd ~
+git clone https://github.com/newlight77/workspace-quickstart.git
+cd workspace-quickstart
+```
 
 ## Pre-requisites
 
@@ -23,14 +31,6 @@ sudo get-apt install git
 sudo get-apt install python2 libselinux-python
 sudo get-apt install ansible
 ```
-
-### clone this
-```sh
-cd ~
-git clone https://github.com/newlight77/ubuntu.git
-cd ubuntu
-```
-
 
 ## Ansible
 
@@ -108,5 +108,14 @@ This list of tools can be overridden by deleting roles in the playbook.
 ### Contributors
 
 ```sh
+vagrant up
+```
+
+or install manually a VM, then inside the vm:
+
+```sh
 sudo echo prompt password
-ansible-playbook -b -u vagrant ansible/playbook.yml
+ansible-playbook ansible/playbook.yml
+```
+
+Note: some steps may take time so it will fail as it prompts for password again while running.
