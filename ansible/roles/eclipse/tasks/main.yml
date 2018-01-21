@@ -1,9 +1,5 @@
 ---
 
-- stat:
-    path: "{{ eclipse.dir }}"
-  register: eclipse_dir
-
 - name: "Create {{ parent_dir }} directory"
   file:
     path: "{{ parent_dir }}"
@@ -11,6 +7,11 @@
     group: "{{ ansible_user }}"
     state: directory
   become: yes
+
+- stat:
+    path: "{{ eclipse.dir }}"
+  register: eclipse_dir
+
 
 - block:
 
@@ -25,20 +26,8 @@
   - name: Unarchive Eclipse
     unarchive:
       src: "/tmp/{{eclipse.file}}"
-      dest: "{{ eclipse.dir }}"
+      dest: "{{ parent_dir }}"
       copy: no
-
-  - name: Remove old symlink
-    file:
-      path: "{{parent_dir}}/eclipse"
-      state: absent
-
-  - file:
-      src: "{{eclipse.dir}}"
-      dest: "{{parent_dir}}/eclipse"
-      owner: "{{ ansible_user }}"
-      group: "{{ ansible_user }}"
-      state: link
 
   when: eclipse_dir.stat.isdir is not defined
 

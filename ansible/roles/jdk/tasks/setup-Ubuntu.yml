@@ -8,9 +8,14 @@
   args:
     warn: no
 
+- name: Ensure openjdk is uninstalled.
+  apt:
+    name: openjdk
+    state: absent
+  become: yes
+
 - debug:
     msg: "Required version = {{jdk.version}}_{{jdk.minor}} and current_version = {{current_version.stdout}}"
-
 
 - block:
 
@@ -36,12 +41,41 @@
   #     mode: 0755
 
   # - name: Install {{jdk.file_gz}}
-  #   shell: "/tmp/ujavainstaller.sh /tmp/{{jdk.file_gz}}"
+  #   shell: "/tmp/ujavainstaller.sh --remove-openjdk /tmp/{{jdk.file_gz}}"
   #   become: yes
 
   - name: Install {{jdk.file_gz}}
     shell: "{{playbook_dir}}/roles/jdk/scripts/ujavainstaller.sh /tmp/{{jdk.file_gz}}"
     become: yes
+  
+  # - name: Ensure dependencies are installed.
+  #   apt:
+  #     name: "{{ item }}"
+  #     state: present
+  #   with_items:
+  #     - java-package
+  #     - python-software-properties
+  #     - debconf-utils
+  #   become: yes
+  #
+  # - name: Configure make deb package
+  #   shell: "echo debconf shared/accepted-oracle-license-v1-1 select Y | debconf-set-selections"
+  #   become: yes
+  #
+  # - name: Configure make deb package
+  #   shell: "echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections"
+  #   become: yes
+  #
+  # - name: Configure make deb package
+  #   shell: "echo oracle-java8-installer shared/accepted-oracle-licence-v1-1 select true | debconf-set-selections"
+  #   become: yes
+  #
+  # - name: Make deb package from {{jdk.file_gz}}
+  #   shell: "make-jpkg /tmp/{{jdk.file_gz}}"
+  #
+  # - name: Install {{jdk.file_gz}}
+  #   package: " /tmp/{{jdk.file_deb}}"
+  #   become: yes
 
   - name: Remove old path configuration
     file:

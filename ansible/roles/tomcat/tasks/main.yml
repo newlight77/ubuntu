@@ -22,7 +22,7 @@
   - name: Unarchive Tomcat
     unarchive:
       src: "/tmp/{{tomcat.file}}"
-      dest: "{{tomcat.dir}}"
+      dest: "{{parent_dir}}"
       copy: no
 
   - name: Remove old symlink

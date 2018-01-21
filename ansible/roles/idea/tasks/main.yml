@@ -1,9 +1,5 @@
 ---
 
-- stat:
-    path: "{{idea.dir}}"
-  register: idea_dir
-
 - name: Create {{ parent_dir }} directory
   file:
     path: "{{ parent_dir }}"
@@ -11,6 +7,11 @@
     group: "{{ ansible_user }}"
     state: directory
   become: yes
+
+- stat:
+    path: "{{idea.dir}}"
+  register: idea_dir
+
 
 - block:
 

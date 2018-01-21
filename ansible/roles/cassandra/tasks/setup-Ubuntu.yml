@@ -14,8 +14,6 @@
 
 - name: Install Cassandra
   apt:
-    name: {{item}}
+    name: cassandra
     state: latest
-  with_items:
-    - cassandra
   become: yes

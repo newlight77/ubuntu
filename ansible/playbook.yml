@@ -24,19 +24,19 @@
     - role: pip
     - role: maven
     - role: gradle
-    - role: sublime
+    # - role: sublime
     - role: atom
     - role: cassandra
     - role: slack
     - role: chrome
     - role: sqlectron
     - role: tomcat
-    - role: eclipse
-    - role: idea
     - role: bash-customization
-    - role: virtualbox
+    # - role: virtualbox
     - role: vagrant
     - role: mailhog
+    # - role: eclipse
+    - role: idea
 
   tasks:
     # - include: tasks/ansible-setup.yml

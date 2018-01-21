@@ -1,7 +1,7 @@
 ---
 
 version : oxygen
-parent_dir: "{{ apps_dir | '/apps'}}"
+parent_dir: "{{ apps_dir }}"
 eclipse:
   major: 8
   version: "{{version}}"

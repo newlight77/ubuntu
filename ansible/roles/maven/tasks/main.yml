@@ -1,12 +1,5 @@
 ---
 
-- stat:
-    path: "{{ maven.dir }}"
-  register: maven_dir
-
-- debug:
-    msg: "maven_dir = {{ maven_dir.stat.isdir }}"
-  when: maven_dir.stat.isdir is defined
 
 - name: "Create {{ parent_dir }} directory"
   file:
@@ -15,6 +8,14 @@
     group: "{{ ansible_user }}"
     state: directory
   become: yes
+
+- stat:
+    path: "{{ maven.dir }}"
+  register: maven_dir
+
+- debug:
+    msg: "maven_dir = {{ maven_dir.stat.isdir }}"
+  when: maven_dir.stat.isdir is defined
 
 - block:
 
@@ -26,7 +27,7 @@
   - name: Unarchive maven
     unarchive:
       src: "/tmp/{{maven.file}}"
-      dest: "{{maven.dir}}"
+      dest: "{{parent_dir}}"
       copy: no
 
   - name: Remove old symlink

@@ -43,31 +43,23 @@ downloads: ~/.ansible-downloads/
 #   - unzip
 
 
-gem_packages: []
+# gem_packages: []
   # - name: drush
   #   state: present # present/absent, default: present
   #   version: "^8.1" # default: N/A
 
-npm_packages:
+# npm_packages:
   # - name: webpack
   #   state: present # present/absent/latest, default: present
   #   version: "^2.6" # default: N/A
-  - jslint
-  - eslint
-  - gulp
-  - nodemon
-  - yo
-  - phantomjs
-  - hercule
-  - dredd
-  - drakov
-  - aglio
-  - apiaryio
-  - drafter
-  - fury-cli
-  - slack
+  # - jslint
+  # - eslint
+  # - gulp
+  # - nodemon
+  # - yo
 
-pip_packages: []
+
+# pip_packages: []
   # - name: drush
   #   state: present # present/absent, default: present
   #   version: "^8.1" # default: N/A

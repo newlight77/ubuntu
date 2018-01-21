@@ -1,9 +1,9 @@
 ---
 
 version: 4.1
-parent_dir: "{{ apps_dir | '/apps'}}"
+parent_dir: "{{ apps_dir }}"
 gradle:
   version: "{{version}}"
-  url: "https://services.gradle.org/distributions/{{file}}"
+  url: "https://services.gradle.org/distributions/gradle-{{version}}-bin.zip"
   dir: "{{parent_dir}}/gradle-{{version}}"
   file: "gradle-{{version}}-bin.zip"

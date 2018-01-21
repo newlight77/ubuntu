@@ -1,10 +1,11 @@
 ---
 
-parent_dir: "{{ apps_dir | '/apps'}}"
+parent_dir: "{{ apps_dir }}"
 version: 3.5.2
+major: 3
 maven:
-  major: 3
+  major: "{{major}}"
   version: "{{version}}"
-  url: "https://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-{{version}}-bin.tar.gz"
-  dir: "{{parent_dir}}/maven-{{version}}"
+  url: "https://archive.apache.org/dist/maven/maven-{{major}}/{{version}}/binaries/apache-maven-{{version}}-bin.tar.gz"
+  dir: "{{parent_dir}}/apache-maven-{{version}}"
   file: "apache-maven-{{version}}-bin.tar.gz"

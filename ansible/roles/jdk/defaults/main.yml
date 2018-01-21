@@ -8,4 +8,5 @@ jdk:
   major: "{{major}}"
   file_rpm: "jdk-{{major}}u{{minor}}-linux-x64.rpm"
   file_gz: "jdk-{{major}}u{{minor}}-linux-x64.tar.gz"
+  file_deb: "jdk-{{major}}u{{minor}}-linux-x64.deb"
   tmp: /tmp

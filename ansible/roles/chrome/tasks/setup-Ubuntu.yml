@@ -9,7 +9,7 @@
   become: yes
 
 - name: Install Google Chrome
-  apt: name={{item}} state=latest
-  with_items:
-    - google-chrome-stable
+  package:
+    name: google-chrome-stable
+    state: latest
   become: yes

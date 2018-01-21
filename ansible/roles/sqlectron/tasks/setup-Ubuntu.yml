@@ -15,11 +15,7 @@
 
   - name: install the Sqlectron packages
     package:
-      name: {{ item }}
-      state: present
-    with_items:
-      - "{{ sqlectron.url_rpm}}"
+      deb: "{{ sqlectron.url_deb}}"
     become: yes
-    when: current_version.stdout is defined and sqlectron.version not in current_version.stdout
 
   when: current_version.stdout | version_compare(sqlectron.version, '>')

@@ -1,19 +1,20 @@
 ---
 
+- name: "Create {{ gradle.parent_dir }} directory"
+  file:
+    path: "{{ parent_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+  become: yes
+
 - stat:
     path: "{{gradle.dir}}"
   register: gradle_dir
 
 - debug:
-    msg: "gradle_dir = {{ gradle_dir.stat.isdir }}"
+  msg: "gradle_dir = {{ gradle_dir.stat.isdir }}"
 
-- name: "Create {{ gradle.parent_dir }} directory"
-  file:
-    path: "{{ gradle.home_parent_dir }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    state: directory
-  become: yes
 
 - block:
 
@@ -25,7 +26,7 @@
   - name: Unarchive gradle
     unarchive:
       src: "/tmp/{{gradle.file}}"
-      dest: "{{gradle.dir}}"
+      dest: "{{parent_dir}}"
       copy: no
 
   when: gradle_dir.stat.isdir is not defined
