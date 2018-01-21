@@ -46,6 +46,12 @@
       path: "/var/lib/docker/devicemapper/devicemapper"
       state: absent
 
+  - name: Create /etc/docker
+    file:
+      path: /etc/docker
+      state: directory
+    become: yes
+
   - name: "Configuring docker daemon"
     template:
       src: daemon.json.j2
