@@ -8,44 +8,40 @@
   args:
     warn: no
 
-
-
 - debug:
     msg: "Required version = {{jdk.version}}_{{jdk.minor}} and current_version = {{current_version.stdout}}"
 
+
 - block:
-  - name: Ensure jdk dependencies are  installed.
-    package:
-      name: '{{ item }}'
-      state: present
-    become: yes
-    with_items:
-      - software-properties-common
-      - python-software-properties
-      - debconf-utils
 
-  - name: Import WebUpd8 PGP key
-    apt_key: keyserver=keyserver.ubuntu.com id=0xEEA14886 state=present
-    become: yes
+  - name: Retrieve download url for Oracle JDK 8
+    shell: "{{playbook_dir}}/roles/jdk/scripts/getDownloadUrl.sh -o=linux -a=x64 -f=tar.gz -v={{jdk.minor}}"
+    register: jdk_download_url
+    changed_when: false
+    failed_when: false
 
-  - name: add repository for Oracke jdk 8
-    apt_repository: repo=ppa:webupd8team/java state=present
-    become: yes
+  - debug:
+      msg: "Download URL : {{jdk_download_url.stdout}}"
 
-  - name: Accept Java 8 License
-    debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
-    become: yes
+  - name: get Oracle JDK tarball (as gz file)
+    get_url:
+      url:     "{{jdk_download_url.stdout}}"
+      headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
+      dest:    "/tmp/{{jdk.file_gz}}"
 
-  - name: Install Oracle Jkd 8
-    apt: name={{item}} state=latest
-    with_items:
-      - oracle-java8-installer
-      - ca-certificates
-      - oracle-java8-set-default
-    become: yes
+  # - name: Retrieve install script
+  #   get_url:
+  #     url:     "https://raw.githubusercontent.com/AdamScheller/UbuntuJavaInstaller/master/ujavainstaller.sh"
+  #     dest:    "/tmp/ujavainstaller.sh"
+  #     mode: 0755
 
-  - name: Set this as default Java; also environment variables
-    apt: pkg="oracle-java8-set-default" state=present force=yes
+  # - name: Install {{jdk.file_gz}}
+  #   shell: "/tmp/ujavainstaller.sh /tmp/{{jdk.file_gz}}"
+  #   become: yes
+
+  - name: Install {{jdk.file_gz}}
+    shell: "{{playbook_dir}}/roles/jdk/scripts/ujavainstaller.sh /tmp/{{jdk.file_gz}}"
+    become: yes
 
   - name: Remove old path configuration
     file:

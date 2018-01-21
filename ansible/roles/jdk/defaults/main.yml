@@ -1,9 +1,11 @@
 ---
 
+major: 8
 minor: 161
 jdk:
-  version: 1.8.0
+  version: 1.{{major}}.0
   minor: "{{minor}}"
-  file_rpm: "jdk-8u{{minor}}-linux-x64.rpm"
-  file_gz: "jdk-8u{{minor}}-linux-x64.tar.gz"
+  major: "{{major}}"
+  file_rpm: "jdk-{{major}}u{{minor}}-linux-x64.rpm"
+  file_gz: "jdk-{{major}}u{{minor}}-linux-x64.tar.gz"
   tmp: /tmp
