@@ -1,10 +1,11 @@
 ---
 
-version : oxygen
+version: photon
+release: M4
 parent_dir: "{{ apps_dir }}"
 eclipse:
   major: 8
   version: "{{version}}"
-  url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/{{version}}/R/eclipse-jee-{{version}}-R-linux-gtk-{{ansible_architecture}}.tar.gz"
+  url: "http://mirror.dkm.cz/eclipse/technology/epp/downloads/release/{{version}}/{{release}}/eclipse-jee-{{version}}-{{release}}-linux-gtk-{{ansible_architecture}}.tar.gz"
   dir : "{{parent_dir}}/eclipse-{{version}}"
-  file: "eclipse-jee-{{version}}-R-linux-gtk-{{ansible_architecture}}.tar.gz"
+  file: "eclipse-jee-{{version}}-{{release}}-linux-gtk-{{ansible_architecture}}.tar.gz"

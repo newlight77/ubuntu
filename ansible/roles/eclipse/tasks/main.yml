@@ -9,7 +9,7 @@
   become: yes
 
 - stat:
-    path: "{{ eclipse.dir }}"
+    path: "{{eclipse.dir}}"
   register: eclipse_dir
 
 
@@ -26,8 +26,24 @@
   - name: Unarchive Eclipse
     unarchive:
       src: "/tmp/{{eclipse.file}}"
-      dest: "{{ parent_dir }}"
+      dest: "/tmp"
       copy: no
+
+  - name: Create {{eclipse.dir}} directory
+    command: "mv /tmp/eclipse {{eclipse.dir}}"
+
+  - name: Remove old symlink
+    file:
+      path: "{{parent_dir}}/eclipse"
+      state: absent
+
+  - name: Create symlink
+    file:
+      src: "{{eclipse.dir}}"
+      dest: "{{parent_dir}}/eclipse"
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      state: link
 
   when: eclipse_dir.stat.isdir is not defined
 
@@ -55,6 +71,6 @@
 - name: "Add Eclipse logo to eclipse application"
   copy:
     src: eclipse.png
-    dest: "{{ apps_dir }}/eclipse/eclipse.png"
+    dest: "{{eclipse.dir}}/eclipse.png"
     mode: 0644
   become: yes
