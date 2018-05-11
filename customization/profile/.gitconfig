@@ -1,8 +1,0 @@
-#############################################
-# github.com/newlight77/ubuntu [customization
-
-[include]
-    path = ~/.bash_custom/.gitconfig_alias
-
-# github.com/newlight77/ubuntu customization]
-#############################################

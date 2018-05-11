@@ -1,4 +1,0 @@
----
-
-- name: Customizing
-  shell: "{{ playbook_dir }}/../customization/customize.sh"

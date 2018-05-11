@@ -31,7 +31,7 @@
     - role: chrome
     - role: sqlectron
     - role: tomcat
-    - role: bash-customization
+    - role: bash-custom
     # - role: virtualbox
     - role: vagrant
     - role: mailhog
