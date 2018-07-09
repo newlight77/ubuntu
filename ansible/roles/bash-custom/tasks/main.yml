@@ -1,7 +1,12 @@
 ---
 
+- name: Remove old path configuration
+  file:
+    path: "{{ playbook_dir }}/bash_custom"
+    state: absent
+
 - name: Cloning bash_custom
-  shell: "git clone https://github.com/newlight77/bash_custom.git"
+  shell: "git clone https://github.com/newlight77/bash_custom.git "
 
 - name: Customizing
   shell: "{{ playbook_dir }}/bash_custom/customize.sh"
