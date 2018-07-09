@@ -1,0 +1,9 @@
+---
+- name: install the rpmfusion repo packages
+  yum: name={{ item }}
+       state=present
+  with_items:
+    - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+    - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
+  when: ansible_os_family == "RedHat"
+  become: yes
