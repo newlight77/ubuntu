@@ -1,25 +1,23 @@
 ---
 
-
-
-  - name: Ensure pre-requisite packages are installed.
-    package:
-      name: '{{ item }}'
-      state: present
-    become: yes
-    with_items:
-      - gcc
-      - dkms
-      - make
-      - qt
-      - libgomp
-      - patch
-      - kernel-headers
-      - kernel-devel
-      - binutils
-      - glibc-headers
-      - glibc-devel
-      - font-forge
+- name: Ensure pre-requisite packages are installed.
+  package:
+    name: '{{ item }}'
+    state: present
+  become: yes
+  with_items:
+    - gcc
+    - dkms
+    - make
+    - qt
+    - libgomp
+    - patch
+    - kernel-headers
+    - kernel-devel
+    - binutils
+    - glibc-headers
+    - glibc-devel
+    - font-forge
 
 - name: Add VirtualBox repository.
   get_url:
