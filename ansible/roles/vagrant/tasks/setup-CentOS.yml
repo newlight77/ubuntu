@@ -1,0 +1,20 @@
+---
+
+# - name: Ensure dependencies are installed.
+#   package:
+#     name: '{{ item }}'
+#     state: present
+#   become: yes
+#   with_items:
+#     - libvirt-devel
+    # - vagrant-libvirt
+    # - vagrant
+
+
+- name: install the vagrant packages
+  package: name={{ item }}
+       state=present
+  with_items:
+    - "{{vagrant.url}}"
+  when: ansible_os_family == "RedHat"
+  become: yes

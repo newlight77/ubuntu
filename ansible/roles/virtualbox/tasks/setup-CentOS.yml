@@ -1,0 +1,38 @@
+---
+
+
+
+  - name: Ensure pre-requisite packages are installed.
+    package:
+      name: '{{ item }}'
+      state: present
+    become: yes
+    with_items:
+      - gcc
+      - dkms
+      - make
+      - qt
+      - libgomp
+      - patch
+      - kernel-headers
+      - kernel-devel
+      - binutils
+      - glibc-headers
+      - glibc-devel
+      - font-forge
+
+- name: Add VirtualBox repository.
+  get_url:
+    url: "http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo"
+    dest: '/etc/yum.repos.d/virtualbox.repo'
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+
+- name: Ensure VirtualBox is installed.
+  package:
+    name: VirtualBox-{{virtualbox.version}}
+    state: present
+    enablerepo: 'virtualbox'
+  become: yes

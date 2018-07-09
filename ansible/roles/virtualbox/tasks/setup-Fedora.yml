@@ -4,14 +4,14 @@
 - name: Ensure dependencies are installed.
   package:
     name: '{{ item }}'
-    state: absent
+    state: present
   become: yes
   with_items:
     - kernel-devel
 
 - name: Add VirtualBox repository.
   get_url:
-    url: "{{rpm_repo_url}}"
+    url: "http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo"
     dest: '/etc/yum.repos.d/virtualbox.repo'
     owner: root
     group: root

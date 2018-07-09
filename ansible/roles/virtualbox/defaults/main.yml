@@ -3,4 +3,3 @@
 version: 5.1
 virtualbox:
   version: "{{version}}"
-  rpm_repo_url: http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
