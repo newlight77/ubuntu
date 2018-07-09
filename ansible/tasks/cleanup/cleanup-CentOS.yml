@@ -1,0 +1,23 @@
+---
+- name: remove additional packages
+  dnf: pkg={{ item }}
+       state=absent
+  become: yes
+  with_items: []
+
+- name: cleaning task for dnf packages
+  shell: yum clean all
+  args:
+    warn: false
+  become: yes
+
+- name: delete cache files
+  file: path=/var/cache/{{ item }}
+        state=absent
+  with_items:
+    - yum
+  become: yes
+
+- name: reload firewall configuration
+  command: /usr/bin/firewall-cmd --reload
+  become: yes
