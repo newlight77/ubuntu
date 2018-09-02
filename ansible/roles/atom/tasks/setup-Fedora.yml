@@ -1,7 +1,7 @@
 ---
 
 - name: check if Atom is installed?
-  command: "dnf list installed | grep atom | grep {{ atom.version }}"
+  command: "dnf list installed atom"
   register: current_version
   changed_when: false
   ignore_errors: true
@@ -17,13 +17,14 @@
     package:
       name: atom
       state: absent
+    become: yes
 
   - name: install the atom packages
     package:
-      name: {{ item }}
+      name: "{{ item }}"
       state: present
     with_items:
       - "{{ atom.url_rpm}}"
     become: yes
 
-  when: current_version.stdout | version_compare(atom.version, '>')
+  when: current_version.stdout == "" or current_version.stdout | version_compare(atom.version, '>')
