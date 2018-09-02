@@ -18,6 +18,20 @@
     when: gem.user is not defined
 
   - debug:
+      msg: "Downloading GEM..."
+
+  - name: Install GEM
+    dnf: name=rubygems
+         state=present
+    become: yes
+
+  - debug:
+      msg: "Installing drush-deploy package..."
+
+  - gem:
+      name: drush-deploy
+
+  - debug:
       msg: "Installing GEM packges with user {{ gem.user }}"
 
   - name: Install global Ruby gems.
