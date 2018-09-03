@@ -10,5 +10,7 @@
   become: yes
 
 - name: Install Google Chrome.
-  package: name=google-chrome-stable state=present
+  package: 
+    name: google-chrome-stable
+    state: present
   become: yes
