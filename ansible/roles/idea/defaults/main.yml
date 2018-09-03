@@ -1,6 +1,6 @@
 ---
 
-version: 2017.3.3
+version: 2018.2.2
 parent_dir: "{{ apps_dir }}"
 idea:
   version: "{{version}}"
