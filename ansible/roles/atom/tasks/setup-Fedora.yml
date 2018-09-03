@@ -1,19 +1,21 @@
 ---
 
 - name: check if Atom is installed?
-  command: "dnf list installed atom"
-  register: current_version
+  shell: "{{playbook_dir}}/roles/atom/scripts/grepAtom.sh -i={{ atom.version }}"
+  register: atom_current_version
   changed_when: false
-  ignore_errors: true
-  args:
-    warn: no
+  failed_when: false
+  become: yes
 
 - debug:
-    msg: "current_version : {{ current_version.stdout }}"
+    msg: "recommended_atom_version: {{ atom.version }}, atom_current_version : {{ atom_current_version.stdout }}"
 
 - block:
 
-  - name : unistall older version
+  - debug:
+      msg: "atom n'est pas installé, ou a une version inférieure à la {{ atom.version }}"
+
+  - name : uninstall older version
     package:
       name: atom
       state: absent
@@ -27,4 +29,4 @@
       - "{{ atom.url_rpm}}"
     become: yes
 
-  when: current_version.stdout == "" or current_version.stdout | version_compare(atom.version, '>')
+  when: atom_current_version.stdout == "" or atom_current_version.stdout is version(atom.version, '<')
