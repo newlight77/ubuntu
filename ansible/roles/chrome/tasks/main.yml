@@ -1,4 +1,4 @@
 ---
 
 # Setup/install tasks.
-#- include: setup-{{ ansible_distribution }}.yml
+- include: setup-{{ ansible_distribution }}.yml

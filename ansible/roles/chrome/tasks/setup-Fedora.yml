@@ -1,16 +1,22 @@
 ---
 
-- name: Adding Google-Chrome repository
-  template:
-    src: google-chrome.repo.j2
-    dest: /etc/yum.repos.d/google-chrome.repo
-    owner: root
-    group: root
-    mode: 0644
+- name: check if Google Chrome is downloaded ?
+  shell: "{{playbook_dir}}/roles/chrome/scripts/grepChrome.sh -i='google-chrome-stable_current_x86_64.rpm'"
+  register: chrome_exists
+  changed_when: false
+  failed_when: false
   become: yes
 
-- name: Install Google Chrome.
-  package: 
-    name: google-chrome-stable
+- debug:
+    msg: "{{ chrome_exists.stdout }}"
+
+- name: get Google Chrome (as RPM file)
+  get_url:
+    url:  "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
+    dest: "/tmp/google-chrome-stable_current_x86_64.rpm"
+  when: chrome_exists == ""
+
+- name: install Google Chrome
+  yum:
+    name: /tmp/google-chrome-stable_current_x86_64.rpm
     state: present
-  become: yes
