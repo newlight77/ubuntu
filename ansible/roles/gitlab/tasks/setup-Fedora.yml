@@ -1,0 +1,73 @@
+---
+
+- name: install prerequisites
+  dnf: name={{ item }}
+       state=present
+  with_items:
+    - curl
+    - openssh-server
+    - postfix
+  become: yes
+
+- name: enable Postfix service
+  service:
+    name: postfix 
+    enabled: yes
+    state: started
+  become: yes
+
+- file:
+    path: /var/opt/gitlab/gitlab-rails/etc
+    state: directory
+    owner: root
+    recurse: yes
+    mode: 0755
+  become: yes
+
+- name: check if GitLab CE is already downloaded
+  shell: "{{playbook_dir}}/roles/gitlab/scripts/grepGitlab.sh"
+  register: gitlab_downloaded
+  changed_when: false
+  failed_when: false
+  become: yes
+
+- name: GitLab CE downloaded ?
+  debug: 
+    msg: "{{ gitlab_downloaded.stdout }}"
+
+- name: get GitLab CE (as RPM file)
+  get_url:
+    url:  "https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/7/gitlab-ce-11.0.6-ce.0.el7.x86_64.rpm/download"
+    dest: "/tmp/gitlab-ce-11.0.6-ce.0.el7.x86_64.rpm"
+  become: yes
+  when: gitlab_downloaded.stdout == ""
+
+- name: install GitLab CE
+  dnf:
+    name: /tmp/gitlab-ce-11.0.6-ce.0.el7.x86_64.rpm
+    state: present
+  become: yes
+
+- name: GitLab reconfigure
+  shell: /bin/gitlab-ctl reconfigure
+  become: yes
+
+# - name: open firewall ports
+#   firewalld:
+#     permanent: true
+#     service: "{{ item }}"
+#     state: enabled
+#     immediate: yes
+#   with_items:
+#     - http
+#     - https
+#   become: yes
+
+# - lineinfile:
+#   path: /etc/gitlab/gitlab.rb
+#   regexp: '^external_url'
+#   line: "external_url 'http://localhost:80'"
+
+- name: display password
+  debug: 
+    msg: "Login credentials for the GitLab admin are root / 5iveL!fe"
