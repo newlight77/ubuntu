@@ -10,13 +10,16 @@
 - debug:
     msg: "{{ chrome_exists.stdout }}"
 
-- name: get Google Chrome (as RPM file)
-  get_url:
+- block:
+
+  - name: get Google Chrome (as RPM file)
+    get_url:
     url:  "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
     dest: "/tmp/google-chrome-stable_current_x86_64.rpm"
-  when: chrome_exists == ""
+  
+  - name: install Google Chrome
+    yum:
+      name: /tmp/google-chrome-stable_current_x86_64.rpm
+      state: present
 
-- name: install Google Chrome
-  yum:
-    name: /tmp/google-chrome-stable_current_x86_64.rpm
-    state: present
+  when: chrome_exists == ""
