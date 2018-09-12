@@ -13,3 +13,4 @@ gem:
   #  - node-sass
   packages:
     - drush
+    - jekyll

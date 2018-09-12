@@ -1,0 +1,71 @@
+---
+
+- name: check version of docker
+  shell: docker --version 2>&1
+  register: current_version
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+  become: yes
+
+- debug:
+    msg: "Required version = {{ docker.version }} and current_version = {{ current_version }}"
+
+- block:
+  - name: Ensure old versions of Docker along with its dependencies are not installed.
+    package:
+      name: '{{ item }}'
+      state: absent
+    become: yes
+    with_items:
+      - docker
+      - docker-engine
+      - docker.io
+
+  - name: Installing apt-key
+    apt_key:
+      id: "0EBFCD88"
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+    become: yes
+
+  - name: Add deb repository
+    # apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main' state=present
+    apt_repository:
+      repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+      state: present
+    become: yes
+
+
+  - name: Remove devicemapper folder
+    file:
+      path: "/var/lib/docker/devicemapper/devicemapper"
+      state: absent
+
+  - name: Create /etc/docker
+    file:
+      path: /etc/docker
+      state: directory
+    become: yes
+
+  - name: "Configuring docker daemon"
+    template:
+      src: daemon.json.j2
+      dest: /etc/docker/daemon.json
+      mode: 0411
+    become: yes
+
+  - name: Install
+    apt:
+      pkg: "{{ item }}"
+      state: latest
+      update_cache: yes
+    become: yes
+    with_items:
+      - docker-ce
+      # - linux-image-extra-$(uname -r)
+      # - linux-image-extra-virtual
+
+  when: current_version.stdout | version_compare(npm.version, '>=')

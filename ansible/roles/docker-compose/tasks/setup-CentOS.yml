@@ -1,0 +1,48 @@
+---
+---
+- name: Check current docker-compose version.
+  command: docker-compose --version
+  register: dc_current_version
+  changed_when: false
+  failed_when: false
+
+- name: Check if need update.
+  set_fact:
+    docker_compose_update: true
+  when: dc_current_version.stdout is defined
+    and docker_compose.version not in dc_current_version.stdout
+
+- name: Delete existing docker-compose version if it's different.
+  file:
+    path: "{{ docker_compose.path }}"
+    state: absent
+  when: docker_compose_update is defined
+  become: yes
+
+- name: clean up previous pre-requisite packages
+  package:
+    name: '{{ item }}'
+    state: absent
+  become: yes
+  with_items:
+    - epel-release
+    - python-pip
+    - docker-compose
+
+- name: Ensure pre-requisite packages are installed for docker_compose.
+  package:
+    name: '{{ item }}'
+    state: present
+  become: yes
+  with_items:
+    - epel-release
+    - python-pip
+    - docker-compose
+
+- name: Install docker_compose.
+  package:
+    name: '{{ item }}'
+    state: present
+  become: yes
+  with_items:
+    - docker-compose
