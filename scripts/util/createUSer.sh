@@ -19,7 +19,7 @@ createUser() {
   chmod 600 /home/$USER/.ssh/authorized_keys
   chmod 700 /home/$USER/.ssh
   ls -alrt /home/$USER/.ssh/
-  usermod -aG ${USER}
+  usermod -aG wheel ${USER}
   vi /home/${USER}/.ssh/authorized_keys
 }
 
