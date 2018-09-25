@@ -38,7 +38,7 @@
     - role: eclipse
     - role: idea
     - role: vscode
-    - role: gitlab
+    #- role: gitlab
 
   tasks:
     # - include: tasks/ansible-setup.yml
