@@ -13,7 +13,7 @@
 - block:
 
   - debug:
-      msg: "atom n'est pas installé, ou a une version inférieure à la {{ atom.version }}"
+      msg: "atom is not installed, or has a version prior to {{ atom.version }}"
 
   - name : uninstall older version
     package:
