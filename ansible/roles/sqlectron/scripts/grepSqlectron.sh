@@ -5,9 +5,9 @@ for i in "$@"
     esac
 done
 
-## Getting Atom installed version, or "" if Atom is not installed
+## Getting Sqlectron installed version, or "" if Sqlectron is not installed
 
-URL=$(dnf list installed SQLECTRON | \
+VERSION=$(dnf list installed SQLECTRON | \
       grep -o "${SQLECTRON_VERSION}")
 
-echo $URL
+echo $VERSION

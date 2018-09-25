@@ -5,9 +5,9 @@ for i in "$@"
     esac
 done
 
-## Getting Atom installed version, or "" if Atom is not installed
+## Getting Chrome package, or "" if Chrome package is absent
 
-URL=$(ls /tmp/ | \
+FILE=$(ls /tmp/ | \
       grep -o "${CHROME_FILE}")
 
-echo $URL
+echo $FILE

@@ -7,7 +7,7 @@ done
 
 ## Getting Atom installed version, or "" if Atom is not installed
 
-URL=$(dnf list installed atom | \
+VERSION=$(dnf list installed atom | \
       grep -o "${ATOM_VERSION}")
 
-echo $URL
+echo $VERSION
