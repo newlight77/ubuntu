@@ -1,0 +1,50 @@
+---
+
+- name: install prerequisites
+  apt: name={{ packages }}
+  vars:
+    packages:
+    - curl
+    - openssh-server
+    - postfix
+  become: yes
+
+- name: start sshd service
+  service:
+    name: sshd
+    enabled: yes
+    state: started
+
+- name: start postfix service
+  service:
+    name: postfix
+    enabled: yes
+    state: started
+
+- name: install GitLab CE
+  apt:
+    deb: https://packages.gitlab.com/gitlab/gitlab-ce/packages/debian/jessie/gitlab-ce_11.1.6-ce.0_amd64.deb/download
+  become: yes
+
+- name: GitLab reconfigure
+  shell: /bin/gitlab-ctl reconfigure
+  tags: 
+    - gitlab
+  become: yes
+  ignore_errors: yes
+
+- name: Allow all access to tcp port 80
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+  become: yes
+
+# - lineinfile:
+#   path: /etc/gitlab/gitlab.rb
+#   regexp: '^external_url'
+#   line: "external_url 'http://localhost:80'"
+
+- name: display password
+  debug: 
+    msg: "Login credentials for the GitLab admin are root / 5iveL!fe"

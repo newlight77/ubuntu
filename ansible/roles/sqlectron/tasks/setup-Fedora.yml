@@ -1,25 +1,23 @@
 ---
 
 - name: check if Sqlectron is installed?
-  command: "dnf list installed | grep -i sqlectron | grep {{ sqlectron.version }}"
-  register: current_version
+  shell: "{{playbook_dir}}/roles/sqlectron/scripts/grepSqlectron.sh -i={{ sqlectron.version }}"
+  register: sqlectron_current_version
   changed_when: false
-  ignore_errors: true
-  args:
-    warn: no
+  failed_when: false
+  become: yes
 
 - debug:
-    msg: "current_version : {{ current_version.stdout }}"
+    msg: "sqlectron_current_version : {{ sqlectron_current_version.stdout }}"
 
 - block:
   
   - name: install the Sqlectron packages
     package:
-      name: {{ item }}
+      name: "{{ item }}"
       state: present
     with_items:
       - "{{ sqlectron.url_rpm}}"
     become: yes
-    when: current_version.stdout is defined and sqlectron.version not in current_version.stdout
 
-  when: current_version.stdout | version_compare(sqlectron.version, '>')
+  when: sqlectron_current_version.stdout == "" or sqlectron_current_version.stdout | version_compare(sqlectron.version, '>')

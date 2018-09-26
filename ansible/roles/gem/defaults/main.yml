@@ -12,5 +12,5 @@ gem:
   #  This syntax also works.
   #  - node-sass
   packages:
-    - drush
+    #- drush
     - jekyll

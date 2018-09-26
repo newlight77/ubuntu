@@ -1,0 +1,20 @@
+---
+
+- name: import Microsoft Packages
+  command: "rpm --import https://packages.microsoft.com/keys/microsoft.asc"
+  register: ms_pack_output
+  changed_when: false
+  ignore_errors: false
+  become: yes
+
+- name: get Visual Studio Code package
+  command: "sh -c 'echo -e \"[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc\" > /etc/yum.repos.d/vscode.repo'"
+  register: code_output
+  changed_when: false
+  ignore_errors: false
+  become: yes
+
+- name: install Visual Studio Code
+  dnf: name=code
+       state=present
+  become: yes

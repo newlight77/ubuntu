@@ -1,6 +1,6 @@
 ---
 
-fedora_current: 26
+fedora_current: 28
 
 configure_sudoers: yes
 

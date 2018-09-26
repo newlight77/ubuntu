@@ -2,5 +2,5 @@
 
 version: 2.1.2
 vagrant:
-  url: "https://releases.hashicorp.com/vagrant/{{vagrant.version}}/vagrant_{{version}}_{{ansible_architecture}}.rpm"
+  url: "https://releases.hashicorp.com/vagrant/{{version}}/vagrant_{{version}}_{{ansible_architecture}}.rpm"
   url1: "https://releases.hashicorp.com/vagrant/2.1.2/vagrant_2.1.2_x86_64.rpm"

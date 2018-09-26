@@ -1,7 +1,7 @@
 ---
 
 major: 8
-minor: 161
+minor: 181
 jdk:
   version: 1.{{major}}.0
   minor: "{{minor}}"

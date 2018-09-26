@@ -37,6 +37,8 @@
     - role: mailhog
     - role: eclipse
     - role: idea
+    - role: vscode
+    #- role: gitlab
 
   tasks:
     # - include: tasks/ansible-setup.yml
