@@ -15,7 +15,6 @@
 - debug:
   msg: "gradle_dir = {{ gradle_dir.stat.isdir }}"
 
-
 - block:
 
   - name: get gradle tarball

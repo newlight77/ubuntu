@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   connection: local
+  strategy: debug
+  debugger: on_failed
 
   vars_files:
     - config.yml
@@ -16,7 +18,7 @@
     - role: motd
     - role: sudoers
     - role: rpmfusion
-    - role: jdk
+    # - role: jdk
     - role: docker
     - role: nodejs
     - role: npm

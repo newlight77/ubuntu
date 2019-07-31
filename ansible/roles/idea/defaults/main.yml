@@ -1,9 +1,9 @@
 ---
 
-version: 2018.2.2
+version: 2019.2
 parent_dir: "{{ apps_dir }}"
 idea:
   version: "{{version}}"
   file: "ideaIC-{{version}}-no-jdk.tar.gz"
-  url: "https://download-cf.jetbrains.com/idea/ideaIC-{{version}}-no-jdk.tar.gz"
+  url: "https://download-cf.jetbrains.com/idea/ideaIC-{{version}}-no-jbr.tar.gz"
   dir: "{{parent_dir}}/ideaIC-{{version}}"

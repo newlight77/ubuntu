@@ -14,8 +14,8 @@
 
   - name: get Google Chrome (as RPM file)
     get_url:
-    url:  "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
-    dest: "/tmp/google-chrome-stable_current_x86_64.rpm"
+      url:  "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
+      dest: /tmp/google-chrome-stable_current_x86_64.rpm
   
   - name: install Google Chrome
     yum:
