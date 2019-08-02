@@ -44,4 +44,7 @@
     with_items: "{{ gem_packages }}"
     ignore_errors: yes
 
-  when: current_version.stdout | version_compare(gem.version, '>=')
+  when:
+    - node_current_version is succeeded
+    - node_current_version is defined
+    - node_current_version.stdout == "" or node_current_version.stdout is version(gem.version, operator='>=', strict=True)

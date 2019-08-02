@@ -21,14 +21,14 @@ __common_packages:
   - make
   - nano
   - nmap
-  - ntop
+  # - ntop
   - ntp
   - ntpdate
   - openssl
   - p7zip
   - pbzip2
   - pwgen
-  - python2-dnf
+  - python3-dnf
   - tar
   - terminator
   - unzip

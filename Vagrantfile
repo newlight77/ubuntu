@@ -12,7 +12,7 @@ if os == 'ubuntu'
 # elsif os == 'centos'
 #   box_name = 'centos/7'
 else
-  box_name = 'fedora/28-cloud-base'
+  box_name = 'fedora/30-cloud-base'
 end
 
 

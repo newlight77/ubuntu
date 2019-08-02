@@ -1,12 +1,16 @@
 ---
 
 - name: check if NodeJs is installed?
-  shell: node -v 2>&1 | sed 's/v//'
+  shell: node -v 2>&1 | grep -v | sed 's/v//'
   register: node_current_version
   changed_when: false
+  failed_when: false
   ignore_errors: true
   args:
     warn: no
+
+- debug:
+    msg : "{{node_current_version.stdout}}"
 
 - block:
   - name: Import Nodesource RPM key
@@ -28,4 +32,7 @@
       enablerepo: 'epel,nodesource'
     become: yes
 
-  when: node_current_version.stdout | version_compare(nodejs.version, '>=')
+  when: 
+    - node_current_version is succeeded
+    - node_current_version is defined
+    - node_current_version.stdout == "" or node_current_version.stdout is version(nodejs.version, operator='>=', strict=True)

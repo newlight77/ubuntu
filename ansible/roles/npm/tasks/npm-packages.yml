@@ -29,4 +29,7 @@
     when: npm.package_json_path is defined and npm.package_json_path
     become: yes
 
-  when: current_version.stdout | version_compare(npm.version, '>=')
+  when: 
+    - node_current_version is succeeded
+    - node_current_version is defined
+    - node_current_version.stdout == "" or node_current_version.stdout is version(npm.version, operator='>=', strict=True)

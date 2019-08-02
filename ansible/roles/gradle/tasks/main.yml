@@ -13,7 +13,7 @@
   register: gradle_dir
 
 - debug:
-  msg: "gradle_dir = {{ gradle_dir.stat.isdir }}"
+    msg: "gradle_dir = {{ gradle_dir.stat }}"
 
 - block:
 
@@ -28,7 +28,7 @@
       dest: "{{parent_dir}}"
       copy: no
 
-  when: gradle_dir.stat.isdir is not defined
+  when: gradle_dir.stat.exists == False
 
 
 - name: Remove old symlink

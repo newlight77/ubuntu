@@ -29,4 +29,7 @@
     with_items: "{{ pip_packages }}"
     ignore_errors: yes
 
-  when: current_version.stdout | version_compare(pip.version, '>=')
+  when:
+    - node_current_version is succeeded
+    - node_current_version is defined
+    - node_current_version.stdout == "" or node_current_version.stdout is version(pip.version, operator='>=', strict=True)
