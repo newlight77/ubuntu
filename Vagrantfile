@@ -8,7 +8,7 @@ os = ENV['OS'] || 'fedora'
 if os == 'ubuntu'
   box_name = 'ubuntu/xenial64'
 elsif os == 'redhat'
-  box_name = 'rhel/7.2'
+  box_name = 'generic/rhel7'
 elsif os == 'centos'
   box_name = 'centos/7'
 else

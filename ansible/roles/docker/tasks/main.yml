@@ -2,21 +2,9 @@
 
 # Setup/install tasks.
 - include: setup-{{ ansible_distribution }}.yml
-- include: docker-compose.yml
+- include: docker-compose-{{ ansible_distribution }}.yml
+- include: docker-group.yml
 
-- name: Create Docker group
-  group:
-    name: docker
-    state: present
-  become: yes
-
-- name: Add current user to Docker group
-  user:
-    name: "{{ ansible_env.USER }}" 
-    groups: docker
-    append: yes
-  become: yes
-
-- name: "Ensure Docker is {{ docker.start | ternary('started','stopped') }}"
-  service: name=docker state={{ docker.start | ternary('restarted','stopped') }} enabled={{ docker.service_enabled }}
-  become: yes
+- name: "Ensure Docker is restarted"
+  command: /bin/true
+  notify: Restart Docker

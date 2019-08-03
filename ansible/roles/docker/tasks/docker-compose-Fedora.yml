@@ -1,0 +1,29 @@
+---
+- name: check version of docker
+  shell: docker-compose --version | sed -e 's/,//' | awk '{print $3}' 2>&1
+  register: current_version
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+  args:
+    warn: no
+  become: yes
+
+- debug:
+    msg: "Required version = {{ docker_compose.version }} and current_version = {{ current_version }}"
+
+- block:
+
+  - name: Ensure pre-requisite packages are installed for docker_compose.
+    package:
+      name: '{{ item }}'
+      state: present
+    become: yes
+    with_items:
+      - python-pip
+      - docker-compose
+
+  when:
+    - current_version is succeeded
+    - current_version is defined
+    - current_version.stdout == "" or current_version.stdout is version(docker_compose.version, operator='>=', strict=True)
