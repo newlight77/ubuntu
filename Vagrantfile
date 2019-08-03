@@ -7,10 +7,10 @@ VAGRANTFILE_API_VERSION = "2"
 os = ENV['OS'] || 'fedora'
 if os == 'ubuntu'
   box_name = 'ubuntu/xenial64'
-# elsif os == 'redhat'
-#   box_name = 'rhel/7.2'
-# elsif os == 'centos'
-#   box_name = 'centos/7'
+elsif os == 'redhat'
+  box_name = 'rhel/7.2'
+elsif os == 'centos'
+  box_name = 'centos/7'
 else
   box_name = 'fedora/30-cloud-base'
 end
@@ -52,9 +52,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     SHELL
   else
     config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
-      #sudo dnf upgrade -y
-      sudo dnf -y install python2-dnf libselinux-python yum
-      sudo dnf -y install ansible
+      #sudo yum upgrade -y
+      sudo yum -y install python3-dnf libselinux-python yum
+      sudo yum -y install ansible
     SHELL
 
     config.vm.provision "run", type: "shell", inline: <<-SHELL

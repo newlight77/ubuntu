@@ -21,6 +21,7 @@
     - role: vagrant
 
   tasks:
+    - include: tasks/ansible-setup.yml
     - include: tasks/cleanup.yml
 
   handlers:
