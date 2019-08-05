@@ -1,12 +1,23 @@
 ---
-
-fedora_current: 30
-
+  
 configure_sudoers: yes
 
 apps_dir: /apps
 
 downloads: ~/.ansible-downloads/
+
+centos:
+  version: 7
+
+fedora:
+  version: 30
+
+docker:
+  version: 18.09.0
+  
+docker_compose:
+  version: 1.18.0
+
 
 # common_packages:
 #   - autoconf

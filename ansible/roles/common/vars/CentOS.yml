@@ -6,6 +6,7 @@ __common_packages:
   - curl
   - diffutils
   - dos2unix
+  - epel-release
   - firewalld
   - gawk
   - gcc

@@ -4,4 +4,4 @@ docker:
   version: 18.09.0
 
 docker_compose:
-   version: "1.23.2"
+  version: 1.18.0

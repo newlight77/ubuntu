@@ -7,8 +7,6 @@ VAGRANTFILE_API_VERSION = "2"
 os = ENV['OS'] || 'fedora'
 if os == 'ubuntu'
   box_name = 'ubuntu/xenial64'
-elsif os == 'redhat'
-  box_name = 'generic/rhel7'
 elsif os == 'centos'
   box_name = 'centos/7'
 else
@@ -41,27 +39,28 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant"
 
   if os == 'ubuntu'
-    config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
+    config.vm.provision "init", privileged: true, type: "shell", inline: <<-SHELL
       sudo apt-add-repository ppa:ansible/ansible
       sudo apt-get -y update
       sudo apt-get -y install software-properties-common ansible
     SHELL
-    config.vm.provision "run", type: "shell", inline: <<-SHELL
-      cd /vagrant/ansible
-      su -c "ansible-playbook -u ubuntu playbook.yml" ubuntu
+  elsif os == 'centos'
+    config.vm.provision "init", privileged: true, type: "shell", inline: <<-SHELL
+      #sudo yum upgrade -y
+      sudo yum -y install python2-dnf libselinux-python yum
+      sudo yum -y install ansible
     SHELL
   else
-    config.vm.provision "prepare-installation", privileged: true, type: "shell", inline: <<-SHELL
+    config.vm.provision "init", privileged: true, type: "shell", inline: <<-SHELL
       #sudo yum upgrade -y
       sudo yum -y install python3-dnf libselinux-python yum
       sudo yum -y install ansible
     SHELL
-
-    config.vm.provision "run", type: "shell", inline: <<-SHELL
-      cd /vagrant/ansible
-      su -c "ansible-playbook -u vagrant playbook.yml" vagrant
-    SHELL
   end
 
+  config.vm.provision "run", type: "shell", inline: <<-SHELL
+    cd /vagrant/ansible
+    su -c "ansible-playbook -u vagrant playbook.yml" vagrant
+  SHELL
 
  end

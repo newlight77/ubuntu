@@ -1,7 +1,7 @@
 ---
 
 - name: check version of docker
-  shell: docker --version 2>&1
+  shell: docker --version 2>&1 | grep -v not | sed -e 's/,//' | awk '{print $3}'
   register: current_version
   changed_when: false
   failed_when: false

@@ -26,4 +26,4 @@
   when:
     - current_version is succeeded
     - current_version is defined
-    - current_version.stdout == "" or current_version.stdout is version(docker_compose.version, operator='>=', strict=True)
+    - current_version.stdout == "" or current_version.stdout is version(docker_compose.version, operator='<', strict=True)

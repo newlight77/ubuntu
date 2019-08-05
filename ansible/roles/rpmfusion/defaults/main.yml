@@ -1,0 +1,8 @@
+---
+
+centos:
+  version: 7
+
+fedora:
+  version: 30
+

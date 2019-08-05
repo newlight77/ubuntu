@@ -1,7 +1,7 @@
 ---
 
 - name: check version of docker
-  shell: docker --version | sed -e 's/,//' | awk '{print $3}' 2>&1 
+  shell: docker --version 2>&1 | grep -v not | sed -e 's/,//' | awk '{print $3}'
   register: current_version
   changed_when: false
   failed_when: false
@@ -59,4 +59,4 @@
   when: 
     - current_version is succeeded
     - current_version is defined
-    - current_version.stdout == "" or current_version.stdout is version(docker.version, operator='>=', strict=True)
+    - current_version.stdout == "" or current_version.stdout is version(docker.version, operator='<', strict=True)
